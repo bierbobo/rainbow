@@ -12,7 +12,6 @@
     <module>rainbow-ibatis</module>
   </modules>
 
-
   <name>rainbow</name>
   <url>http://maven.apache.org</url>
 
