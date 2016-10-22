@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xsi:schemaLocation="http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<elasticsearch:repositories base-package="com.xyz.acme"/>-->
+
+
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.150.146:3306/biip"/>
+        <property name="username" value="deploy"/>
+        <property name="password" value="1qaz2wsx"/>
+    </bean>
+
+
+    <bean id="jdbcTemplate"
+          class="org.springframework.jdbc.core.JdbcTemplate" abstract="false"
+          lazy-init="false" autowire="default"  >
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+
+    <!--cluster-nodes可以指定多组ip:port,逗号分隔-->
+    <!--<elasticsearch:transport-client id="client" cluster-nodes="192.168.200.196:9303" cluster-name="jiesi-1" />-->
+    <!--<elasticsearch:transport-client id="client" cluster-nodes="localhost:9300" cluster-name="elasticsearch" />-->
+
+    <elasticsearch:transport-client id="client" cluster-nodes="172.20.130.120:9311,172.20.133.58:9311,172.20.133.59:9311,172.20.138.154:9311" cluster-name="jiesi-103" />
+
+    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client"/>
+    </bean>
+
+    <elasticsearch:repositories  base-package="com.jd.spring.data.elasticsearch.demo.repository.iface"/>
+
+
+
+
+</beans>
