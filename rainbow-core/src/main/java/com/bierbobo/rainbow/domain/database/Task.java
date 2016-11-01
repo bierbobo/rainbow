@@ -1,4 +1,4 @@
-package com.bierbobo.domain.database;
+package com.bierbobo.rainbow.domain.database;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.bierbobo.util;
+package com.bierbobo.rainbow.util;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

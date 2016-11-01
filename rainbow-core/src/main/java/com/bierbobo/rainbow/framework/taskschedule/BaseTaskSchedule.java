@@ -1,11 +1,11 @@
-package com.bierbobo.framework.taskschedule;
+package com.bierbobo.rainbow.framework.taskschedule;
 
-import com.bierbobo.dao.TaskDAO;
-import com.bierbobo.domain.database.Task;
-import com.bierbobo.domain.task.CommonResult;
-import com.bierbobo.domain.task.QueryTaskParam;
-import com.bierbobo.domain.task.TaskStateEnum;
-import com.bierbobo.util.NetworkUtil;
+import com.bierbobo.rainbow.dao.TaskDAO;
+import com.bierbobo.rainbow.domain.database.Task;
+import com.bierbobo.rainbow.domain.task.CommonResult;
+import com.bierbobo.rainbow.domain.task.QueryTaskParam;
+import com.bierbobo.rainbow.domain.task.TaskStateEnum;
+import com.bierbobo.rainbow.util.NetworkUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,14 +1,14 @@
-package com.bierbobo.dao;
+package com.bierbobo.rainbow.dao;
 
 
 
 
 
-import com.bierbobo.domain.database.Task;
-import com.bierbobo.domain.task.NewTaskOfBIDataTaskParam;
-import com.bierbobo.domain.task.QueryTaskParam;
-import com.bierbobo.domain.task.RepeatTaskStateParam;
-import com.bierbobo.domain.task.TaskGroupTypeParam;
+import com.bierbobo.rainbow.domain.database.Task;
+import com.bierbobo.rainbow.domain.task.NewTaskOfBIDataTaskParam;
+import com.bierbobo.rainbow.domain.task.QueryTaskParam;
+import com.bierbobo.rainbow.domain.task.RepeatTaskStateParam;
+import com.bierbobo.rainbow.domain.task.TaskGroupTypeParam;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.bierbobo.domain.task;
+package com.bierbobo.rainbow.domain.task;
 
 import java.io.Serializable;
 import java.util.List;

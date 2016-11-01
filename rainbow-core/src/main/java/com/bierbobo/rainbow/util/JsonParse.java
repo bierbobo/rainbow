@@ -1,4 +1,4 @@
-package com.bierbobo.util;
+package com.bierbobo.rainbow.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
