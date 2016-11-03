@@ -1,7 +1,7 @@
-package com.bierbobo.rainbow.framework.taskschedule;
+package com.bierbobo.rainbow.framework;
 
 import com.bierbobo.rainbow.dao.TaskDAO;
-import com.bierbobo.rainbow.domain.database.Task;
+import com.bierbobo.rainbow.domain.entity.Task;
 import com.bierbobo.rainbow.domain.task.CommonResult;
 import com.bierbobo.rainbow.domain.task.QueryTaskParam;
 import com.bierbobo.rainbow.domain.task.TaskStateEnum;

@@ -4,7 +4,7 @@ package com.bierbobo.rainbow.dao;
 
 
 
-import com.bierbobo.rainbow.domain.database.Task;
+import com.bierbobo.rainbow.domain.entity.Task;
 import com.bierbobo.rainbow.domain.task.NewTaskOfBIDataTaskParam;
 import com.bierbobo.rainbow.domain.task.QueryTaskParam;
 import com.bierbobo.rainbow.domain.task.RepeatTaskStateParam;

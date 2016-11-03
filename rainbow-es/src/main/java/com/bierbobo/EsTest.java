@@ -1,3 +1,4 @@
+/*
 package com.bierbobo;
 
 import org.apache.log4j.Logger;
@@ -17,9 +18,11 @@ import org.springframework.data.elasticsearch.core.query.*;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by lifubo on 2016/9/12.
- */
+ *//*
+
 public class EsTest {
 
     private static Logger logger = Logger.getLogger(Main.class);
@@ -31,6 +34,7 @@ public class EsTest {
         i+=2;
         System.out.println(i);
 
+*/
 /*
         ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext(
                 "/spring/TransportClient_elasticsearchTemplate.xml");
@@ -48,7 +52,8 @@ public class EsTest {
         IndexQuery indexQuery = new IndexQuery();
         indexQuery.setId( "1000336_12312312");
         indexQuery.setObject(appDashboardAnalysis);
-        elasticsearchTemplate.index(indexQuery);*/
+        elasticsearchTemplate.index(indexQuery);*//*
+
 
 
 //        query(elasticsearchTemplate);
@@ -64,14 +69,16 @@ public class EsTest {
 //        agg2(elasticsearchTemplate);
 //        aggs1(elasticsearchTemplate);
 
-        /*
+        */
+/*
         for (int i = DISTRIBUTION_SORT.split(",").length - 1; i >= 0; i--) {
 
 
 
 
         }
-*/
+*//*
+
 
     }
 
@@ -263,3 +270,4 @@ public class EsTest {
         }
     }
 }
+*/
