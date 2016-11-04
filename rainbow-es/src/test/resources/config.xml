@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<db>
+    <exclude>
+        <table name="desc sales" field="total_pv_60,total_pv_90,no_stock_pv_ytd,no_stock_pv_7,no_stock_pv_14,no_stock_pv_28,no_stock_pv_60,no_stock_pv_90,pv_cnvs_rate_ytd,shelves_qtty_ytd,shelves_qtty_7,shelves_qtty_14,shelves_qtty_28,shelves_qtty_60,shelves_qtty_90,region_band"/>
+    </exclude>
+    <mapping>
+        <field db_name="wid" mapping_name="skuId" />
+        <field db_name="wname" mapping_name="skuName" />
+        <field db_name="level_1_id" mapping_name="itemFirstCateCd" />
+        <field db_name="level_2_id" mapping_name="itemFirstCateName" />
+        <field db_name="level_3_id" mapping_name="itemSecondCateCd" />
+        <field db_name="level_1_name" mapping_name="itemSecondCateName" />
+        <field db_name="level_2_name" mapping_name="itemThirdCateCd" />
+        <field db_name="level_3_name" mapping_name="itemThirdCateName" />
+        <field db_name="brand_id" mapping_name="brandCode" />
+        <field db_name="click_band" mapping_name="orgNationClicksBand" />
+        <field db_name="sale_band" mapping_name="orgNationSaleNumBand" />
+    </mapping>
+    <query>
+        wid, bi_data_date, wname, level_1_id, level_2_id,
+        level_3_id,	level_1_name, level_2_name,	level_3_name,
+        nation_vendor_code, nation_vendor_name, brand_id, brand_name,
+        sale_status,
+        last_sale_time,off_sale_time, shelves_tm,first_into_wh_tm,qgp,market_price, click_count, click_no_stock,
+        click_band, sale_band,
+        sale_count, saler_erp_id, buyer_erp_id,saler_name, buyer_name,
+        is_dropship, is_national,
+        is_stop_no_stock,is_shelf_life,
+        create_time, update_time, main_sku_id,length,width,height,weight,
+        distribution_id, distribution_name,
+        company_id, company_name,
+        delv_store_name, delv_store_id,
+        vendor_code,
+        vendor_name,
+        warehouse_price, allow_reserve_flag, ytd_sales, sales_7, sales_14,
+        sales_28, sales_60,sales_90,sale_qtty_ytd,sale_qtty_7,
+        sale_qtty_14,sale_qtty_28,sale_qtty_60,sale_qtty_90,
+        total_pv_ytd,total_pv_7,total_pv_14,total_pv_28,total_pv_60,total_pv_90,
+        no_stock_pv_ytd,no_stock_pv_7,no_stock_pv_14,no_stock_pv_28,no_stock_pv_60,no_stock_pv_90,
+        shelves_qtty_ytd,shelves_qtty_7,shelves_qtty_14,
+        shelves_qtty_28,shelves_qtty_60,shelves_qtty_90
+        ,pv_cnvs_rate_ytd,region_band,
+        cur_month_sales,
+        is_parallel,is_xnzt
+    </query>
+
+</db>
+

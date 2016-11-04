@@ -1,5 +1,7 @@
-package com.bierbobo;
+package com.bierbobo.rainbow.repository;
 
+
+import com.bierbobo.rainbow.service.AppDashboardAnalysis;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.bierbobo;
+package com.bierbobo.rainbow.es;
 
 import org.apache.log4j.Logger;
 import org.elasticsearch.client.Client;
@@ -40,10 +40,6 @@ public class Tool {
         }
     }
 
-
-    public static void main(String[] args){
-
-    }
 
 
     /**

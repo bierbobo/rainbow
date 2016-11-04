@@ -1,4 +1,4 @@
-package com.bierbobo;
+package com.bierbobo.rainbow.util;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

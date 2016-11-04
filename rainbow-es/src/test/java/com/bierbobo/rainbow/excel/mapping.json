@@ -1,0 +1,211 @@
+{
+  "item_sku_id": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "main_sku_id": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "sku_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "brand_code": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "barndname_en": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "barndname_cn": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "barndname_full": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "sku_status_cd": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "item_first_cate_cd": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "item_first_cate_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "item_second_cate_cd": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "item_second_cate_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "item_third_cate_cd": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "item_third_cate_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "shelves_tm": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "shelves_dt": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "otc_tm": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "utc_tm": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "dept_id": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "purchaser_erp_acct": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "purchaser_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "saler_erp_acct": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "sale_staf_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "first_into_wh_tm": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "last_into_wh_tm": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "is_new_flag": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "is_xg_flag": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "is_sg_flag": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "is_vc_flag": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "is_fs_flag": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+
+
+  "is_xnzt_flag": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "is_qgfh_flag": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "is_pxkc_flag": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "is_sfww_flag": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "org_nation_sale_num_band": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "org_nation_sale_amt_band": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "org_nation_clicks_band": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "major_supp_brevity_code": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "major_supp_name": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "dept_name_1": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+
+
+  "dept_id_1": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "dept_name_2": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "dept_id_2": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "dept_name_3": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "dept_id_3": {
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+
+  "dept_name_4": {
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "dept_id_4": {
+    "type": "integer",
+    "index": "not_analyzed"
+  }
+
+
+
+
+}

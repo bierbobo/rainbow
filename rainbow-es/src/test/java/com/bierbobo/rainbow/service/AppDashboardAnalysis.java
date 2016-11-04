@@ -1,6 +1,5 @@
-package com.bierbobo;
+package com.bierbobo.rainbow.service;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.math.BigDecimal;
@@ -10,12 +9,21 @@ import java.util.Date;
  * Created by lifubo on 2016/9/1.
  */
 
-@Document(indexName = "app_dashboard_analysis", type = "sku_analysis")
+@Document(indexName = "app_dashboard_base_sku_info", type = "sku_info")
 public class AppDashboardAnalysis {
 
-    @Id
-    private Long id;
 
+    private	String	biDataDate	;
+
+    public String getBiDataDate() {
+        return biDataDate;
+    }
+
+    public void setBiDataDate(String biDataDate) {
+        this.biDataDate = biDataDate;
+    }
+
+    private Long id;
     private	Long	skuId	;
     private	String	skuName	;
     private	Integer	itemFirstCateCd	;
@@ -46,9 +54,8 @@ public class AppDashboardAnalysis {
     private	Integer	isStopNoStock	;
     private	Integer	isShelfLife	;
     private	Integer	isXnzt	;
-    private	Date	shelvesTm	;
-    private	Date	offSaleTime	;
-    private	Date	firstIntoWhTm	;
+
+
     private	String	qgp	;
     private	Long	mainSkuId	;
     private	BigDecimal	length	;
@@ -110,6 +117,7 @@ public class AppDashboardAnalysis {
     private	String	orgNationSaleAmtBand	;
     private	Integer	isNewFlag	;
     private	Integer	isVcFlag	;
+
 
     public Long getSkuId() {
         return skuId;
@@ -213,14 +221,6 @@ public class AppDashboardAnalysis {
 
     public void setSaleStatus(Integer saleStatus) {
         this.saleStatus = saleStatus;
-    }
-
-    public Date getLastSaleTime() {
-        return lastSaleTime;
-    }
-
-    public void setLastSaleTime(Date lastSaleTime) {
-        this.lastSaleTime = lastSaleTime;
     }
 
 
@@ -345,29 +345,7 @@ public class AppDashboardAnalysis {
         this.isXnzt = isXnzt;
     }
 
-    public Date getShelvesTm() {
-        return shelvesTm;
-    }
 
-    public void setShelvesTm(Date shelvesTm) {
-        this.shelvesTm = shelvesTm;
-    }
-
-    public Date getOffSaleTime() {
-        return offSaleTime;
-    }
-
-    public void setOffSaleTime(Date offSaleTime) {
-        this.offSaleTime = offSaleTime;
-    }
-
-    public Date getFirstIntoWhTm() {
-        return firstIntoWhTm;
-    }
-
-    public void setFirstIntoWhTm(Date firstIntoWhTm) {
-        this.firstIntoWhTm = firstIntoWhTm;
-    }
 
     public String getQgp() {
         return qgp;
