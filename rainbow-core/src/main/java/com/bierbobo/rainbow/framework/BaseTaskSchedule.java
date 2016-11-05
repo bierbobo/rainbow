@@ -1,8 +1,8 @@
 package com.bierbobo.rainbow.framework;
 
 import com.bierbobo.rainbow.dao.TaskDAO;
-import com.bierbobo.rainbow.domain.common.CommonResult;
 import com.bierbobo.rainbow.domain.entity.Task;
+import com.bierbobo.rainbow.domain.task.CommonResult;
 import com.bierbobo.rainbow.domain.task.QueryTaskParam;
 import com.bierbobo.rainbow.domain.task.TaskStateEnum;
 import com.bierbobo.rainbow.util.NetworkUtil;
@@ -12,13 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lifubo on 2016/10/19.
@@ -26,12 +20,11 @@ import java.util.concurrent.TimeUnit;
 public abstract class BaseTaskSchedule {
 
 
+    private String businessType;
     private Integer taskNum; //每个任务配置的独立数量
 
     @Value("${taskNumMultiple}")
     private  int taskNumMultiple; //并发处理的任务数
-
-    private String businessType;
 
     @Resource
     private TaskDAO taskDao;
@@ -41,23 +34,6 @@ public abstract class BaseTaskSchedule {
     Logger logger = Logger.getLogger(BaseTaskSchedule.class);
 
 
-    //处理采销大表导出Excel数据,每次在数据库读取 taskNumMultiple 条数据 然后开启 taskNumMultiple 线程执行
-    private static final int corePoolSize = 10;
-    private static final int maximumPoolSize = 100;
-    private static final int keepAliveTime = 60;
-
-    private static final ThreadPoolExecutor pool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
-            TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100), new ThreadPoolExecutor.CallerRunsPolicy());
-
-
-    public String getBusinessType() {
-        return businessType;
-    }
-
-    public void setBusinessType(String businessType) {
-        this.businessType = businessType;
-    }
-
     public Integer getTaskNum() {
         return taskNum;
     }
@@ -66,50 +42,7 @@ public abstract class BaseTaskSchedule {
         this.taskNum = taskNum;
     }
 
-
-
     public Boolean run(){
-
-
-        System.out.println(new Date()+"111111111");
-
-        try {
-            final CountDownLatch countDownLatch = new CountDownLatch(5);
-            for (int i = 0; i < 5; i++) {
-
-                Thread thread = new Thread() {
-
-                    @Override
-                    public void run() {
-                        Random random=new Random();
-                        int i1 = random.nextInt(5);
-                        System.out.println("sleep....."+i1);
-                        try {
-                            Thread.sleep(i1*1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        countDownLatch.countDown();
-
-                    }
-                };
-
-                thread.start();
-
-            }
-            countDownLatch.await();
-            System.out.println("多线程定时任务执行完毕.....");
-
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e.getMessage(),e);
-        }
-
-        return true;
-    }
-
-
-
-    public Boolean run1(){
 
 
         //抓去任务list
