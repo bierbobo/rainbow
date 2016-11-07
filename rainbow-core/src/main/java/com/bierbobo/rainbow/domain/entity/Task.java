@@ -6,18 +6,18 @@ import java.util.List;
 
 public class Task implements Serializable{
 
-    private String uuid;
-
     private String businessType;
     private String businessKey;
 
-    private String name;
-
     private Integer state;
-
     private String serverIp;
-    
     private String message;
+
+    private String uuid;
+
+
+
+    private String name;
 
 	private Date createTime;
 
