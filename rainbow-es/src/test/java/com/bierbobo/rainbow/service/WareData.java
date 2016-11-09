@@ -11,7 +11,7 @@ import java.util.List;
  * 修改历史： 修改人   修改时间   修改内容
  *            程相栋  2015-10-15  增加前台（主站）价格
  */
-public class WareData extends Ware{
+public class WareData {
 	
 	/**
 	 * 直供商库存

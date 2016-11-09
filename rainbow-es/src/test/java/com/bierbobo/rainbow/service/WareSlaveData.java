@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * 采销大表中配送中心维度相关数据
  * @author tangling
  */
-public class WareSlaveData extends Sales {
+public class WareSlaveData {
 	/**
 	 * 可用库存
 	 */
@@ -151,20 +151,6 @@ public class WareSlaveData extends Sales {
 	}
 	public void setInStockNum(Integer inStockNum) {
 		this.inStockNum = inStockNum;
-	}
-	public Double getInStockNumCost() {
-		if(this.inStockNum==null){
-			return null;
-		}
-		double result = 0.0;
-		if(this.inStockNumCost != null && this.inStockNumCost >= 0){
-			result = this.inStockNumCost;
-		}
-		else{
-			result = this.inStockNum*getWarehousePrice().doubleValue();
-		}
-
-		return result;
 	}
 	public void setInStockNumCost(Double inStockNumCost) {
 		this.inStockNumCost = inStockNumCost;

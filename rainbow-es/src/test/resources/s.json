@@ -1,0 +1,316 @@
+
+{
+  "biDataDate":{
+    "type": "string",
+    "index": "not_analyzed"
+  }
+,"skuId": { "com":" 商品ID",
+  "type": "long",
+  "index": "not_analyzed"
+},
+"mainSkuId": {"com":"主商品sku",
+"type": "long",
+"index": "not_analyzed"
+},
+"skuName": {"com":"商品名称",
+"type": "string",
+"index": "no"
+},
+
+
+"itemFirstCateCd": {"com":"一级分类ID",
+"type": "string",
+"index": "not_analyzed"
+},
+"itemFirstCateName": {"com":"一级分类名称",
+"type": "string",
+"index": "no"
+},
+"itemSecondCateCd": {"com":"二级分类ID",
+"type": "string",
+"index": "not_analyzed"
+},
+"itemSecondCateName": {"com":"二级分类名称",
+"type": "string",
+"index": "no"
+},
+"itemThirdCateCd": {"com":"三级分类ID",
+"type": "string",
+"index": "not_analyzed"
+},
+"itemThirdCateName": {"com":"三级分类名称",
+"type": "string",
+"index": "no"
+}
+
+
+,"deptID1": { "com":" 1级部门ID",
+"type": "long",
+"index": "not_analyzed"
+}
+,"deptName1": { "com":" 1级部门名称",
+"type": "string",
+"index": "no"
+}
+,"deptID2": { "com":" 2级部门ID",
+"type": "long",
+"index": "not_analyzed"
+}
+,"deptName2": { "com":" 2级部门名称",
+"type": "string",
+"index": "no"
+}
+,"deptID3": { "com":" 3级部门ID",
+"type": "long",
+"index": "not_analyzed"
+}
+,"deptName3": { "com":" 3级部门名称",
+"type": "string",
+"index": "no"
+}
+,"deptID4": { "com":" 4级部门ID",
+"type": "long",
+"index": "not_analyzed"
+}
+,"deptName4": { "com":" 4级部门名称",
+"type": "string",
+"index": "no"
+}
+,"workPostCd": { "com":" 末级部门ID",
+"type": "long",
+"index": "not_analyzed"
+}
+
+
+,"nationVendorCode": { "com":" 全国供应商简码 fdm_vcs_ware_base_price_mysql_chain",
+"type": "string",
+"index": "not_analyzed"
+}
+,"nationVendorName": {"com":"全国供应商名称",
+"type": "string",
+"index": "not_analyzed"
+}
+
+
+,"brandCode": {"com":"品牌编码",
+"type": "string",
+"index": "not_analyzed"
+}
+,"brandName": {"com":"品牌名称",
+"type": "string",
+"index": "not_analyzed"
+}
+,"salerErpId": {"com":"销售员ERP",
+"type": "string",
+"index": "not_analyzed"
+}
+,"salerName": {"com":"销售员名称",
+"type": "string",
+"index": "not_analyzed"
+}
+,"buyerErpId": {"com":"采购员erp",
+"type": "string",
+"index": "not_analyzed"
+}
+,"buyerName": {"com":"采购员名称",
+"type": "string",
+"index": "not_analyzed"
+}
+
+
+"com":"*******************商品状态*******************",
+,"isDropship": {"com":"是否厂商直送",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isNational": {"com":"是否全国发货",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isParallel": {"com":"是否平行库存",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isShelfLife": {"com":"是否保质期商品",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isStopNoStock": {"com":"是否售完即止",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isXnzt": {"com":"是否虚拟组套",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isNewFlag": {"com":"是否新品",
+"type": "string",
+"index": "not_analyzed"
+}
+,"isVcFlag": {"com":"是否虚拟品类",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isAllowReserveFlag": {"com":"是否预售",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"isNationNosales30": {         "com":"是否全国30日不动销",
+"type": "double",
+"index": "not_analyzed"
+}
+,"isNationNosales60": {         "com":"是否全国60日不动销",
+"type": "double",
+"index": "not_analyzed"
+}
+,"isNationNosales90": {         "com":"是否全国90日不动销",
+"type": "double",
+"index": "not_analyzed"
+}
+,"isUnsalablenventory": {    "com":"是否全国件数滞销",
+"type": "integer",
+"index": "not_analyzed"
+}
+,"bookingStatus": {         "com":"预订状态",
+"type": "double",
+"index": "not_analyzed"
+}
+
+"com":"*******************商品各类时间*******************",
+,"saleStatus": {"com":"上下柜状态",
+"type": "string",
+"index": "not_analyzed"
+}
+,"offSaleReason": {         "com":"下柜原因",
+"type": "double",
+"index": "not_analyzed"
+}
+,"shelvesTm": {"com":"上架时间",
+"type": "string",
+"index": "not_analyzed"
+}
+,"lastSaleTime": {"com":"最近上柜时间",
+"type": "string",
+"index": "not_analyzed"
+}
+,"offSaleTime": {"com":"最近下柜时间",
+"type": "string",
+"index": "not_analyzed"
+}
+,"firstIntoWhTm": {"com":"首次入库时间",
+"type": "string",
+"index": "not_analyzed"
+}
+,"lastIntoWhTm": {"com":"末次入库时间",
+"type": "string",
+"index": "not_analyzed"
+}
+
+
+,"qgp": {"com":"保质期",
+"type": "string",
+"index": "not_analyzed"
+}
+
+
+"com":"*******************商品大小*******************",
+,"length": {"com":"商品长度",
+"type": "double",
+"index": "not_analyzed"
+}
+,"width": {"com":"商品宽度",
+"type": "double",
+"index": "not_analyzed"
+}
+,"height": {"com":"商品高度",
+"type": "double",
+"index": "not_analyzed"
+}
+,"weight": {"com":"商品体积",
+"type": "double",
+"index": "not_analyzed"
+}
+,"wt": {"com":"商品重量",
+"type": "double",
+"index": "not_analyzed"
+}
+
+"com":"*******************各类价格*******************",
+
+,"jdPrice": {         "com":"京东价",
+"type": "double",
+"index": "not_analyzed"
+}
+,"mktPrice": {         "com":"市场价",
+"type": "double",
+"index": "not_analyzed"
+}
+
+"com":"************BAND************",
+,"orgNationClicksBand": {"com":"全国一级品类7日点击量BAND",
+"type": "string",
+"index": "not_analyzed"
+}
+,"orgNationClicksBand37": {"com":"全国三级品类7日点击量BAND",
+"type": "string",
+"index": "not_analyzed"
+}
+,"orgNationSaleNumBand": {"com":"全国一级品类7日销量BAND",
+"type": "string",
+"index": "not_analyzed"
+}
+,"orgNationSaleNumBand37": {"com":"全国三级品类7日销量BAND",
+"type": "string",
+"index": "not_analyzed"
+}
+,"orgNationSaleAmtBand": {"com":"全国一级品类7日销售额BAND",
+"type": "string",
+"index": "not_analyzed"
+}
+
+,"clickNoStock": {"com":"无货点击量 非图书为0",
+"type": "long",
+"index": "not_analyzed"
+}
+,"clickCount": {"com":"点击量",
+"type": "long",
+"index": "not_analyzed"
+}
+,"saleCount": {"com":"7日全国销量(从band表中取的，用于band排名的)",
+"type": "long",
+"index": "not_analyzed"
+}
+
+,"financingInventory": {     "com":"财务库存(全国月至今平均库存金额,全国月至今累计仓报价成本,全国财务存货周转,全国月至今累计退货仓报价成本)",
+"type": "string",
+"index": "no"
+}
+
+
+"com":"************用于排序的字段************",
+,"nationwideSales7":{ "com":"全国7日有效销量 订单-收货地口径  全国七日销量  biip_sale表",
+"type": "long",
+"index": "no"
+}
+,"nationTotalPV": {                "com":"全国昨日总PV",
+"type": "integer",
+"index": "no"
+}
+,"nationNoStockPV": {                "com":"全国昨日无货PV",
+"type": "string",
+"index": "no"
+}
+,"nationNumStock": {                "com":"全国现货库存",
+"type": "string",
+"index": "no"
+}
+,"nationNumStockAmount": {          "com":"全国现货库存成本",
+"type": "string",
+"index": "no"
+}
+,"nationUnsalableStockAmount": {          "com":"全国滞销库存金额",
+"type": "string",
+"index": "no"
+}
+
+}

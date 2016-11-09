@@ -1,4 +1,4 @@
-package com.bierbobo.rainbow.service;
+package com.bierbobo.rainbow.service.concurrentQuery;
 
 import com.bierbobo.rainbow.domain.common.CommonResult;
 import com.bierbobo.rainbow.domain.common.Page;

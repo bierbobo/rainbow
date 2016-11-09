@@ -13,7 +13,7 @@
 	</task:scheduled-tasks>
 
 
-	<bean id="exportTask" class="com.bierbobo.rainbow.taskschedule.ExportServiceImpl">
+	<bean id="exportTask" class="com.bierbobo.rainbow.service.exportData.ExportServiceImpl">
 		<property name="taskNum" value="1" />
 		<property name="businessType" value="WARE_EXP" />
 	</bean>
