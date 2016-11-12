@@ -1,1 +1,0 @@
-{  "skuId": {    "type": "long",    "index": "not_analyzed"  },  "skuId1": {        "type": "long",        "index": "not_analyzed"      }}  

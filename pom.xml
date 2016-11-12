@@ -12,6 +12,9 @@
     <module>rainbow-es</module>
     <module>rainbow-ibatis</module>
     <module>rainbow-core</module>
+    <module>rainbow-jsf</module>
+    <module>rainbow-util</module>
+    <module>rainbow-data</module>
   </modules>
 
   <name>rainbow</name>

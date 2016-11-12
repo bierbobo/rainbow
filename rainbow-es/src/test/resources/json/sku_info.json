@@ -1,0 +1,347 @@
+{
+  "skuId": {
+    "comment": " 商品ID",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "mainSkuId": {
+    "comment": "主商品sku",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "skuName": {
+    "comment": "商品名称",
+    "type": "string",
+    "index": "no"
+  },
+  "itemFirstCateCd": {
+    "comment": "一级分类ID",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "itemFirstCateName": {
+    "comment": "一级分类名称",
+    "type": "string",
+    "index": "no"
+  },
+  "itemSecondCateCd": {
+    "comment": "二级分类ID",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "itemSecondCateName": {
+    "comment": "二级分类名称",
+    "type": "string",
+    "index": "no"
+  },
+  "itemThirdCateCd": {
+    "comment": "三级分类ID",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "itemThirdCateName": {
+    "comment": "三级分类名称",
+    "type": "string",
+    "index": "no"
+  },
+  "deptID1": {
+    "comment": " 1级部门ID",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "deptName1": {
+    "comment": " 1级部门名称",
+    "type": "string",
+    "index": "no"
+  },
+  "deptID2": {
+    "comment": " 2级部门ID",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "deptName2": {
+    "comment": " 2级部门名称",
+    "type": "string",
+    "index": "no"
+  },
+  "deptID3": {
+    "comment": " 3级部门ID",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "deptName3": {
+    "comment": " 3级部门名称",
+    "type": "string",
+    "index": "no"
+  },
+  "deptID4": {
+    "comment": " 4级部门ID",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "deptName4": {
+    "comment": " 4级部门名称",
+    "type": "string",
+    "index": "no"
+  },
+  "workPostCd": {
+    "comment": " 末级部门ID",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "nationVendorCode": {
+    "comment": " 全国供应商简码",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "nationVendorName": {
+    "comment": "全国供应商名称",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "brandCode": {
+    "comment": "品牌编码",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "brandName": {
+    "comment": "品牌名称",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "salerErpId": {
+    "comment": "销售员ERP",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "salerName": {
+    "comment": "销售员名称",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "buyerErpId": {
+    "comment": "采购员erp",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "buyerName": {
+    "comment": "采购员名称",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "isDropship": {
+    "comment": "是否厂商直送",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isNational": {
+    "comment": "是否全国发货",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isParallel": {
+    "comment": "是否平行库存",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isShelfLife": {
+    "comment": "是否保质期商品",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isStopNoStock": {
+    "comment": "是否售完即止",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isXnzt": {
+    "comment": "是否虚拟组套",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isNewFlag": {
+    "comment": "是否新品",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "isVcFlag": {
+    "comment": "是否虚拟品类",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isAllowReserveFlag": {
+    "comment": "是否预售",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "isNationNosales30": {
+    "comment": "是否全国30日不动销",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "isNationNosales60": {
+    "comment": "是否全国60日不动销",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "isNationNosales90": {
+    "comment": "是否全国90日不动销",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "isUnsalablenventory": {
+    "comment": "是否全国件数滞销",
+    "type": "integer",
+    "index": "not_analyzed"
+  },
+  "bookingStatus": {
+    "comment": "预订状态",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "saleStatus": {
+    "comment": "上下柜状态",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "offSaleReason": {
+    "comment": "下柜原因",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "shelvesTm": {
+    "comment": "上架时间",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "lastSaleTime": {
+    "comment": "最近上柜时间",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "offSaleTime": {
+    "comment": "最近下柜时间",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "firstIntoWhTm": {
+    "comment": "首次入库时间",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "lastIntoWhTm": {
+    "comment": "末次入库时间",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "qgp": {
+    "comment": "保质期",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "length": {
+    "comment": "商品长度",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "width": {
+    "comment": "商品宽度",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "height": {
+    "comment": "商品高度",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "weight": {
+    "comment": "商品体积",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "wt": {
+    "comment": "商品重量",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "jdPrice": {
+    "comment": "京东价",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "mktPrice": {
+    "comment": "市场价",
+    "type": "double",
+    "index": "not_analyzed"
+  },
+  "orgNationClicksBand": {
+    "comment": "全国一级品类7日点击量BAND",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "orgNationClicksBand37": {
+    "comment": "全国三级品类7日点击量BAND",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "orgNationSaleNumBand": {
+    "comment": "全国一级品类7日销量BAND",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "orgNationSaleNumBand37": {
+    "comment": "全国三级品类7日销量BAND",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "orgNationSaleAmtBand": {
+    "comment": "全国一级品类7日销售额BAND",
+    "type": "string",
+    "index": "not_analyzed"
+  },
+  "clickNoStock": {
+    "comment": "无货点击量 非图书为0",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "clickCount": {
+    "comment": "点击量",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "saleCount": {
+    "comment": "7日全国销量(从band表中取的，用于band排名的)",
+    "type": "long",
+    "index": "not_analyzed"
+  },
+  "nationwideSales7": {
+    "comment": "全国7日有效销量 订单-收货地口径  全国七日销量  biip_sale表",
+    "type": "long",
+    "index": "no"
+  },
+  "nationTotalPV": {
+    "comment": "全国昨日总PV",
+    "type": "integer",
+    "index": "no"
+  },
+  "nationNoStockPV": {
+    "comment": "全国昨日无货PV",
+    "type": "string",
+    "index": "no"
+  },
+  "nationNumStock": {
+    "comment": "全国现货库存",
+    "type": "string",
+    "index": "no"
+  },
+  "nationNumStockAmount": {
+    "comment": "全国现货库存成本",
+    "type": "string",
+    "index": "no"
+  },
+  "nationUnsalableStockAmount": {
+    "comment": "全国滞销库存金额",
+    "type": "string",
+    "index": "no"
+  }
+}

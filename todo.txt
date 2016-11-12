@@ -1,0 +1,42 @@
+
+doing  list .......................
+
+
+1）并行任务调度框架:  串行、并发执行；
+2）导出任务框架
+3) 注册任务
+
+
+todo list .......................
+
+一、ibatis  mybatis  springmvc springData 的集成
+
+二、excel  、xml  、  json、word 解析（ini格式、xml、yml都比json适合）
+2.1. xml 2 bean
+1) xml 构建树行结构。
+根据树行结构创建类。
+2)xml -- json -- bean
+2.2  json 2 bean
+属性配置（属性不同的情况下）
+对象嵌套、list对象
+先生成类，在封装到对象中。
+拿到注释
+2.3 poi解析excel (dom sax)
+xls与xlsx两种格式的解析
+
+三、apache common 框架
+lang3 (data string格式处理)
+collection
+io
+
+
+三、 map hashmap 源码分析 并发分析
+
+四、 多线程并发书总结学习
+1. join  wait notify
+2. synaro....   锁对象： 类锁、实例对象锁、对象锁
+
+五、es集成  springdata  与 es源码学习
+
+
+

@@ -27,8 +27,12 @@
     <!--<elasticsearch:transport-client id="client" cluster-nodes="192.168.200.196:9303" cluster-name="jiesi-1" />-->
     <!--<elasticsearch:transport-client id="client" cluster-nodes="192.168.200.196:9303,192.168.200.197:9303" cluster-name="jiesi-1" />-->
 
-
+<!--
     <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300" cluster-name="elasticsearch" />
+    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client"/>
+    </bean>-->
+
     <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
         <constructor-arg name="client" ref="client"/>
     </bean>
