@@ -1,0 +1,18 @@
+version是版本的意思
+
+
+xmlns:是XML NameSpace的缩写，因为XML文件的标签名称都是自定义的，自己写的和其他人定义的标签很有可能会重复命名，而功能却不一样，
+        所以需要加上一个namespace来区分这个xml文件和其他的xml文件，类似于java中的package。
+默认命名空间。
+
+
+xsi全名：xml schema instance
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" --xml遵循的标签规范
+xmlns:xsi是指web.xml遵守xml规范
+
+
+xsi:schemaLocation用于声明了目标名称空间的模式文档
+用来定义xmlschema的地址，也就是xml书写时需要遵循的语法，两部分组成，前面部分就是命名空间的名字，后面是xsd（xmlschema）的地址。
+
+
+
