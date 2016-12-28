@@ -13,17 +13,17 @@ public class Test {
     public static void main(String[] args) {
 
         ExcelHandler excelHandler=new ExcelHandler();
-        Cell2Map cell2Map = new Cell2Map();
-        cell2Map.setFilePath("d:\\1234.xls");
-        List<HashMap> hashMaps = excelHandler.readExcel(HashMap.class,cell2Map );
-        System.out.println(hashMaps);
 
-        /*
+
         MapData mapData=new MapData();
-        mapData.setExcelType("2007");
-        mapData.generalExcelData(null);
-        excelHandler.setExcelDataGenarate(mapData);
-        excelHandler.generateExcel();
-        */
+        mapData.setFilePath("d:/3.xlsx");
+        excelHandler.generateExcel(mapData);
+
+
+        Cell2Map cell2Map = new Cell2Map();
+        cell2Map.setFilePath("d:/3.xlsx");
+        List<HashMap> hashMaps = excelHandler.readExcel(HashMap.class,cell2Map );
+
+        System.out.println(hashMaps);
     }
 }

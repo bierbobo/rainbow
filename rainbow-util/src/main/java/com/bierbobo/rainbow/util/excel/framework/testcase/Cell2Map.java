@@ -10,6 +10,7 @@ import java.util.HashMap;
  */
 public class Cell2Map  extends Cell2BeanMap<HashMap> {
 
+
     private String filePath;
 
     @Override
@@ -20,15 +21,16 @@ public class Cell2Map  extends Cell2BeanMap<HashMap> {
 
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     @Override
     public String getFilePath() {
         return filePath;
     }
-/*
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+ /*
     @Override
     public <DataBean> List<DataBean> readExcel(Class<DataBean> clazz) {
         return super.readExcel(clazz);

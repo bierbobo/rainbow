@@ -12,7 +12,6 @@ public  abstract class Cell2BeanMap<T>  {
 
 
     public abstract void setBean(int rowIndex,int colIndex, Cell cell, T t);
-
     public abstract String getFilePath();
 
     protected String generalFilePath1() {

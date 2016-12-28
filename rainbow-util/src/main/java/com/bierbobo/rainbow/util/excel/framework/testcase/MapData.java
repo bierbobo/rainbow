@@ -12,40 +12,55 @@ import java.util.List;
 /**
  * Created by lifubo on 2016/12/28.
  */
-public class MapData extends ExcelDataGenarate<Object,HashMap> {
+public class MapData extends ExcelDataGenarate<HashMap> {
 
-    private String excelType;//导出excel类型 03 07
-    public String getExcelType() {
-        return excelType;
+    private String filePath;
+    private QueryVo param;
+
+    @Override
+    public String getFilePath() {
+        return filePath;
+    }
+    @Override
+    public   QueryVo getParam() {
+        return param;
     }
 
-    public void setExcelType(String excelType) {
-        this.excelType = excelType;
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
+    public void setParam(QueryVo param) {
+        this.param = param;
+    }
+
 
 
     @Override
-    public ExcelData<HashMap> generalExcelData(Object o) {
+    public ExcelData<HashMap> generalExcelData() {
+
+//        QueryVo queryVo = this.getParam();
 
         ExcelData<HashMap> excelData=new ExcelData<HashMap>();
         List<ExcelCellFormat> colFormatList= new ArrayList<>();
 
         List<HashMap> list = new ArrayList<>();
-        for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 10; i++) {
 
             ExcelCellFormat format=new ExcelCellFormat();
             HashMap hashMap=new HashMap();
-            for (int i = 0; i < 10; i++) {
-                hashMap.put(i,j+":"+i);
+            for (int j = 0; j < 10; j++) {
+                hashMap.put(j,i+":"+j);
             }
             colFormatList.add(format);
             list.add(hashMap);
         }
+
         excelData.setDataList(list);
         excelData.setColFormatList(colFormatList);
 
-        this.setExcelData(excelData);
         return excelData;
+
     }
 
     @Override
@@ -60,8 +75,5 @@ public class MapData extends ExcelDataGenarate<Object,HashMap> {
 
     }
 
-    @Override
-    public String generalFilePath() {
-        return "d:/123.xlsx";
-    }
+
 }

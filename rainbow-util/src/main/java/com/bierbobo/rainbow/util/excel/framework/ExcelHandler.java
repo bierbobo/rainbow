@@ -1,7 +1,7 @@
 package com.bierbobo.rainbow.util.excel.framework;
 
 import com.bierbobo.rainbow.domain.common.Page;
-import com.bierbobo.rainbow.util.excel.Constants;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -31,8 +31,12 @@ public class ExcelHandler {
 
 	public static final String OFFICE_EXCEL_2003_POSTFIX = "xls";
 	public static final String OFFICE_EXCEL_2010_POSTFIX = "xlsx";
+	public static final String EMPTY = "";
+	public static final String POINT = ".";
 	public static final String NOT_EXCEL_FILE = " : Not the Excel file!";
 	public static final String PROCESSING = "Processing...";
+	public static final int FLUSH_ROWS = 1000;
+
 
 	private ExcelDataGenarate excelDataGenarate;
 
@@ -123,19 +127,34 @@ public class ExcelHandler {
 	}
 
 
+	/**
+	 *
+	 *
+	 * @param excelDataGenarate
+	 */
+	public   void generateExcel(ExcelDataGenarate excelDataGenarate){
 
-	public   void generateExcel(){
+		if (excelDataGenarate==null) {
+			throw new RuntimeException("ExcelDataGenarate不可为空");
+		}
+		//生成excel内容
+		String filePath = excelDataGenarate.getFilePath();
+		if (StringUtils.isBlank(filePath)) {
+			throw new RuntimeException("ExcelDataGenarate中的filePath不可为空");
+		}
 
+		this.setExcelDataGenarate(excelDataGenarate);
 		Workbook workbook =null;
+
 		try {
-
 			//根据查询条件判读是否需要进行 数据写入
-
-			//生成excel内容
-			if (this.excelDataGenarate.getExcelType().equalsIgnoreCase("2007")) {
+			String fileType = this.getFileType(filePath);
+			if (OFFICE_EXCEL_2003_POSTFIX.equals(fileType)) {
+				workbook=new HSSFWorkbook();
+			}else if(OFFICE_EXCEL_2010_POSTFIX.equals(fileType)){
 				workbook=new SXSSFWorkbook();
 			}else{
-				workbook=new HSSFWorkbook();
+				throw new RuntimeException("不支持的excel类型");
 			}
 
 			Sheet sheet = workbook.createSheet();
@@ -222,7 +241,7 @@ public class ExcelHandler {
 
 			//每当行数达到设置的值就刷新数据到硬盘,以清理内存
 			if (sheet instanceof SXSSFSheet) {
-				if(rowIndex% Constants.FLUSH_ROWS==0){
+				if(rowIndex% FLUSH_ROWS==0){
 					((SXSSFSheet)sheet).flushRows();
 				}
 
@@ -270,7 +289,7 @@ public class ExcelHandler {
 
 			//每当行数达到设置的值就刷新数据到硬盘,以清理内存
 			if (sheet instanceof SXSSFSheet) {
-				if(rowIndex% Constants.FLUSH_ROWS==0){
+				if(rowIndex% FLUSH_ROWS==0){
 					((SXSSFSheet)sheet).flushRows();
 				}
 
@@ -287,7 +306,7 @@ public class ExcelHandler {
 
 		FileOutputStream fileOutputStream = null;
 		try {
-			String path = this.excelDataGenarate.generalFilePath();
+			String path = this.excelDataGenarate.getFilePath();
 			fileOutputStream = new FileOutputStream(path);
 			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
 			workbook.write(bufferedOutputStream);
@@ -307,5 +326,23 @@ public class ExcelHandler {
 		}
 	}
 
+	private String getFileType(String path) {
+
+		if (path == null || EMPTY.equals(path.trim())) {
+			return EMPTY;
+		}
+
+		String fileType =EMPTY;
+		if (path.contains(POINT)) {
+			String filePostfix = path.substring(path.lastIndexOf(POINT) + 1, path.length());
+			if (OFFICE_EXCEL_2003_POSTFIX.equalsIgnoreCase(filePostfix)) {
+				fileType=OFFICE_EXCEL_2003_POSTFIX;
+			}else if(OFFICE_EXCEL_2010_POSTFIX.equalsIgnoreCase(filePostfix)){
+				fileType=OFFICE_EXCEL_2010_POSTFIX;
+			}
+		}
+
+		return fileType;
+	}
 
 }

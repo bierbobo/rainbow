@@ -11,56 +11,91 @@ import java.util.List;
 /**
  * Created by lifubo on 2016/12/28.
  */
-public abstract class ExcelDataGenarate<Param,Result> {
+public abstract class ExcelDataGenarate<Result> {
 
-    private ExcelData excelData;
+
+
+    private ExcelData<Result> excelData;
     List<ExcelCellFormat> colFormatList;// 标题信息以及列的格式信息
-    private String excelType;//导出excel类型 03 07
-
-
     private boolean pageEnable;// 是否分页读取数据
     private Integer pageSize = -1; // 每页记录数
     private Integer totalCount = -1; // 总记录数
 
-    public String getExcelType() {
-        return excelType;
-    }
+
+
     public boolean isPageEnable() {
         return pageEnable;
-    }
-    public void setPageEnable(boolean pageEnable) {
-        this.pageEnable = pageEnable;
     }
     public Integer getPageSize() {
         return pageSize;
     }
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
     public Integer getTotalCount() {
         return totalCount;
+    }
+    public List<ExcelCellFormat> getColFormatList() {
+        return colFormatList;
+    }
+
+    public void setPageEnable(boolean pageEnable) {
+        this.pageEnable = pageEnable;
+    }
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
     }
-
-    public void setExcelData(ExcelData excelData) {
-        this.excelData = excelData;
+    public void setColFormatList(List<ExcelCellFormat> colFormatList) {
+        this.colFormatList = colFormatList;
     }
+
+    public  <Param> Param getParam() {
+        return null;
+    }
+
     public ExcelData<Result> getExcelData() {
-        return excelData;
+        return this.generalExcelData();
     }
-    public <Result> ExcelData<Result> getExcelData(int pageNo) {
-        return excelData;
+
+    public   ExcelData<Result> getExcelData(int pageNo) {
+        return this.generalExcelData(pageNo);
     }
 
 
-    public abstract    ExcelData<Result> generalExcelData(Param param);
+    /**
+     * 生成文件路径
+     * @return
+     */
+    public abstract  String getFilePath() ;
+
+    /**
+     * 生成文件数据
+     * @return
+     */
+    public abstract ExcelData<Result> generalExcelData();
+
+    /**
+     * 生成文件数据
+     * @return
+     */
+    public  ExcelData<Result> generalExcelData(int pageNo){
+        return null;
+    }
+
+    /**
+     * 将数据填充到excel中
+     * @param rowIndex
+     * @param columnIndex
+     * @param cell
+     * @param excelCellFormat
+     * @param bean
+     */
     public abstract void setCellValue(int rowIndex,int columnIndex ,Cell cell,ExcelCellFormat excelCellFormat,Result bean );
-    public abstract  String generalFilePath() ;
 
+/*
 
-    protected   ExcelData<Result> generalExcelData1(Param param) {
+    protected   void generalExcelData1(Param param) {
+*/
 /*
 		//4.创建单元格样式
 		CellStyle cellStyle =wb.createCellStyle();
@@ -75,17 +110,19 @@ public abstract class ExcelDataGenarate<Param,Result> {
 		cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 		cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
 		cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);  // 创建一个居中格式
-		*/
+		*//*
 
-        ExcelData excelData=new ExcelData();
-        return excelData;
+
+//        ExcelData excelData=new ExcelData();
+//        return excelData;
     }
 
 
-    protected   ExcelData<Result> generalExcelData(Param param,int pageNo) {
+    protected   ExcelData<Result> generalExcelData1(Param param,int pageNo) {
 
         // 根据分页信息、查询条件  来客隆一个新的查询条件
        // QueryVO clonePara = ObjectCloneUtils.serializableClone(para);
+*/
 /*
 		//4.创建单元格样式
 		CellStyle cellStyle =wb.createCellStyle();
@@ -100,11 +137,13 @@ public abstract class ExcelDataGenarate<Param,Result> {
 		cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 		cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
 		cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);  // 创建一个居中格式
-		*/
+		*//*
+
 
         ExcelData excelData=new ExcelData();
         return excelData;
     }
+*/
 
     /**
      *
