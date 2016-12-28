@@ -27,6 +27,14 @@
         </dependency>
 
 
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-examples</artifactId>
+            <version>3.12</version>
+        </dependency>
+
+
         <!-- apache common -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -97,6 +105,18 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.23</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bierbobo</groupId>
+            <artifactId>rainbow-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 </project>
