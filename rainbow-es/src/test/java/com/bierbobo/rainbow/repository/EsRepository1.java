@@ -6,15 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-/**
- * Title: StreamingQueryRepository
- * Description: StreamingQueryRepository
- * Company: <a href=www.jd.com>京东</a>
- * Date:  2016/7/19
- *
- * @author <a href=mailto:zhouzhichao@jd.com>chaochao</a>
- */
-public interface EsRepository extends CrudRepository<AppDashboardAnalysis, Long> {
+public interface EsRepository1 extends CrudRepository<AppDashboardAnalysis, Long> {
 
     /*@Query("select u from User u")*/
     //Stream<Product> findAllByCustomQueryAndStream();

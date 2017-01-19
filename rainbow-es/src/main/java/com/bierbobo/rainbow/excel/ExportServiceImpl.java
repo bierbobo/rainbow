@@ -6,7 +6,7 @@ import java.util.List;
 /**
 
 
-public class WareExportVerticalServiceImpl {
+public beanClass WareExportVerticalServiceImpl {
 
 
     public CommonResult<Boolean> queryData(ExportData data,Task task) {

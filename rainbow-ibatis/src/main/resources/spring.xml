@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+
+
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd  
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/cache 
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+	http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring   
+  	"
+	default-autowire="byName" default-lazy-init="false">
+
+
+	<!--使用注解方式配置spring bean-->
+	<context:annotation-config/>
+
+	<!-- aop动态代理 -->
+	<aop:aspectj-autoproxy />
+
+	<!-- spring代理范围：全局 -->
+    <context:component-scan base-package="com.bierbobo"/>
+     <aop:aspectj-autoproxy proxy-target-class="false"/>
+
+	<!-- 配置文件 -->
+	<context:property-placeholder location="classpath:conf/*.properties" />
+
+	<!-- 声明式事务控制 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" />
+
+	<!-- 引入的其他文件 -->
+	<import resource="spring-dao.xml"/>
+
+
+</beans>

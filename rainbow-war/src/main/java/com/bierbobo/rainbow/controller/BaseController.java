@@ -1,13 +1,14 @@
 package com.bierbobo.rainbow.controller;
 
-import com.bierbobo.rainbow.domain.vo.QueryVO;
-import org.springframework.util.CollectionUtils;
+//import com.bierbobo.rainbow.domain.vo.QueryVO;
+//import org.springframework.util.CollectionUtils;
 
 /**
  * Created by lifubo on 2016/11/1.
  */
 public class BaseController {
 
+/*
 
     protected boolean checkParam(QueryVO queryVO){
         return true;
@@ -28,5 +29,6 @@ public class BaseController {
 
     }
 
+*/
 
 }

@@ -264,11 +264,7 @@
     "type": "double",
     "index": "not_analyzed"
   },
-  "jdPrice": {
-    "comment": "京东价",
-    "type": "double",
-    "index": "not_analyzed"
-  },
+
   "mktPrice": {
     "comment": "市场价",
     "type": "double",

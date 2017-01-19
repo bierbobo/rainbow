@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="subscibe_task" >
+
+
+    <resultMap id="baseMap" class="com.bierbobo.rainbow.domain.SubscibeTask" >
+
+        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="template_id" property="templateId" jdbcType="VARCHAR" />
+
+        <result column="push_mode" property="pushMode" jdbcType="BIGINT" />
+        <result column="push_time" property="pushTime" jdbcType="VARCHAR" />
+
+        <result column="export_type" property="exportType" jdbcType="BIGINT" />
+        <result column="des" property="describe" jdbcType="VARCHAR" />
+        <result column="next_exec_date" property="nextExecDate" jdbcType="VARCHAR" />
+        <result column="creator" property="creator" jdbcType="VARCHAR" />
+        <result column="updator" property="updator" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="DATETIME" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+
+
+        <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+        <result column="user_role" property="userRole" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+
+        <result column="state" property="state" jdbcType="BIGINT" />
+        <result column="server_ip" property="serverIp" jdbcType="VARCHAR" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <resultMap id="subscibeTaskMap" class="com.bierbobo.rainbow.domain.SubscibeTask"
+               extends="subscibe_task.baseMap">
+        <result column="template_name" property="templateName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <typeAlias alias="SubscibeTask" type="com.bierbobo.rainbow.domain.SubscibeTask"/>
+
+    <sql id="Base_Column_List" >
+        id,name,template_id,push_mode,push_time,export_type,des,email,next_exec_date,creator,creator_name,user_role,updator,create_time,update_time,state,server_ip,message
+    </sql>
+
+
+    <select id="list"  parameterClass="SubscibeTask" resultMap="subscibeTaskMap" >
+        select s.id,s.name,s.template_id,s.push_mode,s.push_time,s.export_type,s.des,s.email,s.next_exec_date,s.creator,s.creator_name,
+        s.user_role,s.updator,s.create_time,s.update_time,s.state,s.server_ip,s.message,r.name as template_name
+        from subscibe_task s join report_template r
+        on s.template_id=r.id
+        where 1=1
+        <isNotNull prepend="and" property="name" >
+            s.name = #name#
+        </isNotNull>
+        <isNotNull prepend="and" property="templateName" >
+            r.template_name = #templateName#
+        </isNotNull>
+        <isNotNull prepend="and" property="exportType" >
+            s.export_type= #exportType#
+        </isNotNull>
+        order by s.create_time desc
+     </select>
+
+    <select id="queryById"  parameterClass="SubscibeTask" resultMap="subscibeTaskMap" >
+        select s.id,s.name,s.template_id,s.push_mode,s.push_time,s.export_type,s.des,s.email,s.next_exec_date,s.creator,s.creator_name,
+        s.user_role,s.updator,s.create_time,s.update_time,s.state,s.server_ip,s.messager, r.template_name
+        from subscibe_task s join report_template r
+        on s.template_id=r.id
+        where s.id = #id#
+    </select>
+
+    <delete id="delete" parameterClass="SubscibeTask" >
+        delete from subscibe_task    where id = #id#
+    </delete>
+
+  <insert id="insert" parameterClass="SubscibeTask" >
+    insert into subscibe_task(id,name,template_id,push_mode,push_time,export_type,des,
+       email,next_exec_date,creator,creator_name,user_role,updator,create_time,update_time,state
+    )
+    values (
+        #id#,#name#,#templateId#,#pushMode#,#pushTime#,#exportType#,#describe#,
+        #email#,#nextExecDate#, #creator#,#creatorName#,#userRole#,#updator#,NOW(),NOW(),#state#
+    )
+  </insert>
+
+    <update id="update" parameterClass="SubscibeTask">
+        UPDATE subscibe_task
+        SET   name=#name#,template_id=#templateId#,push_mode=#pushMode#,push_time=#pushTime#,
+              export_type=#exportType#,des=#describe#,email=#email#,next_exec_date=#nextExecDate#,updator=#updator#
+        WHERE id = #id#
+    </update>
+
+    <select id="queryNextExecSubscibeTaskList" parameterClass="SubscibeTask">
+
+        SELECT    <include refid="subscibe_task.Base_Column_List" />
+        from subscibe_task
+        where next_exec_date = #nextExecDate# and ( <![CDATA[  CAST(push_time AS signed)  <=  CAST( #pushTime#  AS signed) ]]> )
+        AND state in
+        <iterate property="sourceStateList" conjunction="," open="(" close=")" >
+          #sourceStateList[]#
+        </iterate>
+        order by push_time asc
+        <![CDATA[ limit 0,#taskNum# ]]>
+
+    </select>
+
+
+
+  <update id="updateTaskStateAndMsg" parameterClass="SubscibeTask">
+
+        UPDATE subscibe_task SET state = #state#
+        <isNotNull prepend="," property="serverIp" >
+          server_ip = #serverIp#
+        </isNotNull>
+        <isNotNull prepend="," property="message" >
+          message = #message#
+        </isNotNull>
+        <isNotNull prepend="," property="nextExecDate" >
+          next_exec_date = #nextExecDate#
+        </isNotNull>
+        WHERE id = #id#
+        AND state in
+        <iterate property="sourceStateList" conjunction="," open="(" close=")" >
+          #sourceStateList[]#
+        </iterate>
+
+  </update>
+
+
+
+</sqlMap>

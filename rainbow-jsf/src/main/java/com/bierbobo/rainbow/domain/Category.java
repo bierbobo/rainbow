@@ -6,9 +6,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import jd.gms.common.util.ErrorCodes;
-import jd.gms.common.util.validation.*;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

@@ -16,6 +16,8 @@
     <module>rainbow-util</module>
     <module>rainbow-data</module>
     <module>rainbow-task</module>
+    <module>rainbow-concurrent</module>
+    <module>rainbow-concurrent1</module>
   </modules>
 
   <name>rainbow</name>
@@ -141,8 +143,15 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
+      <version>1.1.36</version>
+    </dependency>
+<!--
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
       <version>1.2.20</version>
     </dependency>
+-->
 
 
     <!-- jackson 框架-->
@@ -164,11 +173,26 @@
     </dependency>
     -->
 
+
+    <!-- poi -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.12</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.23</version>
     </dependency>
 
   </dependencies>

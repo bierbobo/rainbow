@@ -1,7 +1,7 @@
 package com.bierbobo.rainbow.service;
 
 
-import com.bierbobo.rainbow.repository.EsRepository;
+import com.bierbobo.rainbow.repository.EsRepository1;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +25,7 @@ public class Mysql2Es {
         ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("/spring/elasticsearchRepository.xml");
         JdbcTemplate jdbcTemplate = (JdbcTemplate) appContext.getBean("jdbcTemplate");
         ElasticsearchTemplate elasticsearchTemplate = (ElasticsearchTemplate) appContext.getBean("elasticsearchTemplate");
-        EsRepository esRepository = (EsRepository) appContext.getBean("esRepository");
+        EsRepository1 esRepository = (EsRepository1) appContext.getBean("esRepository");
 
         elasticsearchTemplate.deleteIndex(AppDashboardAnalysis.class);
         elasticsearchTemplate.createIndex(AppDashboardAnalysis.class);
@@ -39,7 +39,7 @@ public class Mysql2Es {
 
     }
 
-    private static void update(ElasticsearchTemplate elasticsearchTemplate, EsRepository esRepository) {
+    private static void update(ElasticsearchTemplate elasticsearchTemplate, EsRepository1 esRepository) {
 
         for (AppDashboardAnalysis appDashboardAnalysis : esRepository.findByItemFirstCateCd("11729")) {
 
@@ -54,7 +54,7 @@ public class Mysql2Es {
     }
 
 
-    private void initData( JdbcTemplate jdbcTemplate, EsRepository streamingQueryRepository) {
+    private void initData( JdbcTemplate jdbcTemplate, EsRepository1 streamingQueryRepository) {
 
 
         List<Map<String, Object>> maps = jdbcTemplate.queryForList("select w.wid as skuId  ,wname    as  skuName  ," +

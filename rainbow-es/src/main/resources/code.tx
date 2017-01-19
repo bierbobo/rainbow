@@ -1,0 +1,18 @@
+    public void %s(String %s) {
+
+        if(StringUtils.isNotEmpty(%s)){
+            String[] dataArray= %s.split(",");
+            if (dataArray.length==%s) {
+                this.setOrderSalesQuantity1(Integer.valueOf(dataArray[0]));
+                this.setOrderSalesQuantity7(Integer.valueOf(dataArray[1]));
+                this.setOrderSalesQuantity14(Integer.valueOf(dataArray[2]));
+                this.setOrderSalesQuantity28(Integer.valueOf(dataArray[3]));
+                this.setOrderSalesQuantity30(Integer.valueOf(dataArray[4]));
+                this.setOrderSalesQuantity60(Integer.valueOf(dataArray[5]));
+                this.setOrderSalesQuantity90(Integer.valueOf(dataArray[6]));
+                this.setOrderSalesQuantity7_28(Integer.valueOf(dataArray[7]));
+                this.setOrderSalesQuantitymonth(Integer.valueOf(dataArray[8]));
+            }
+        }
+        this.orderSalesQuantity = orderSalesQuantity;
+    }

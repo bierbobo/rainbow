@@ -1,12 +1,8 @@
 package com.bierbobo.rainbow.domain.common;
 
 import java.io.Serializable;
-import jd.gms.common.util.ErrorCodes;
-import jd.gms.common.util.validation.Delete;
-import jd.gms.common.util.validation.New;
-import jd.gms.common.util.validation.Update;
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.validator.constraints.NotBlank;
+//import org.apache.commons.lang.StringUtils;
+//import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

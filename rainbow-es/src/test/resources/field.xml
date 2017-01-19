@@ -78,12 +78,7 @@
 
         <measure  key="priceInfo" name="价格相关" >
 
-            <field  key="jdPrice" name="京东价" type="sku"/>
-            <field  key="mktPrice" name="市场价" type="sku"/>
-            <!--实时接口-->
-            <field  key="frontPrice" name="前台售价" type="sku"/>
-            <field  key="whQt" name="仓报价" type="dc,rdc"/>
-            <field  key="purchasePrice" name="采购价" type="dc,rdc"/>
+
             <!--手动计算：前台售价-采购价-->
             <field  key="grossProfit" name="毛利" type="dc,rdc"/>
             <!--手动计算：毛利/前台售价-->

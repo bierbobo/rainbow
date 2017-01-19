@@ -9,15 +9,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-/**
- * Title: Tool
- * Description: Tool
- * Company: <a href=www.jd.com>京东</a>
- * Date:  2016/7/8
- *
- * @author <a href=mailto:zhouzhichao@jd.com>chaochao</a>
- */
 public class Tool {
 
     private static Logger logger = Logger.getLogger(Tool.class);

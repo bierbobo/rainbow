@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
  jackson-dataformat-xml
 
  @JsonIgnore 此注解用于属性上，作用是进行JSON操作时忽略该属性。
- @JsonFormat 此注解用于属性上，作用是把Date类型直接转化为想要的格式，如@JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")。
+ @JsonFormat 此注解用于属性上，作用是把Date类型直接转化为想要的格式，如@JsonFormat(pattern = "yyyy-MM-dd HH-mm-study")。
  @JsonProperty 此注解用于属性上，作用是把该属性的名称序列化为另外一个名称，如把trueName属性序列化为name，@JsonProperty("name")。
 
  */
@@ -46,7 +46,7 @@ public class JacksonUtil {
         String result = "";
         ObjectMapper mapper = new ObjectMapper();
         try {
-            mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:study"));
             result = mapper.writeValueAsString(array);
         } catch (Exception e) {
             //log.error("JacksonUtil Exception>>>>>>>:{}", e.toString());

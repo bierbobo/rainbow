@@ -235,16 +235,6 @@
 "index": "not_analyzed"
 }
 
-"com":"*******************各类价格*******************",
-
-,"jdPrice": {         "com":"京东价",
-"type": "double",
-"index": "not_analyzed"
-}
-,"mktPrice": {         "com":"市场价",
-"type": "double",
-"index": "not_analyzed"
-}
 
 "com":"************BAND************",
 ,"orgNationClicksBand": {"com":"全国一级品类7日点击量BAND",

@@ -134,7 +134,7 @@ public class EsExcutor {
 
     public static void main(String[] args) {
 
-        String execCode = getExecCode("c:/ss.txt");
+        String execCode = getExecCode("c:/study.txt");
 
         execCode = execCode.replace("\"","\\\"");
         execCode = execCode.replace("\'", "\"");
