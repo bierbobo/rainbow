@@ -26,12 +26,8 @@ public class BaseTaskSchedule {
 
     private static String LOGGER_BEGIN = "【任务统一处理框架】";
     Logger logger = Logger.getLogger(BaseTaskSchedule.class);
-
-
-    private static final int MESSAGE_LENGTH = 2000;//task表中message字段的最大长度
-
-
     private TaskScheduleService taskScheduleService;
+
 
     //处理采销大表导出Excel数据,每次在数据库读取 taskNumMultiple 条数据 然后开启 taskNumMultiple 线程执行
 
@@ -47,12 +43,22 @@ public class BaseTaskSchedule {
 
     /**
 
-     * @description:任务注册方法【支持批量】
-     * @param:a)records:要注册的任务；b)flag:true的时候更新已有的任务[此时task的effectiveUpdateTimeSpace字段必填]；
-     *  c)param:后置任务使用的参数[后置任务主要考虑事务管理]
-     * @returnData:Map<String,Task>:其中key为uuid；task对象中也包含uuid
-     * @author: chenzhifei
-     * @created_date:2013-10-12
+     1.检查任务的配置与参数信息
+     2.对任务按照是否存在进行分组
+     3.不存在的任务：进行注册插入
+     4.存在的任务：根据影响时间，查询出需要修改的任务,更新任务
+     5.对任务进行后续处理
+
+
+
+
+     *任务注册方法【支持批量】
+     *
+     * @param records   要注册的任务
+     * @param flag      true的时候更新已有的任务[此时task的effectiveUpdateTimeSpace字段必填]；
+     * @param param     后置任务使用的参数[后置任务主要考虑事务管理]
+     * @param <T>
+     * @return          Map<String,Task>:其中key为uuid；task对象中也包含uuid
      */
     @Transactional
     public <T> CommonResult<Map<String,Task>> registerTask(List<Task> records,boolean flag,List<T> param){
@@ -67,8 +73,7 @@ public class BaseTaskSchedule {
         Map<Integer,List<Task>> groupedTask =taskScheduleService.groupTaskByRecorded(records);
         List<Task> noRecordedTask = groupedTask.get(0);//task表中不存在的任务
         List<Task> recordedTask = groupedTask.get(1);//task表中存在的任务
-        //设定任务的state、uuid、serverIP
-        noRecordedTask = appointRecordTaskUniteInfo(noRecordedTask,true);
+
         taskScheduleService.registerTasks(noRecordedTask);
 
 
@@ -77,7 +82,6 @@ public class BaseTaskSchedule {
             if(recordedTask.size()>0){
                 List<Task> needUpdateTask =taskScheduleService.getNeedUpdateTask(recordedTask);
                 if(needUpdateTask.size()>0){
-                    needUpdateTask = appointRecordTaskUniteInfo(needUpdateTask,false);
                     List<Task> tasks =taskScheduleService.updateTaskStateAndMsg(needUpdateTask);
                     if(tasks!=null&&tasks.size()>0){
                         for(Task temp : tasks){
@@ -98,32 +102,6 @@ public class BaseTaskSchedule {
 
 
 
-    //注册任务时封装任务的统一信息【state:0,uuid:随机,server_iP:本机ip】
-    private List<Task> appointRecordTaskUniteInfo(List<Task> records,boolean isNewTask){
-        if(isNewTask){
-            for(Task temp :records){
-                //统一处理businessState、uuid和serverIp
-                temp.setState(TaskStateEnum.NEW_TASK.getState());
-                temp.setUuid(UUID.randomUUID().toString());
-                temp.setMessage(JSONUtil.cutParams(temp.getMessage(),MESSAGE_LENGTH));
-                temp.setServerIp(NetworkUtil.getLocalIP());
-            }
-        }else{
-            for(Task temp :records){
-                temp.setMessage(JSONUtil.cutParams(temp.getMessage(),MESSAGE_LENGTH));
-                temp.setServerIp(NetworkUtil.getLocalIP());
-                temp.setState(TaskStateEnum.NEW_TASK.getState());
-                List<Integer> sourceStateList = new ArrayList<Integer>();
-                sourceStateList.add(TaskStateEnum.COMPLETE_TASK.getState());
-                sourceStateList.add(TaskStateEnum.FAIL_TASK.getState());
-                temp.setSourceStateList(sourceStateList);
-            }
-        }
-
-        return records;
-    }
-
-
 
     /**
         1.前置判断
@@ -134,6 +112,7 @@ public class BaseTaskSchedule {
              3.根据主键（任务类型、任务key）与原状态 更新 新状态
              4.更新成功的加入到封锁对象中
         4.根据任务的运行方式，进行并行与串行运行
+
      *
      * @return
      */

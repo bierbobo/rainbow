@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lifubo on 2017/1/19.
@@ -33,6 +30,7 @@ public abstract class TaskScheduleService {
     private Integer taskNum; //每次任务的处理数量
     private TaskScheduleEnum taskScheduleEnum; //任务的执行类型：串行 、并行
     private TaskDAO taskDao;
+    private static final int MESSAGE_LENGTH = 2000;//task表中message字段的最大长度
 
 
     public String getBusinessType() {
@@ -127,6 +125,8 @@ public abstract class TaskScheduleService {
 
         Map<String,Task> resultMap = new HashMap<String, Task>();
 
+        //设定任务的state、uuid、serverIP
+        noRecordedTask =this.appointRecordTaskUniteInfo(noRecordedTask, true);
         if(noRecordedTask.size()>0){
             for(Task record : noRecordedTask){
                 try{
@@ -228,6 +228,32 @@ public abstract class TaskScheduleService {
 
 
 
+    //注册任务时封装任务的统一信息【state:0,uuid:随机,server_iP:本机ip】
+    public List<Task> appointRecordTaskUniteInfo(List<Task> records,boolean isNewTask){
+        if(isNewTask){
+            for(Task temp :records){
+                //统一处理businessState、uuid和serverIp
+                temp.setState(TaskStateEnum.NEW_TASK.getState());
+                temp.setUuid(UUID.randomUUID().toString());
+                temp.setMessage(JSONUtil.cutParams(temp.getMessage(),MESSAGE_LENGTH));
+                temp.setServerIp(NetworkUtil.getLocalIP());
+            }
+        }else{
+            for(Task temp :records){
+                temp.setMessage(JSONUtil.cutParams(temp.getMessage(),MESSAGE_LENGTH));
+                temp.setServerIp(NetworkUtil.getLocalIP());
+                temp.setState(TaskStateEnum.NEW_TASK.getState());
+                List<Integer> sourceStateList = new ArrayList<Integer>();
+                sourceStateList.add(TaskStateEnum.COMPLETE_TASK.getState());
+                sourceStateList.add(TaskStateEnum.FAIL_TASK.getState());
+                temp.setSourceStateList(sourceStateList);
+            }
+        }
+
+        return records;
+    }
+
+
     //2=======
 
 
@@ -294,6 +320,9 @@ public abstract class TaskScheduleService {
 
         List<Task> resultList =null;
         try{
+
+            records = this.appointRecordTaskUniteInfo(records,false);
+
             resultList = taskDao.updateTaskStateAndMsg(records);
             if(resultList==null||resultList.size()==0){
                 resultList = new ArrayList<Task>();
