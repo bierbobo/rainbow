@@ -5,9 +5,9 @@ package com.bierbobo.rainbow.dao;
 
 
 import com.bierbobo.rainbow.domain.entity.Task;
-import com.bierbobo.rainbow.domain.task.NewTaskOfBIDataTaskParam;
+
 import com.bierbobo.rainbow.domain.vo.QueryTaskParam;
-import com.bierbobo.rainbow.domain.task.RepeatTaskStateParam;
+
 import com.bierbobo.rainbow.domain.task.TaskGroupTypeParam;
 
 import java.util.List;
@@ -28,7 +28,9 @@ public interface TaskDAO {
     public List<Task> updateTaskStateAndMsg(List<Task> updateTaskParam);
 
 
-
+    public void recordTask(Task record);
+    public List<Task> selectTaskListGrType(TaskGroupTypeParam updatedTaskParam);
+    public List<String> selectBusinessKeysGrType(TaskGroupTypeParam tempSelTaskParam);
 
 
     int deleteByPrimaryKey(String businessType, String businessKey);
@@ -44,18 +46,10 @@ public interface TaskDAO {
     int updateByPrimaryKey(Task record);
     
 //    public Integer insertUnduplicated(RegisterTaskDomain records);
-    public void recordTask(Task record);
-//    public void updateRecordedTask(Task recordedTask);
 
-    public List<Task> selectTaskListGrType(TaskGroupTypeParam updatedTaskParam);
-    
+
+
     List<Task> selectBIDataTaskGrName(TaskGroupTypeParam taskGroupTypeParam);
-    
-    public int hasNewTaskOfBIDataTask(NewTaskOfBIDataTaskParam newTaskOfBIDataTaskParam);
-    
-    public List<String> selectBusinessKeysGrType(TaskGroupTypeParam tempSelTaskParam);
-    
-    public Integer repeatTaskStateByBusinessType(RepeatTaskStateParam param);
 
 
 }
