@@ -6,7 +6,7 @@ package com.bierbobo.rainbow.dao;
 
 import com.bierbobo.rainbow.domain.entity.Task;
 import com.bierbobo.rainbow.domain.task.NewTaskOfBIDataTaskParam;
-import com.bierbobo.rainbow.domain.task.QueryTaskParam;
+import com.bierbobo.rainbow.domain.vo.QueryTaskParam;
 import com.bierbobo.rainbow.domain.task.RepeatTaskStateParam;
 import com.bierbobo.rainbow.domain.task.TaskGroupTypeParam;
 
@@ -16,6 +16,15 @@ public interface TaskDAO {
 
 
     public List<Task> selectTaskList(QueryTaskParam queryTaskParam);
+
+
+    /**
+     *
+     *
+     *
+     * @param updateTaskParam
+     * @return
+     */
     public List<Task> updateTaskStateAndMsg(List<Task> updateTaskParam);
 
 

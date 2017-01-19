@@ -5,7 +5,7 @@ import com.bierbobo.rainbow.domain.common.CommonResult;
 import com.bierbobo.rainbow.domain.entity.ExportData;
 import com.bierbobo.rainbow.domain.entity.Task;
 import com.bierbobo.rainbow.domain.task.TaskStateEnum;
-import com.bierbobo.rainbow.framework.BaseTaskSchedule;
+import com.bierbobo.rainbow.taskschedule.BaseTaskSchedule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class ExportServiceImpl extends BaseTaskSchedule {
 
 
 
-	@Override
+//	@Override
 	public List<Task> excuteTask(List<Task> taskList) {
 
 		for(Task task : taskList) {

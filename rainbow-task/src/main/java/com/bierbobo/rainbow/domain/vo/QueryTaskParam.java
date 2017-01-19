@@ -1,4 +1,4 @@
-package com.bierbobo.rainbow.domain.task;
+package com.bierbobo.rainbow.domain.vo;
 
 public class QueryTaskParam {
 
