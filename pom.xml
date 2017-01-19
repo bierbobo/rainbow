@@ -17,7 +17,6 @@
     <module>rainbow-data</module>
     <module>rainbow-task</module>
     <module>rainbow-concurrent</module>
-    <module>rainbow-concurrent1</module>
   </modules>
 
   <name>rainbow</name>
