@@ -1,4 +1,4 @@
-package com.bierbobo.rainbow.framework;
+package com.bierbobo.concurrent;
 
 import com.bierbobo.rainbow.domain.common.CommonResult;
 import com.bierbobo.rainbow.domain.common.Page;

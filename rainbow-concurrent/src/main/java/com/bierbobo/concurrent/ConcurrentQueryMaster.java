@@ -1,4 +1,4 @@
-package com.bierbobo.rainbow.framework;
+package com.bierbobo.concurrent;
 
 
 import com.bierbobo.rainbow.domain.common.CommonResult;
@@ -7,8 +7,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;

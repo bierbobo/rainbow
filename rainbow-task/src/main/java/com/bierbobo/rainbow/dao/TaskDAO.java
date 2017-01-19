@@ -47,6 +47,6 @@ public interface TaskDAO {
     public List<String> selectBusinessKeysGrType(TaskGroupTypeParam tempSelTaskParam);
     
     public Integer repeatTaskStateByBusinessType(RepeatTaskStateParam param);
-    
-    
+
+
 }
