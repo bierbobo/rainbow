@@ -8,30 +8,39 @@ import com.bierbobo.rainbow.domain.entity.Task;
 
 import com.bierbobo.rainbow.domain.vo.QueryTaskParam;
 
-import com.bierbobo.rainbow.domain.task.TaskGroupTypeParam;
+import com.bierbobo.rainbow.domain.vo.TaskGroupParam;
 
 import java.util.List;
 
 public interface TaskDAO {
 
 
-    public List<Task> selectTaskList(QueryTaskParam queryTaskParam);
+    public List<Task> selectNewTaskList(QueryTaskParam queryTaskParam);
+
+    /**
+     * 按businessType  keys     effectiveUpdateTimeSpace   state
+     * @param updatedTaskParam
+     * @return
+     */
+    public List<Task> selectTaskByTaskGroupParam(TaskGroupParam updatedTaskParam);
 
 
     /**
-     *
-     *
-     *
-     * @param updateTaskParam
+     * 按businessType  和 keys  的维度把任务分组
+     * @param
      * @return
      */
+    public List<String> selectKeysByTypeAndKeys(TaskGroupParam tempSelTaskParam);
+
+
     public List<Task> updateTaskStateAndMsg(List<Task> updateTaskParam);
 
+    public List<Task> insertTask(List<Task> taskList);
 
-    public void recordTask(Task record);
-    public List<Task> selectTaskListGrType(TaskGroupTypeParam updatedTaskParam);
-    public List<String> selectBusinessKeysGrType(TaskGroupTypeParam tempSelTaskParam);
 
+
+
+/*
 
     int deleteByPrimaryKey(String businessType, String businessKey);
 
@@ -50,6 +59,7 @@ public interface TaskDAO {
 
 
     List<Task> selectBIDataTaskGrName(TaskGroupTypeParam taskGroupTypeParam);
+*/
 
 
 }

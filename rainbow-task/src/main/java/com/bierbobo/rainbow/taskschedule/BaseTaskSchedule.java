@@ -2,6 +2,7 @@ package com.bierbobo.rainbow.taskschedule;
 
 
 import com.bierbobo.rainbow.domain.common.CommonResult;
+import com.bierbobo.rainbow.domain.common.Constants;
 import com.bierbobo.rainbow.domain.common.TaskScheduleEnum;
 import com.bierbobo.rainbow.domain.entity.Task;
 import com.bierbobo.rainbow.domain.vo.QueryTaskParam;
@@ -9,6 +10,7 @@ import com.bierbobo.rainbow.domain.task.TaskStateEnum;
 import com.bierbobo.rainbow.service.TaskScheduleService;
 import com.bierbobo.rainbow.util.JSONUtil;
 import com.bierbobo.rainbow.util.NetworkUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -35,14 +37,20 @@ public class BaseTaskSchedule {
     private static final int maximumPoolSize = 100;
     private static final int keepAliveTime = 60;
 
-    private final ThreadPoolExecutor pool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
+    private ThreadPoolExecutor pool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
             TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100), new ThreadPoolExecutor.CallerRunsPolicy());
 
 
+    public ThreadPoolExecutor getPool() {
+        return pool;
+    }
 
+    public void setPool(ThreadPoolExecutor pool) {
+        this.pool = pool;
+    }
 
     /**
-
+     任务注册方法【支持批量】
      1.检查任务的配置与参数信息
      2.对任务按照是否存在进行分组
      3.不存在的任务：进行注册插入
@@ -50,10 +58,6 @@ public class BaseTaskSchedule {
      5.对任务进行后续处理
 
 
-
-
-     *任务注册方法【支持批量】
-     *
      * @param records   要注册的任务
      * @param flag      true的时候更新已有的任务[此时task的effectiveUpdateTimeSpace字段必填]；
      * @param param     后置任务使用的参数[后置任务主要考虑事务管理]
@@ -70,27 +74,32 @@ public class BaseTaskSchedule {
         }
 
         Map<String,Task> resultMap = new HashMap<String, Task>();
-        Map<Integer,List<Task>> groupedTask =taskScheduleService.groupTaskByRecorded(records);
-        List<Task> noRecordedTask = groupedTask.get(0);//task表中不存在的任务
-        List<Task> recordedTask = groupedTask.get(1);//task表中存在的任务
+        Map<String,List<Task>> groupedTask =taskScheduleService.groupTaskByRecorded(records);
+        List<Task> noRecordedTask = groupedTask.get(Constants.TASK_NO_EXIST);//task表中不存在的任务
+        List<Task> recordedTask = groupedTask.get(Constants.TASK_EXIST);//task表中存在的任务
 
-        taskScheduleService.registerTasks(noRecordedTask);
-
+        List<Task> insertTasks = taskScheduleService.insertTask(noRecordedTask);
+        if( CollectionUtils.isNotEmpty(insertTasks)){
+            for(Task task : insertTasks){
+                resultMap.put(task.getUuid(), task);
+            }
+        }
 
         //针对指定需要更新的任务，进行任务更新并且反查任务的uuid
         if(flag){
-            if(recordedTask.size()>0){
+            if(CollectionUtils.isNotEmpty(recordedTask)){
                 List<Task> needUpdateTask =taskScheduleService.getNeedUpdateTask(recordedTask);
-                if(needUpdateTask.size()>0){
-                    List<Task> tasks =taskScheduleService.updateTaskStateAndMsg(needUpdateTask);
-                    if(tasks!=null&&tasks.size()>0){
-                        for(Task temp : tasks){
-                            resultMap.put(temp.getUuid(),temp);
+                if( CollectionUtils.isNotEmpty(needUpdateTask)){
+                    List<Task> updateTasks =taskScheduleService.updateTaskStateAndMsg(needUpdateTask);
+                    if( CollectionUtils.isNotEmpty(updateTasks)){
+                        for(Task task : updateTasks){
+                            resultMap.put(task.getUuid(), task);
                         }
                     }
                 }
             }
         }
+
         taskScheduleService.registerExtraInfo(param);
         result.setSuccess(true);
         result.setMessage("任务添加完成");
