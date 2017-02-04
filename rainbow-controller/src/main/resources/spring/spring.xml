@@ -11,13 +11,14 @@
 
 
 	<!--使用注解方式配置spring bean-->
-	<!--<context:annotation-config/>-->
+	<context:annotation-config/>
 
 
 	<!-- spring代理范围：全局 -->
     <context:component-scan base-package="com.bierbobo"/>
 
 
+	<!--<import resource="spring-web.xml" />-->
 
 
 

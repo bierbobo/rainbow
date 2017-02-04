@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Spring WebMVC 配置</description>
+
+	<context:component-scan base-package="com.bierbobo.rainbow.controller" />
+
+
+
+	<!--模板信息配置-->
+	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" /><!-- 模板存放的路径 -->
+		<property name="configLocation" value="classpath:conf/velocity.properties"/>
+	</bean>
+
+<!--	<bean id="velocityConfigurer1" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath"  value="WEB-INF/velocity/" />&lt;!&ndash; 設置模板防止位置&ndash;&gt;
+		<property name="velocityProperties">
+			<props>
+				<prop key="directive.foreach.counter.name">loopCounter</prop>
+				<prop key="directive.foreach.counter.initial.value">0</prop>
+				<prop key="input.encoding">UTF-8</prop>&lt;!&ndash; 指定模板引擎进行模板处理的编码 &ndash;&gt;
+				<prop key="output.encoding">UTF-8</prop>&lt;!&ndash; 指定输出流的编码 &ndash;&gt;
+			</props>
+		</property>
+	</bean>-->
+
+	<!-- 配置视图的显示 -->
+	<bean id="ViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value="/" /><!-- 视图文件的前缀，即存放的路径 -->
+		<property name="suffix" value=".vm" /><!-- 视图文件的后缀名 -->
+		<!--<property name="toolboxConfigLocation" value="/WEB-INF/tools.xml" /><!–toolbox配置文件路径–>-->
+		<property name="dateToolAttribute" value="date" /><!--日期函数名称-->
+		<property name="numberToolAttribute" value="number" /><!--数字函数名称-->
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->
+		<property name="exposeRequestAttributes" value="true" /><!--是否开放request属性-->
+		<property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
+	</bean>
+
+
+
+
+	<!-- 设置freeMarker的配置文件路径 -->
+	<bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="classpath:conf/freemarker.properties"/>
+	</bean>
+
+
+	<!-- 配置freeMarker的模板路径 -->
+	<bean id="freemarkerConfig"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="freemarkerSettings" ref="freemarkerConfiguration"/>
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+	</bean>
+
+	<!-- 一定要放在viewResolver的前面，这样就先去找freemarker的 -->
+	<!-- 配置freeMarker视图解析器 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="contentType" value="text/html; charset=utf-8"/>
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+
+		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+		<!--<property name="order" value="0"></property>-->
+	</bean>
+
+
+
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+
+
+</beans>

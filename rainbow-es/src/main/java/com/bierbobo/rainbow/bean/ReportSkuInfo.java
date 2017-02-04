@@ -86,7 +86,7 @@ public class ReportSkuInfo {
     private String qgp;//保质期
 
     //价格相关
-    private String jdPrice;//京东价
+    private String jdPrice;//
     private String mktPrice;//市场价
     private String nationWhqtPrice ;//全国最大仓报价
 
