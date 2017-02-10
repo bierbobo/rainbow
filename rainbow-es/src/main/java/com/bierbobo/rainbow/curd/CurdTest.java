@@ -1,7 +1,9 @@
 package com.bierbobo.rainbow.curd;
 
 import com.bierbobo.rainbow.bean.ReportSkuDcMainDetail;
+import com.bierbobo.rainbow.bean.ReportSkuInfo;
 import com.bierbobo.rainbow.repository.EsRepository;
+import com.bierbobo.rainbow.repository.SkuRepository;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -26,10 +28,16 @@ public class CurdTest {
 
 
         ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("/spring/elasticsearchRepository.xml");
-        ElasticsearchTemplate elasticsearchTemplate = (ElasticsearchTemplate) appContext.getBean("elasticsearchTemplate");
-        EsRepository esRepository = (EsRepository) appContext.getBean("esRepository");
-        updateByScroll(elasticsearchTemplate, esRepository);
-        updateByCondition(elasticsearchTemplate, esRepository);
+//        ElasticsearchTemplate elasticsearchTemplate = (ElasticsearchTemplate) appContext.getBean("elasticsearchTemplate");
+        SkuRepository skuRepository = (SkuRepository) appContext.getBean("skuRepository");
+        List<ReportSkuInfo> list = skuRepository.findByBuyerErpId("wangzhichao");
+        for (ReportSkuInfo reportSkuInfo : list) {
+            System.out.println(reportSkuInfo);
+        }
+
+//        EsRepository esRepository = (EsRepository) appContext.getBean("esRepository");
+//        updateByScroll(elasticsearchTemplate, esRepository);
+//        updateByCondition(elasticsearchTemplate, esRepository);
 
 
       //  EsRepository esRepository = (EsRepository) appContext.getBean("esRepository");

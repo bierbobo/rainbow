@@ -739,4 +739,88 @@ public class ReportSkuInfo {
     public void setSaleCount(String saleCount) {
         this.saleCount = saleCount;
     }
+
+    @Override
+    public String toString() {
+        return "ReportSkuInfo{" +
+                "id='" + id + '\'' +
+                ", biDataDate='" + biDataDate + '\'' +
+                ", nationwideSales7='" + nationwideSales7 + '\'' +
+                ", nationTotalPV='" + nationTotalPV + '\'' +
+                ", nationNoStockPV='" + nationNoStockPV + '\'' +
+                ", nationNumStock='" + nationNumStock + '\'' +
+                ", nationNumStockAmount='" + nationNumStockAmount + '\'' +
+                ", nationUnsalableStockAmount='" + nationUnsalableStockAmount + '\'' +
+                ", skuId='" + skuId + '\'' +
+                ", mainSkuId='" + mainSkuId + '\'' +
+                ", skuName='" + skuName + '\'' +
+                ", itemFirstCateCd='" + itemFirstCateCd + '\'' +
+                ", itemFirstCateName='" + itemFirstCateName + '\'' +
+                ", itemSecondCateCd='" + itemSecondCateCd + '\'' +
+                ", itemSecondCateName='" + itemSecondCateName + '\'' +
+                ", itemThirdCateCd='" + itemThirdCateCd + '\'' +
+                ", itemThirdCateName='" + itemThirdCateName + '\'' +
+                ", deptID1='" + deptID1 + '\'' +
+                ", deptName1='" + deptName1 + '\'' +
+                ", deptID2='" + deptID2 + '\'' +
+                ", deptName2='" + deptName2 + '\'' +
+                ", deptID3='" + deptID3 + '\'' +
+                ", deptName3='" + deptName3 + '\'' +
+                ", deptID4='" + deptID4 + '\'' +
+                ", deptName4='" + deptName4 + '\'' +
+                ", workPostCd='" + workPostCd + '\'' +
+                ", nationVendorCode='" + nationVendorCode + '\'' +
+                ", nationVendorName='" + nationVendorName + '\'' +
+                ", brandCode='" + brandCode + '\'' +
+                ", brandName='" + brandName + '\'' +
+                ", itemType='" + itemType + '\'' +
+                ", saleStatus='" + saleStatus + '\'' +
+                ", offSaleReason='" + offSaleReason + '\'' +
+                ", salerErpId='" + salerErpId + '\'' +
+                ", salerName='" + salerName + '\'' +
+                ", buyerErpId='" + buyerErpId + '\'' +
+                ", buyerName='" + buyerName + '\'' +
+                ", reserveState='" + reserveState + '\'' +
+                ", bookingStatus='" + bookingStatus + '\'' +
+                ", length='" + length + '\'' +
+                ", width='" + width + '\'' +
+                ", height='" + height + '\'' +
+                ", weight='" + weight + '\'' +
+                ", wt='" + wt + '\'' +
+                ", isDropship='" + isDropship + '\'' +
+                ", isNational='" + isNational + '\'' +
+                ", isStopNoStock='" + isStopNoStock + '\'' +
+                ", isXnzt='" + isXnzt + '\'' +
+                ", isShelfLife='" + isShelfLife + '\'' +
+                ", isParallel='" + isParallel + '\'' +
+                ", isNewFlag='" + isNewFlag + '\'' +
+                ", isVcFlag='" + isVcFlag + '\'' +
+                ", isAllowReserveFlag='" + isAllowReserveFlag + '\'' +
+                ", shelvesTm='" + shelvesTm + '\'' +
+                ", lastSaleTime='" + lastSaleTime + '\'' +
+                ", offSaleTime='" + offSaleTime + '\'' +
+                ", firstIntoWhTm='" + firstIntoWhTm + '\'' +
+                ", lastIntoWhTm='" + lastIntoWhTm + '\'' +
+                ", qgp='" + qgp + '\'' +
+                ", jdPrice='" + jdPrice + '\'' +
+                ", mktPrice='" + mktPrice + '\'' +
+                ", nationWhqtPrice='" + nationWhqtPrice + '\'' +
+                ", orgNationClicksBand='" + orgNationClicksBand + '\'' +
+                ", orgNationClicksBand37='" + orgNationClicksBand37 + '\'' +
+                ", orgNationSaleNumBand='" + orgNationSaleNumBand + '\'' +
+                ", orgNationSaleNumBand37='" + orgNationSaleNumBand37 + '\'' +
+                ", financingInventory='" + financingInventory + '\'' +
+                ", avgMonthStoreMoney='" + avgMonthStoreMoney + '\'' +
+                ", costNorebateAmountS='" + costNorebateAmountS + '\'' +
+                ", storeReturnFinance='" + storeReturnFinance + '\'' +
+                ", returnCostS='" + returnCostS + '\'' +
+                ", isNationNosales30='" + isNationNosales30 + '\'' +
+                ", isNationNosales60='" + isNationNosales60 + '\'' +
+                ", isNationNosales90='" + isNationNosales90 + '\'' +
+                ", isUnsalablenventory='" + isUnsalablenventory + '\'' +
+                ", clickNoStock='" + clickNoStock + '\'' +
+                ", clickCount='" + clickCount + '\'' +
+                ", saleCount='" + saleCount + '\'' +
+                '}';
+    }
 }

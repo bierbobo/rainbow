@@ -25,7 +25,8 @@ public class JsonParse {
         InputStream resourceAsStream = JsonParse.class.getResourceAsStream("/mapping.json");
         String jsonstr = ReadFileToString(resourceAsStream);
 
-        Map<String,Map<String,String>> jsonMap= (Map)  JSON.parseObject(jsonstr,Feature.OrderedField );
+//        Map<String,Map<String,String>> jsonMap= (Map)  JSON.parseObject(jsonstr,Feature.OrderedField );
+        Map<String,Map<String,String>> jsonMap= (Map)  JSON.parseObject(jsonstr );
 
         for (Map.Entry<String, Map<String, String>> entry : jsonMap.entrySet()) {
 
@@ -106,7 +107,8 @@ public class JsonParse {
         InputStream resourceAsStream = JsonParse.class.getResourceAsStream("/mapping.json");
         String jsonstr = ReadFileToString(resourceAsStream);
 
-        Map map1= (Map)  JSON.parseObject(jsonstr,Feature.OrderedField );
+//        Map map1= (Map)  JSON.parseObject(jsonstr,Feature.OrderedField );
+        Map map1= (Map)  JSON.parseObject(jsonstr );
         System.out.println(map1);
 
 /*

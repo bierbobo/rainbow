@@ -37,7 +37,7 @@
         <constructor-arg name="client" ref="client"/>
     </bean>
 
-    <!--<elasticsearch:repositories  base-package="com.jd.spring.data.elasticsearch.demo.repository.iface"/>-->
+    <!--<elasticsearch:repositories  base-package="com.spring.data.elasticsearch.demo.repository.iface"/>-->
 
 
 
