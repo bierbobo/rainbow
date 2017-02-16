@@ -1,24 +1,47 @@
-package com.bierbobo.rainbow.mybatis.service;
+package com.bierbobo.rainbow.data.orm.mybatis.main;
+
+import com.bierbobo.rainbow.data.orm.mybatis.dao.UserMapper;
+import com.bierbobo.rainbow.data.orm.mybatis.domain.UserBean;
+import com.bierbobo.rainbow.data.orm.mybatis.service.UserService;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
-import com.bierbobo.rainbow.mybatis.dao.UserMapper;
-import com.bierbobo.rainbow.mybatis.domain.UserBean;
-import org.apache.ibatis.session.SqlSession;
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args ) throws Exception {
+
+//        springRun();
+        mainRun();
+
+    }
+
+
+    private static void springRun() throws Exception {
+        String paths[] = {"classpath:spring/applicationContext.xml"};
+        ApplicationContext context = new ClassPathXmlApplicationContext(paths);
+        UserService userService = (UserService) context.getBean("userService");
+        userService.insertUser();
+        userService.selectAllUser();
+    }
 
 
 
-public class UserService {
+    private static void mainRun() throws Exception {
 
-
-    public static void main(String[] args) {
-          insertUser();
+        insertUser();
 //        deleteUser();
 //        selectUserById();
         selectAllUser();
     }
 
-    
+
     /**
      * 新增用户
      */
@@ -29,14 +52,15 @@ public class UserService {
         try {
             mapper.insertUser(user);
             System.out.println(user.toString());
-             session.commit();
+            session.commit();
         } catch (Exception e) {
             e.printStackTrace();
             session.rollback();
         }
     }
-    
-    
+
+
+
     /**
      * 删除用户
      */
@@ -51,8 +75,8 @@ public class UserService {
             session.rollback();
         }
     }
-    
-    
+
+
     /**
      * 根据id查询用户
      */
@@ -60,16 +84,16 @@ public class UserService {
         SqlSession session=DBTools.getSession();
         UserMapper mapper=session.getMapper(UserMapper.class);
         try {
-        UserBean user=    mapper.selectUserById(2);
-        System.out.println(user.toString());
-            
+            UserBean user=    mapper.selectUserById(2);
+            System.out.println(user.toString());
+
             session.commit();
         } catch (Exception e) {
             e.printStackTrace();
             session.rollback();
         }
     }
-    
+
     /**
      * 查询所有的用户
      */
@@ -77,14 +101,14 @@ public class UserService {
         SqlSession session=DBTools.getSession();
         UserMapper mapper=session.getMapper(UserMapper.class);
         try {
-        List<UserBean> user=mapper.selectAllUser();
-        System.out.println(user.toString());
-        session.commit();
+            List<UserBean> user=mapper.selectAllUser();
+            System.out.println(user.toString());
+            session.commit();
         } catch (Exception e) {
             e.printStackTrace();
             session.rollback();
         }
     }
-    
+
 
 }

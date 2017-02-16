@@ -1,9 +1,6 @@
-package com.bierbobo.rainbow.dao.impl;
+package ibatis;
 
 
-import com.bierbobo.rainbow.dao.SubscibeTaskDao;
-import com.bierbobo.rainbow.domain.SubscibeTask;
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -13,6 +10,10 @@ import java.util.List;
  * Created by lifubo on 2016/11/4.
  */
 @Repository
+public class SubscibeTaskDaoImpl {
+
+}
+/*
 public class SubscibeTaskDaoImpl extends SqlMapClientDaoSupport implements SubscibeTaskDao {
 
 
@@ -61,4 +62,4 @@ public class SubscibeTaskDaoImpl extends SqlMapClientDaoSupport implements Subsc
         return returnTaskList;
 
     }
-}
+}*/

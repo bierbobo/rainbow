@@ -1,4 +1,4 @@
-package com.bierbobo.rainbow.mybatis.domain;
+package com.bierbobo.rainbow.data.orm.mybatis.domain;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.bierbobo.rainbow.mybatis.service;
+package com.bierbobo.rainbow.data.orm.mybatis.main;
 
 import java.io.Reader;
 

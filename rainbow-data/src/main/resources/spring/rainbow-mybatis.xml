@@ -9,7 +9,6 @@
        default-autowire="byName">
 	
 
-	
 	<!-- BoneCP configuration -->
 	<bean id="abstractDataSource" abstract="true" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClass}" />
@@ -37,7 +36,7 @@
 	<!-- 集成Mybatis -->
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="masterDataSource" />
-		<property name="configLocation" value="classpath:rpms-sqlmap-config.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatis.cfg.xml" />
 	</bean>
 
 	<bean id="sqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -49,24 +48,19 @@
 		<constructor-arg index="1" value="BATCH" />
 	</bean>
 
-<!--	<bean id="hbaseAccessDao"
-		  class="com.jd.rpms.dao.base.impl.MyHbaseAccessDaoImpl">
-		<property name="scanCacheSize" value = "500" />
-		<property name="hbaseConf">
-			<map>
-				<entry key = "hbase.zookeeper.quorum" value = "${hbase.zookeeper.quorum}"/>
-				<entry key = "zookeeper.znode.parent" value = "${zookeeper.znode.parent}"/>
-				<entry key = "hbase.rpc.timeout" value = "60000"/>
-				<entry key = "hbase.client.retries.number" value = "3"/>
-				<entry key = "hbase.client.scanner.caching" value = "5000"/>
-				<entry key = "ipc.socket.timeout" value = "2000"/>
-				<entry key = "hbase.client.pause" value = "100"/>
-				<entry key = "zookeeper.recovery.retry" value = "1"/>
-				<entry key = "zookeeper.recovery.retry.intervalmill" value = "100"/>
-			</map>
-		</property>
-	</bean>-->
+	<!--配置 MapperFactoryBean来生成Mapper接口的代理-->
+	<!--
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+	-->
 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bierbobo.rainbow.data.orm.mybatis.dao" />
+		<property name="sqlSessionTemplateBeanName" value="sqlTemplate"/>
+		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+	</bean>
 
 
 

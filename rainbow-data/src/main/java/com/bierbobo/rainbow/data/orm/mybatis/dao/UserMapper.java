@@ -1,10 +1,13 @@
-package com.bierbobo.rainbow.mybatis.dao;
+package com.bierbobo.rainbow.data.orm.mybatis.dao;
 
-import com.bierbobo.rainbow.mybatis.domain.UserBean;
+
+
+import com.bierbobo.rainbow.data.orm.mybatis.domain.UserBean;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public interface UserMapper {
     /**
      * 新增用戶
