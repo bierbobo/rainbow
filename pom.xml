@@ -8,7 +8,6 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>rainbow-es</module>
     <module>rainbow-ibatis</module>
     <module>rainbow-core</module>
     <module>rainbow-jsf</module>

@@ -6,12 +6,16 @@ orm  mybatis-spring
 ibatis 与mybatis
 
 
+两个注解研究
+context:component-scan
+context:annotation-config
+
+beans
+default-autowire="byName"
+
+连接池 线程池  数据源BoneCP
 
 
-2. mybatis学习计划
-
-参数查询  string map  list   bean
-标签  isNotEmpty   isNull
 
 
 
