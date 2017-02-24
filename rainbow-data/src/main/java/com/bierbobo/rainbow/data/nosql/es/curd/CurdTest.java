@@ -16,8 +16,8 @@
 //import java.util.List;
 //
 ///**
-// * Created by lifubo on 2016/12/2.
-// */
+//* Created by lifubo on 2016/12/2.
+//*/
 //public class CurdTest {
 //
 //    private static final String SKU_DC_MAIN_DETAIL_DC_INDEX = "";

@@ -14,6 +14,18 @@ public class UserBean {
     private String password;
     private Double account;
 
+
+    public UserBean() {
+    }
+
+    public UserBean(String id, String username, String password, Double account) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.account = account;
+    }
+
     public String getId() {
         return id;
     }
@@ -44,5 +56,15 @@ public class UserBean {
 
     public void setAccount(Double account) {
         this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", account=" + account +
+                '}';
     }
 }
