@@ -6,9 +6,9 @@
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	"
-	default-autowire="byName" default-lazy-init="false">
+	">
 
+	<!--default-autowire="byName" default-lazy-init="false">-->
 
 	<!--使用注解方式配置spring bean-->
 	<context:annotation-config/>
@@ -17,8 +17,7 @@
 	<!-- spring代理范围：全局 -->
     <context:component-scan base-package="com.bierbobo"/>
 
-
-	<!--<import resource="spring-web.xml" />-->
+	<!--<import resource="spring-webmvc.xml" />-->
 
 
 

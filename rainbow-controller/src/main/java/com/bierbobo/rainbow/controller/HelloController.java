@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-
 public class HelloController {
 
     @RequestMapping("/hello")
@@ -23,7 +22,6 @@ public class HelloController {
     }
 
     @RequestMapping("/world")
-
     public String helloworld(Model model) {
 
         model.addAttribute("username","李四");
