@@ -74,96 +74,96 @@ public abstract class ExportAbstractService<T> {
 
 
     public void generateExcel() throws IOException {
-
-        //生成EXCEL
-        SXSSFWorkbook workbook = new SXSSFWorkbook(100);
-        SXSSFSheet sheet = (SXSSFSheet) workbook.createSheet("sheet1");
-        BufferedOutputStream bufferedOutputStream=null;
-        FileOutputStream fileStream = null;
-        List<ArrayList<String>> dataList=null;
-        String fileAllPath =null;
-
-
-        try {
-
-            //指定的是否需要设置单元格
-            List<String> colFormatInfo = dataList.get(0);
-
-            //遍历，每次遍历创建一行【从第二行开始是表头和数据,第一行为指定的是否需要设置单元格】
-            for(Integer rowNum = 1; rowNum < dataList.size(); rowNum++) {
-
-                //创建POI的行对象SXSSFRow，将本行的数据存在临时变量tempList中
-                SXSSFRow row = (SXSSFRow) sheet.createRow(rowNum-1);
-                List<String> tempList = dataList.get(rowNum);
-
-                //变成生成一行的每列,tempList保存一行数据
-                //遍历一行
-                for(Integer columnIndex = 0; columnIndex < tempList.size(); columnIndex++) {
-
-                    Cell cell = row.createCell(columnIndex);
-                    //对于sheet标头，不进行数据类型转化
-                    if(rowNum == 1 ){
-                        cell.setCellValue(tempList.get(columnIndex));
-
-                    }else{
-
-                        //设置单元格格式【数字型、是否保留小数】
-                        String columnType = colFormatInfo.get(columnIndex);
-
-                        if(Constants.EXPORT_NUM_FORMAT_ENUM.equalsIgnoreCase(columnType)){
-
-                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            String tempValue = tempList.get(columnIndex);
-                            if(StringUtils.isBlank(tempValue)){
-                                tempValue = "0";
-                            }
-                            tempValue = tempValue.trim();
-                            //数据加“0”是防止内容为空
-                            cell.setCellValue(Double.valueOf(tempValue));
-
-                        }else if(Constants.EXPORT_BIGDECIMAL_FORMAT_ENUM.equalsIgnoreCase(columnType)){
-
-                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            String tempValue = tempList.get(columnIndex);
-                            if(StringUtils.isBlank(tempValue)){
-                                tempValue = "0.0000";
-                            }
-                            tempValue = tempValue.trim();
-                            cell.setCellValue(Double.valueOf(tempValue));
-                        }else{
-                            cell.setCellValue(tempList.get(columnIndex));
-                        }
-                    }
-                }
-
-                //每当行数达到设置的值就刷新数据到硬盘,以清理内存
-                if(rowNum% Constants.FLUSH_ROWS==0){
-                    sheet.flushRows();
-                }
-
-            }
-
-            fileStream = new FileOutputStream(fileAllPath);
-            bufferedOutputStream = new BufferedOutputStream(fileStream);
-            workbook.write(bufferedOutputStream);
-            bufferedOutputStream.flush();
-
-        }catch (Exception e) {
-
-            logger.error("queryData()采销大表导出失败", e);
-
-        }finally {
-            if(workbook != null) {
-                workbook.dispose();
-            }
-            if(fileStream != null){
-                try {
-                    fileStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+//
+//        //生成EXCEL
+//        SXSSFWorkbook workbook = new SXSSFWorkbook(100);
+//        SXSSFSheet sheet = (SXSSFSheet) workbook.createSheet("sheet1");
+//        BufferedOutputStream bufferedOutputStream=null;
+//        FileOutputStream fileStream = null;
+//        List<ArrayList<String>> dataList=null;
+//        String fileAllPath =null;
+//
+//
+//        try {
+//
+//            //指定的是否需要设置单元格
+//            List<String> colFormatInfo = dataList.get(0);
+//
+//            //遍历，每次遍历创建一行【从第二行开始是表头和数据,第一行为指定的是否需要设置单元格】
+//            for(Integer rowNum = 1; rowNum < dataList.size(); rowNum++) {
+//
+//                //创建POI的行对象SXSSFRow，将本行的数据存在临时变量tempList中
+//                SXSSFRow row = (SXSSFRow) sheet.createRow(rowNum-1);
+//                List<String> tempList = dataList.get(rowNum);
+//
+//                //变成生成一行的每列,tempList保存一行数据
+//                //遍历一行
+//                for(Integer columnIndex = 0; columnIndex < tempList.size(); columnIndex++) {
+//
+//                    Cell cell = row.createCell(columnIndex);
+//                    //对于sheet标头，不进行数据类型转化
+//                    if(rowNum == 1 ){
+//                        cell.setCellValue(tempList.get(columnIndex));
+//
+//                    }else{
+//
+//                        //设置单元格格式【数字型、是否保留小数】
+//                        String columnType = colFormatInfo.get(columnIndex);
+//
+//                        if(Constants.EXPORT_NUM_FORMAT_ENUM.equalsIgnoreCase(columnType)){
+//
+//                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+//                            String tempValue = tempList.get(columnIndex);
+//                            if(StringUtils.isBlank(tempValue)){
+//                                tempValue = "0";
+//                            }
+//                            tempValue = tempValue.trim();
+//                            //数据加“0”是防止内容为空
+//                            cell.setCellValue(Double.valueOf(tempValue));
+//
+//                        }else if(Constants.EXPORT_BIGDECIMAL_FORMAT_ENUM.equalsIgnoreCase(columnType)){
+//
+//                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+//                            String tempValue = tempList.get(columnIndex);
+//                            if(StringUtils.isBlank(tempValue)){
+//                                tempValue = "0.0000";
+//                            }
+//                            tempValue = tempValue.trim();
+//                            cell.setCellValue(Double.valueOf(tempValue));
+//                        }else{
+//                            cell.setCellValue(tempList.get(columnIndex));
+//                        }
+//                    }
+//                }
+//
+//                //每当行数达到设置的值就刷新数据到硬盘,以清理内存
+//                if(rowNum% Constants.FLUSH_ROWS==0){
+//                    sheet.flushRows();
+//                }
+//
+//            }
+//
+//            fileStream = new FileOutputStream(fileAllPath);
+//            bufferedOutputStream = new BufferedOutputStream(fileStream);
+//            workbook.write(bufferedOutputStream);
+//            bufferedOutputStream.flush();
+//
+//        }catch (Exception e) {
+//
+//            logger.error("queryData()采销大表导出失败", e);
+//
+//        }finally {
+//            if(workbook != null) {
+//                workbook.dispose();
+//            }
+//            if(fileStream != null){
+//                try {
+//                    fileStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
 
 
     }
