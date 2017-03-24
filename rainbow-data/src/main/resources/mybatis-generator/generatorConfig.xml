@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--导入属性配置-->
+    <properties resource="mybatis-generator/generator.properties"></properties>
+
+    <!--指定特定数据库的jdbc驱动jar包的位置-->
+    <classPathEntry location="${jdbc.driverLocation}"/>
+
+    <!-- 一个数据库一个context -->
+    <context id="default" targetRuntime="MyBatis3">
+
+        <!-- 注释 -->
+        <commentGenerator >
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection
+                driverClass="${jdbc.driverClass}"
+                connectionURL="${jdbc.connectionURL}"
+                userId="${jdbc.userId}"
+                password="${jdbc.password}">
+        </jdbcConnection>
+
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+
+        <!-- 生成实体类地址  -->
+        <javaModelGenerator targetPackage="com.bierbobo.rainbow.data.generate.model"
+                            targetProject="src/main/java">
+        </javaModelGenerator>
+
+        <!--生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="com.bierbobo.rainbow.data.generate.mapper"
+                         targetProject="src/main/java">
+        </sqlMapGenerator>
+
+        <!--
+            生成mapxml对应client，也就是接口dao
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator targetPackage="com.bierbobo.rainbow.data.generate.dao"
+                             targetProject="src/main/java" type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <!-- 配置表信息
+
+            enableSelectByExample="false" :  查询所有列，排序、去重、条件
+            enableInsert="false"  :  两种插入语句，可选字段和全部字段
+            enableUpdateByExample="false"  : 两种修改语句，可选字段和全部字段
+            enableDeleteByExample="false"  : 删除语句
+
+            enableCountByExample="false"  : count ,按照条件
+
+        -->
+         <table tableName="wil_rule_sku_limit" domainObjectName="WilRuleSkuLimit"
+                enableSelectByExample="false"
+                enableInsert="false"
+                enableUpdateByExample="false"
+                enableDeleteByExample="false"
+                enableCountByExample="false">
+        </table>
+
+    </context>
+
+
+</generatorConfiguration>

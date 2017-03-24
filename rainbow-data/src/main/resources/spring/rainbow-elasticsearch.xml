@@ -14,10 +14,13 @@
         <constructor-arg name="client" ref="client"/>
     </bean>
 
-    <bean id="orderRepositoryImpl" class="com.bierbobo.rainbow.data.nosql.es.repository.OrderRepositoryImpl">
-        <property name="elasticsearchTemplate" ref="elasticsearchTemplate"/>
-    </bean>
+    <!--<bean id="orderRepositoryImpl" class="com.bierbobo.rainbow.data.nosql.es.repository.userRepository2Impl">-->
+        <!--<property name="elasticsearchTemplate" ref="elasticsearchTemplate"/>-->
+    <!--</bean>-->
 
-    <elasticsearch:repositories  base-package="com.bierbobo.rainbow.data.nosql.es.repository" repository-impl-postfix="Impl" />
+    <elasticsearch:repositories  base-package="com.bierbobo.rainbow.data.nosql.es.repository"
+                                  elasticsearch-template-ref="elasticsearchTemplate"  repository-impl-postfix="Impl"
+
+            />
 
 </beans>

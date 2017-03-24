@@ -1,17 +1,17 @@
 package com.bierbobo.rainbow.data.nosql.es.repository;
 
-import com.bierbobo.rainbow.data.nosql.es.domain.UserBean;
+import com.bierbobo.rainbow.data.nosql.es.domain.UserIndex;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-public interface UserRepository extends ElasticsearchRepository<UserBean, String> {
+public interface UserRepository extends ElasticsearchRepository<UserIndex, String>  {
 
     /**
      * spring data提供的根据方法名称的查询方式
      * @param userName
      * @return
      */
-    public UserBean findByUsername(String userName);
+    public UserIndex findByUsername(String userName);
 
     /**
      * 使用Query注解指定查询语句
@@ -22,7 +22,7 @@ public interface UserRepository extends ElasticsearchRepository<UserBean, String
     @Query("{bool : {must : [ {term : {userName : ?}}  ]}}")
 //    @Query("{\"bool\" : {\"must\" : [ {\"term\" : {\"skuName\" : \"?0\"}}  ]}}")
     //注意：需要替换的参数？需要加双引号；需要指定参数下标，从0开始
-    public UserBean findByName(String userName);
+    public UserIndex findByName(String userName);
 
     //还有分页、排序等API
 

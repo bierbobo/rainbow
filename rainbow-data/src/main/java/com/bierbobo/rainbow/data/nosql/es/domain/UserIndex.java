@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 
 @Document(indexName = "rainbow", type = "user")
-public class UserBean {
+public class UserIndex {
 
     @Id
     private String id;
@@ -15,10 +15,10 @@ public class UserBean {
     private Double account;
 
 
-    public UserBean() {
+    public UserIndex() {
     }
 
-    public UserBean(String id, String username, String password, Double account) {
+    public UserIndex(String id, String username, String password, Double account) {
         super();
         this.id = id;
         this.username = username;
