@@ -1,0 +1,20 @@
+
+<link rel="stylesheet" type="text/css" href="#springUrl("/resources/datatables/css/fixedColumns.bootstrap.min.css")"/>
+<link rel="stylesheet" type="text/css" href="#springUrl("/resources/datatables/css/fixedHeader.bootstrap.min.css")"/>
+
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/dataTables.fixedColumns.min.js")"></script>	
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/dataTables.fixedHeader.min.js")"></script>	
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/dataTables.tableTools.min.js")"></script>
+
+<link rel="stylesheet" type="text/css" href="#springUrl("/resources/datatables/css/buttons.bootstrap.min.css")"/>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/dataTables.buttons.min.js")"></script>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/buttons.bootstrap.min.js")"></script>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/buttons.colVis.min.js")"></script>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/buttons.flash.min.js")"></script>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/buttons.html5.min.js")"></script>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/buttons.print.min.js")"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="#springUrl("/resources/datatables/css/select.bootstrap.min.css")"/>
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/dataTables.select.min.js")"></script>

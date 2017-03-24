@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>智能退货</title>
+
+    #parse("common/lsHead.vm")
+    #parse("common/datatables.vm")
+    #parse("common/piwik.vm")
+
+    <!-- 以下可能用到-->
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/bootstrap-select.min.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/vrs.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/oih201408.css")">
+##<link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/font-awesome.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/mycss.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/bootstrap-editable.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/jquery.bootstrap-touchspin.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/XUI.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/bootstrap-switch.css")">
+    <link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/bootstrap-tour.css")">
+##<link rel="stylesheet" type="text/css" href="#springUrl("/resources/datatables/css/jquery.dataTables.min.css")"/>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootbox.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/jquery.masterblaster.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/drop.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/utils.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootstrap-datepicker.zh-CN.min.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/jquery.bootstrap-touchspin.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootstrap-editable.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/blockUI.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/main.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/XUI.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootstrap-switch.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/bootstrap-tour.js")"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/ComboMenuTag.js")"></script>
+    <script type="text/javascript">
+        var basePath="$request.contextPath";
+    </script>
+##<script type="text/javascript" src="http://bootboxjs.com/bootbox.js"></script>
+    <script type="text/javascript" src="#springUrl("/resources/js/myfunction.js")"></script>
+</head>
+<body>
+    $screen_content
+
+</body>
+</html>

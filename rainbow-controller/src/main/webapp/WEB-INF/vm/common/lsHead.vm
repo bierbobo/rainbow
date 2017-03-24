@@ -1,0 +1,30 @@
+<!–ui标准化组件样式 必选->
+<link rel="stylesheet" type="text/css" href="http://ls.jd.com/resources/soneuiv2/css/third-party.min.css">
+<link rel="stylesheet" type="text/css" href="http://ls.jd.com/resources/soneuiv2/css/sone-ui.min.css" />
+
+<!–ui标准化组件库样式 必选-->
+
+#*
+<script type="text/javascript" src="http://ls.jd.com/resources/soneuiv2/js/third-party/vendors.min.js"></script>
+*#
+<script type="text/javascript" src="#springUrl("/resources/datatables/js/vendors.min.js")"></script>
+
+<script type="text/javascript" src="http://ls.jd.com/resources/soneuiv2/js/third-party/iframeResizer.contentWindow.js"></script>
+<!–ui标准化公共组件 可选-->
+<script type="text/javascript" src="http://ls.jd.com/resources/soneuiv2/js/sone-widget/sone-widget.min.js"></script>
+
+<!--ui标准化组件core  包括leftMenu、Header-->
+<script type="text/javascript" src="http://ls.jd.com/resources/soneuiv2/js/sone-ui/sone-ui.min.js"></script>
+<script type="text/javascript" src="http://ls.jd.com/resources/js/dashboard-init-href.js"></script>
+	
+
+##<script type="text/javascript" src="#springUrl("/resources/js/common/userInfoInit.js")"></script>
+<script type="text/javascript" src="#springUrl("/resources/js/common/menu-ext.js")"></script>
+
+
+<!--bootstrap html5 ie补丁 -->
+<!--[if IE]><script type="text/javascript">(function(){var b=("abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video").split(","),a=b.length;while(a--){document.createElement(b[a])}})();</script><![endif]-->
+<!--[if lt IE 9]>
+<script src=" http://ls.jd.com/resources/soneuiv2/js/third-party/html5patch/html5shiv.js"></script>
+<script src=" http://ls.jd.com/resources/soneuiv2/js/third-party/html5patch/respond.js"></script>
+<![endif]-->

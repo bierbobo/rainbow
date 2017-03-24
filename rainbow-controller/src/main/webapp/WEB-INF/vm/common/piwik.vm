@@ -1,0 +1,12 @@
+<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+var _paq = _paq || [];
+(function() {
+var u="//pvuv.ls.jd.com/piwik/";
+_paq.push(['setTrackerUrl', u+'piwik.php']);
+_paq.push(['setSiteId', 1]);
+var d=document; var g=d.createElement('script'); var s=d.getElementsByTagName('script')[0];
+g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+<noscript><p><img src="//pvuv.ls.jd.com/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>

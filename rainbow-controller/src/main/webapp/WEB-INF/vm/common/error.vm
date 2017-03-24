@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+.refresh {
+	text-align: left;
+	margin:100px auto;
+	width: 750px;
+	height: 220px;
+	background:url(http://ls.jd.com/resources/soneui/img/53a402afNb99cacea.jpg) 0 0;
+	position: relative
+}
+.refresh .txt {
+	position: absolute;
+	left: 236px;
+	top: 16px;
+	color: #fff;
+	font-size: 14px;
+	font-family: "microsoft yahei"
+}
+.refresh .m {
+	position: absolute;
+	left: 336px;
+	top: 80px;
+	line-height: 18px;
+	font-size: 14px
+}
+.refresh .m li {
+	padding-bottom: 8px
+}
+.refresh .m a {
+	color: #005eab
+}
+.refresh .m .fore1, .refresh .m .fore2 {
+	font-family: "microsoft yahei"
+}
+.refresh .m .fore1 a {
+	color: #e4393c
+}
+.refresh .m .fore2 a {
+	color: #e4393c;
+	font-weight: bold;
+	font-size: 18px;
+	padding: 0 3px
+}
+
+</style>
+</head>
+
+<body>
+
+  <div class="refresh"> <span class="txt">糟了...系统出错了...</span>
+    <ul class="m">
+      <li class="fore1">$!ex.message</li>
+      <li class="fore2"> 返回 <a target="_blank" href="/">智能退货</a> </li>
+      <li class="fore2"> 返回 <a target="_blank" href="http://ls.jd.com">零智平台</a> </li>
+    </ul>
+  </div>
+<div style="display:none">
+<font color="red" size="3">
+	<H2>
+		错误：$ex.class.simpleName
+	</H2>
+	<hr/>
+	<P>
+		<strong>错误描述：</strong>$ex.message
+	</P>
+ 
+	<P>
+		<strong>详细信息：</strong>
+	</P>
+	<pre>
+		#foreach($stack in $ex.getStackTrace())
+			$stack.toString()
+		#end
+	</pre>
+	</font>
+  </div>
+
+</body>
+</html>

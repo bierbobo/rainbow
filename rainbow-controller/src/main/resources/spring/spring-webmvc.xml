@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="   
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+	default-autowire="byName" default-lazy-init="false">
+
+	<!--使用注解方式配置spring bean -->
+	<context:component-scan base-package="com.bierbobo.rainbow" use-default-filters="false">
+		 <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+<!--
+
+	<mvc:interceptors>
+		<bean class="com.app.mvc.MyInteceptor" />
+		<mvc:interceptor>
+			<mvc:mapping path="/user/*" /> &lt;!&ndash; /user/*  &ndash;&gt;
+			<bean class="com.mvc.MyInteceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+-->
+
+
+	<!-- 添加注解驱动, 自动注册	RequestMappingHandlerMapping  RequestMappingHandlerAdapter
+	DefaultAnnotationHandlerMapping 处理在类或者方法级别上的@RequestMapping注解 过期 被RequestMappingHandlerMapping替换
+	AnnotationMethodHandlerAdapter  处理RequestParam  ModelAttribute InitBinder等注解 过期 被RequestMappingHandlerAdapter替换
+	-->
+	<!--springmvc默认是没有对象转换成json的转换器的，需要手动添加jackson依赖-->
+	<mvc:annotation-driven />
+
+	<!--mapping的URI注册到SimpleUrlHandlerMapping的urlMap中,key为mapping的URI pattern值,而value为ResourceHttpRequestHandler-->
+	<!--已被 default-servlet-handler  代替 -->
+	<!--<mvc:resources mapping="/*.html" location="/"/>-->
+
+
+	<!-- 让spring mvc将资源请求交给tomcat处理 -->
+	<!--会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到DefaultServletHttpRequestHandler处理-->
+	<mvc:default-servlet-handler />
+
+<!--
+
+	<mvc:view-controller path="/404" view-name="404"/>
+	<mvc:view-controller path="/500" view-name="500"/>
+	<mvc:view-controller path="/uncaughtException" view-name="uncaughtException"/>
+
+-->
+
+	<!--VelocityViewResolver和Velocity的关系与InternalResourceViewResolver和JSP的关系相似。-->
+
+	<!--VelocityConfigurer负责在spring中设置Velocity引擎-->
+	<bean
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath">
+			<value>WEB-INF/vm/</value>
+		</property>
+
+		<!--（1）通过配置文件方式
+		<property name="configLocation" value="classpath:velocity.properties"/>
+		-->
+
+		<!--（2）通过属性的方式：-->
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">utf-8</prop>
+				<prop key="output.encoding">utf-8</prop>
+				<prop key="contentType">text/html;charset=utf-8</prop>
+
+				<!--set指令给一个变量赋值,如果一开始那个变量有值,然后赋值为null,则赋值不起作用,
+				需要在配置文件中设置directive.set.null.allowed = true才行 -->
+				<prop key="directive.set.null.allowed">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!--配置velocity解析视图-->
+	<bean	class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="cache" value="true" />
+		<property name="suffix" value=".vm" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+
+		<property name="layoutUrl" value="common/layout.vm" /><!--指定layout文件-->
+		<!--<property name="layoutKey" value="layout" />-->
+		<property name="screenContentKey" value="screen_content" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.velocity.VelocityLayoutView" />
+
+		<property name="dateToolAttribute" value="dateTool"></property> <!--日期函数名称-->
+		<property name="numberToolAttribute" value="numberTool"></property><!--数字函数名称-->
+		<property name="order" value="0"/>
+
+	</bean>
+
+
+
+	<bean id="viewResolverCommon" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  -->
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.InternalResourceView</value>
+		</property>
+		<property name="order" value="1"/>
+	</bean>
+
+
+<!--
+
+	&lt;!&ndash; 异常处理页面 &ndash;&gt;
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		&lt;!&ndash; 定义默认的异常处理页面，当该异常类型的注册时使用 &ndash;&gt;
+		<property name="defaultErrorView" value="common/error"></property>
+		&lt;!&ndash; 定义异常处理页面用来获取异常信息的变量名，默认名为exception &ndash;&gt;
+		<property name="exceptionAttribute" value="ex"></property>
+		&lt;!&ndash; 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 &ndash;&gt;
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Throwable">common/error</prop>
+				&lt;!&ndash; 这里还可以继续扩展对不同异常类型的处理 &ndash;&gt;
+				<prop key="IOException">common/error</prop>
+				<prop key="java.sql.SQLException">common/error</prop>
+
+			</props>
+		</property>
+		&lt;!&ndash; 表示在发生异常时默认的HttpServletResponse的返回码是多少，默认是200 &ndash;&gt;
+		<property name="defaultStatusCode" value="500"/>
+		&lt;!&ndash; 设置日志输出级别，不定义则默认不输出警告等错误日志信息 &ndash;&gt;
+		<property name="warnLogCategory" value="WARN"></property>
+	</bean>
+-->
+
+
+
+<!--
+
+	&lt;!&ndash;上传附件需要配置此类，支持IO流 &ndash;&gt;
+	<bean id="multipartResolver"	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		&lt;!&ndash; 设置上传文件的最大尺寸为5MB &ndash;&gt;
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>51200</value>
+		</property>
+	</bean>
+-->
+
+
+
+</beans>  

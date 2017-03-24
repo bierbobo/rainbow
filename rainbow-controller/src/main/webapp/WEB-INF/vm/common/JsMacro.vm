@@ -1,0 +1,9 @@
+##宏定义###之关于JS定义的
+#macro(js.create $mapName,$map)
+	var ${mapName} =new Map();
+	#if(!$map)
+	#end
+	#foreach($entry in $map.entryset())
+		${mapName}.put(${entry.key},${entry.value});
+	#end
+#end
