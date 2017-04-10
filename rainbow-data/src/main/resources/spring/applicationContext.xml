@@ -8,7 +8,9 @@
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.bierbobo.rainbow.data.nosql.es"/>
+    <context:component-scan base-package="com.bierbobo.rainbow.data">
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    </context:component-scan>
 
     <bean id="propertyConfigurer"  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -20,8 +22,8 @@
         </property>
     </bean>
 
-    <!--<import resource="rainbow-mybatis.xml"/>-->
-    <import resource="rainbow-elasticsearch.xml"/>
+    <import resource="spring-mybatis.xml"/>
+    <!--<import resource="spring-elasticsearch.xml"/>-->
 
 
 

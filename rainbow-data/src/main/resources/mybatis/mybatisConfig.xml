@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+
+    <settings>
+
+
+        <!--
+            全局映射器启用缓存：默认是true，如果它配成false，其余各个Mapper XML文件配成支持cache也没用
+            各个Mapper XML文件，默认是不采用cache。在配置文件加一行就可以支持cache：<cache />
+        -->
+        <setting name="cacheEnabled" value="true" />
+
+        <!-- useGeneratedKeys="true"把新增加的主键赋值到自己定义的keyProperty（id）中 -->
+        <setting name="useGeneratedKeys" value="true" />
+
+        <!--配置和设定执行器，
+                SIMPLE 执行器执行其它语句。
+                REUSE 执行器可能重复使用prepared statements 语句，
+                BATCH执行器可以重复执行语句和批量更新。-->
+        <setting name="defaultExecutorType" value="REUSE" />
+
+        <!--mybatis支持属性运用驼峰的命名-->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+
+        <setting name="logPrefix" value="com.bierbobo.rainbow.data.orm.mybatis.dao." />
+
+
+        <!-- 数据库超过25000秒仍未响应则超时 -->
+        <setting name="defaultStatementTimeout" value="25000" />
+
+
+    </settings>
+
+
+</configuration>

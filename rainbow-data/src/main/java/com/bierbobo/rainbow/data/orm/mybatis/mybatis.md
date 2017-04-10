@@ -30,3 +30,25 @@ mybatis-spring   : 配置template  mapper 事务
 标签  isNotEmpty   isNull
 原理与插件，分页插件
 存储过程
+
+
+问题：
+1.批量更新
+
+
+
+sql:
+
+drop table t_user;
+create table t_user(
+  id int PRIMARY KEY  auto_increment,
+  username VARCHAR(20),
+  password VARCHAR(20),
+  account DECIMAL (10,2),
+  creator_erp VARCHAR(20),
+  create_time timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+insert into t_user(username,password,account,creator_erp)values('中文','2',111,'abc');
+select * from t_user;
+
+

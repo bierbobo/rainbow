@@ -5,7 +5,6 @@
     <!-- 引入外部配置文件 -->
     <properties resource="jdbc.properties"></properties>
 
-
     <settings>
         <!-- 全局映射器启用缓存 -->
         <setting name="cacheEnabled" value="true" />
@@ -15,6 +14,8 @@
         <setting name="useColumnLabel" value="true" />
         <!-- 数据库超过25000秒仍未响应则超时 -->
         <setting name="defaultStatementTimeout" value="25000" />
+
+
     </settings>
 
     <!-- 为JAVA Bean起类别名 -->
@@ -52,6 +53,7 @@
 
         <!-- 告知映射文件方式2，自动扫描包内的Mapper接口与配置文件
         <package name="com/cy/mybatis/mapper"/> -->
+
     </mappers>
 
 </configuration>

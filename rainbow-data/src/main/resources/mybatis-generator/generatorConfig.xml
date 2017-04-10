@@ -66,11 +66,28 @@
         -->
          <table tableName="wil_rule_sku_limit" domainObjectName="WilRuleSkuLimit"
                 enableSelectByExample="false"
-                enableInsert="false"
-                enableUpdateByExample="false"
+                enableInsert="true"
+                enableUpdateByExample="true"
                 enableDeleteByExample="false"
                 enableCountByExample="false">
         </table>
+
+        <table tableName="wil_rule_category_limit" domainObjectName="WilRuleCategoryLimit"
+               enableSelectByExample="false"
+               enableInsert="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="false"
+               enableCountByExample="false">
+        </table>
+
+        <table tableName="wil_rule_sp_limit" domainObjectName="WilRuleSpLimit"
+               enableSelectByExample="false"
+               enableInsert="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="false"
+               enableCountByExample="false">
+        </table>
+
 
     </context>
 

@@ -1,6 +1,7 @@
 package com.bierbobo.rainbow.data.orm.mybatis.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserBean implements Serializable{
 
@@ -9,7 +10,9 @@ public class UserBean implements Serializable{
     private String username;
     private String password;
     private Double account;
-    
+    private String creatorErp;
+    private Date createTime;
+
     public UserBean() {
         super();
     }
@@ -61,13 +64,31 @@ public class UserBean implements Serializable{
         this.account = account;
     }
 
+    public String getCreatorErp() {
+        return creatorErp;
+    }
+
+    public void setCreatorErp(String creatorErp) {
+        this.creatorErp = creatorErp;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
-        return "UserBean [id=" + id + ", username=" + username + ", password="
-                + password + ", account=" + account + "]";
+        return "UserBean{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", account=" + account +
+                ", creatorErp='" + creatorErp + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
-    
-    
-    
-
 }

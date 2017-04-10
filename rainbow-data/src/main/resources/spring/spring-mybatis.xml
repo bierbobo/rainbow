@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
+
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
     		http://www.springframework.org/schema/beans/spring-beans.xsd
-       		http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+       		http://www.springframework.org/schema/context
      		http://www.springframework.org/schema/context/spring-context.xsd"
        default-autowire="byName">
 	
@@ -27,17 +31,25 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
+
+
 	
-	<!-- 配置事务管理器 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="masterDataSource" />
-	</bean>
-	
-	<!-- 集成Mybatis -->
+	<!-- mybatis sqlSessionFactory 配置 -->
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="masterDataSource" />
-		<property name="configLocation" value="classpath:mybatis/mybatis.cfg.xml" />
+		<!-- mapper.xml 加载路径
+			classpath：只会到你的class路径中查找找文件;
+			classpath*：不仅包含class路径，还包括jar文件中(class路径)进行查找.
+			/**是所有文件夹及里面的子文件夹
+			/*是所有文件夹，不含子文件夹
+		-->
+		<property name="mapperLocations"	  value="classpath:mybatis/**/*Mapper.xml" />
+		<!-- mapper.xml 映射的实体类加载路径 -->
+		<property name="typeAliasesPackage" value="com.bierbobo.rainbow.data.orm.mybatis.domain" />
+		<!-- mapper.xml 通用属性配置 -->
+		<property name="configLocation" value="classpath:mybatis/mybatisConfig.xml" />
 	</bean>
+
 
 	<bean id="sqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sessionFactory" />
@@ -48,18 +60,45 @@
 		<constructor-arg index="1" value="BATCH" />
 	</bean>
 
-	<!--配置 MapperFactoryBean来生成Mapper接口的代理-->
-	<!--
-	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper" />
-		<property name="sqlSessionFactory" ref="sessionFactory" />
-	</bean>
-	-->
 
+	<!-- mapper 接口扫描加载 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>
 		<property name="basePackage" value="com.bierbobo.rainbow.data.orm.mybatis.dao" />
 		<property name="sqlSessionTemplateBeanName" value="sqlTemplate"/>
-		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+	</bean>
+
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="masterDataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 事务控制的业务方法配 -->
+	<!--
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="page*" read-only="true" />
+            <tx:method name="list*" read-only="true" />
+            <tx:method name="*" />
+        </tx:attributes>
+    </tx:advice>
+    -->
+
+	<!-- 事务控制拦截 -->
+	<!--
+    <aop:config proxy-target-class="true">
+        <aop:advisor pointcut="execution(* com.service..*.impl..*.*(..))"
+            advice-ref="txAdvice" />
+    </aop:config>
+    -->
+
+	<!-- spiringJdbc -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref ="masterDataSource"/>
 	</bean>
 
 
