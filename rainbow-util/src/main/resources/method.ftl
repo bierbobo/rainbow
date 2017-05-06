@@ -1,4 +1,5 @@
-<#list fields as field>
-Integer ${field}=0;
-</#list>
+<#--<#list fields as field>-->
+<#--Integer ${field}=0;-->
+<#--</#list>-->
 
+sss

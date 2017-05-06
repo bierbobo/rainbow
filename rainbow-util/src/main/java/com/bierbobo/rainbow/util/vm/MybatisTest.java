@@ -1,5 +1,11 @@
 package com.bierbobo.rainbow.util.vm;
 
+import freemarker.cache.ClassTemplateLoader;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -8,27 +14,21 @@ import java.util.List;
 import java.util.Map;
 
 //import junit.framework.Test;
-import com.bierbobo.rainbow.util.json.JsonUtil;
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 
 /**
  * Created by lifubo on 2016/11/15.
  */
-public class MainTest {
+public class MybatisTest {
 
     public static void main(String[] args) {
 
         Configuration configuration = new Configuration();
         configuration.setObjectWrapper(new DefaultObjectWrapper());
-        configuration.setTemplateLoader(new ClassTemplateLoader(MainTest.class, "/"));
+        configuration.setTemplateLoader(new ClassTemplateLoader(MybatisTest.class, "/"));
 
 
         try {
-            Template template = configuration.getTemplate("getMethod.ftl");
+            Template template = configuration.getTemplate("mybatis.ftl");
             StringWriter writer = new StringWriter();
 
 

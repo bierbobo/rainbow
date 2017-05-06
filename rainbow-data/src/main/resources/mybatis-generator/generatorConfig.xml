@@ -64,6 +64,8 @@
             enableCountByExample="false"  : count ,按照条件
 
         -->
+
+        <!--
          <table tableName="wil_rule_sku_limit" domainObjectName="WilRuleSkuLimit"
                 enableSelectByExample="false"
                 enableInsert="true"
@@ -87,7 +89,16 @@
                enableDeleteByExample="false"
                enableCountByExample="false">
         </table>
+        -->
 
+        <table tableName="wil_report" domainObjectName="WilReport"
+               enableSelectByExample="true"
+               enableInsert="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+                >
+        </table>
 
     </context>
 
