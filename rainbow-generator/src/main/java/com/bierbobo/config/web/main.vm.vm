@@ -1,0 +1,67 @@
+${entityMeta.velocitySymbol}set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>管理系统</title>
+	<link id="easyuiTheme" rel="stylesheet" type="text/css" href="#springUrl('/static/css/easyui/themes/bootstrap/easyui.css')" >
+	<link rel="stylesheet" type="text/css" href="#springUrl('/static/css/easyui/themes/icon.css')">
+	<link rel="stylesheet" type="text/css" href="#springUrl('/static/css/default.css')">
+	<script type="text/javascript" src="#springUrl('/static/js/jquery.min.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/easyui/jquery.easyui.min.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/easyui/easyui-lang-zh_CN.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/menu.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/validate.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/changeEasyuiTheme.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/common.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/jquery.fn.extend.js')"></script>
+	
+</head>
+<body class="easyui-layout">
+<noscript>
+	<div class="noscript"><img src="#springUrl('/static/images/noscript.gif')" alt='抱歉，请开启脚本支持！'/></div>
+</noscript>
+<div class="easyui-layout" style="width:100%;height:100%;">
+	<div data-options="region:'north'" split="true" border="false" style="overflow: hidden; height: 30px;
+        background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+        line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
+		<div style="float:right;">
+			<select id="theme">
+				<option value="bootstrap">bootstrap</option>
+				<option value="default">default</option>
+				<option value="gray">gray</option>
+				<option value="black">black</option>
+				<option value="metro">metro</option>
+				<option value="metro-blue">metro-blue</option>
+				<option value="metro-gray">metro-gray</option>
+				<option value="metro-green">metro-green</option>
+				<option value="metro-orange">metro-orange</option>
+				<option value="metro-red">metro-red</option>
+				<option value="ui-cupertino">ui-cupertino</option>
+				<option value="ui-dark-hive">ui-dark-hive</option>
+				<option value="ui-pepper-grinder">ui-pepper-grinder</option>
+				<option value="ui-sunny">ui-sunny</option>
+				
+			</select>
+			 <span style="float:right; padding-right:20px;" class="head">欢迎 16素材 <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
+		</div>
+       
+    </div>
+	
+<div  id="easyui-accordion"  data-options="region:'west',title:'菜单',split:true" style="width:180px;">
+</div>
+<div data-options="region:'center'" >
+	<div id="tabs" class="easyui-tabs"  fit="true" border="false">
+		<div title="欢迎使用" style="padding:10px;" id="home"></div>
+	</div>
+</div>
+<div region="south" split="true" class="bottom">
+	<div class="footer">管理系统</div>
+</div>
+</div>
+<div id="common_dialog"  class="dialog"></div>
+</body>
+</html>

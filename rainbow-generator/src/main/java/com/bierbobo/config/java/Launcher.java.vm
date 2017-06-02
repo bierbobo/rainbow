@@ -1,0 +1,42 @@
+package ${entityMeta.packageName};
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.concurrent.CountDownLatch;
+import com.bierbobo.ump.profiler.proxy.Profiler;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * ${entityMeta.comment}启动器
+ * @org ${entityMeta.projectMeta.domainName}
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+public class ${entityMeta.projectMeta.mainClassName}Launcher {
+	
+	/**
+	 * Logger for this class
+	 */
+	private static final Log log = LogFactory.getLog(${entityMeta.projectMeta.mainClassName}Launcher.class);
+	
+	/**
+	 * 
+	 * @param args
+	 */
+	@SuppressWarnings("unused")
+	public static void main(String[] args) {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/spring-main.xml");
+        log.info("${entityMeta.projectMeta.mainClassName}Launcher started successfully!");
+        CountDownLatch latch = new CountDownLatch(1);
+         try {
+            Profiler.InitHeartBeats("ump.${entityMeta.projectMeta.projectName}.${entityMeta.projectMeta.moduleName}.alive");
+            Profiler.registerJVMInfo("ump.${entityMeta.projectMeta.projectName}.${entityMeta.projectMeta.moduleName}.jvm");
+        	latch.await();
+        } catch (InterruptedException e) {
+        	log.error(e.getMessage(), e);
+        }
+	}
+}

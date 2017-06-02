@@ -1,0 +1,39 @@
+jQuery(function($) {
+	// 验证
+	var $validation = false;
+	setTimeout(function() {
+		$('#${entityMeta.lowerClassName}-form').validate(formValidator);
+	}, 100);
+	/** 表单提交* */
+	$("#${entityMeta.lowerClassName}-form-sumbit").on('click', (function() {
+		if ($('#${entityMeta.lowerClassName}-form').valid()) {
+			$("#${entityMeta.lowerClassName}-form-sumbit").attr({"disabled":"disabled"});
+			$('#${entityMeta.lowerClassName}-form').ajaxSubmit({
+				url : 'edit${entityMeta.className}.do',
+				success : function(data) {
+					if (data.resultCode == 1) {
+						bootbox.alert(data.resultMessage);// 关闭当前对话框
+						$('#${entityMeta.lowerClassName}-model').modal("hide");
+						${entityMeta.lowerClassName}_grid.fnDraw(); // 重新加载数据
+					} else {
+						bootbox.alert(data.resultMessage);// 关闭当前对话框
+					}
+					  $("#${entityMeta.lowerClassName}-form-sumbit").removeAttr("disabled");
+				}
+			});
+		}
+		return false;
+	}));
+	$('.timeSelect').datetimepicker({
+	    	format: 'yyyy-mm-dd hh:ii:ss'
+	});
+	$('.dateSelect').datetimepicker({
+	    	format: 'yyyy-mm-dd',
+	    	 weekStart: 1,
+	  		autoclose: 1,
+	  		 startView: 2,
+	  		 minView: 2,
+	  		 forceParse: 0
+	});
+});	
+	

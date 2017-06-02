@@ -1,0 +1,114 @@
+package ${entityMeta.packageName}.manager.impl;
+import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Component;
+import org.apache.log4j.Logger;
+
+import ${entityMeta.projectMeta.groupId}.common.Page;
+import ${entityMeta.packageName}.dao.${entityMeta.className}Dao;
+import ${entityMeta.packageName}.domain.${entityMeta.className};
+import ${entityMeta.packageName}.condition.${entityMeta.className}Condition;
+import ${entityMeta.packageName}.manager.${entityMeta.className}Manager;
+#foreach(${importClass} in ${entityMeta.importClassList})
+import ${importClass};
+#end
+/**
+ * ${entityMeta.comment}管理器实现
+ * @org ${entityMeta.projectMeta.domainName}
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+@Component
+public class ${entityMeta.className}ManagerImpl implements ${entityMeta.className}Manager {
+
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger log = Logger.getLogger(${entityMeta.className}ManagerImpl.class);
+	/**
+	 * the ${entityMeta.className}Dao
+	 */
+	@Resource
+	private ${entityMeta.className}Dao ${entityMeta.lowerClassName}Dao;
+	
+	
+	
+	/*===============================================================================*/
+	/*                                以下是增删改查方法
+	/*===============================================================================*/
+	/**
+	 * 获取${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 * @return the ${entityMeta.className}
+	 */
+	@Override
+	public ${entityMeta.className} get${entityMeta.className}(${entityMeta.pkFieldMeta.javaType} ${entityMeta.pkFieldMeta.javaFieldName}) {
+		${entityMeta.className} ${entityMeta.lowerClassName} = ${entityMeta.lowerClassName}Dao.get${entityMeta.className}(${entityMeta.pkFieldMeta.javaFieldName});
+		return ${entityMeta.lowerClassName};
+	}
+
+	
+	@Override
+	public Page find${entityMeta.className}List(Page page, ${entityMeta.className}Condition ${entityMeta.lowerClassName}Condition) {
+		page.setRows(${entityMeta.lowerClassName}Dao.find${entityMeta.className}List(page, ${entityMeta.lowerClassName}Condition));
+		return page;
+	}
+	
+	/**
+	 * 插入${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */
+	@Override
+	public void insert${entityMeta.className}(${entityMeta.className} ${entityMeta.lowerClassName}) {
+	     Date date = new Date();
+	     ${entityMeta.lowerClassName}.setYn((byte)1);
+		 ${entityMeta.lowerClassName}.setCreateTime(date);
+		 ${entityMeta.lowerClassName}.setUpdateTime(date);
+		${entityMeta.lowerClassName}Dao.insert${entityMeta.className}(${entityMeta.lowerClassName});
+	}
+
+	/**
+	 * 更新${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */
+	@Override
+	public void update${entityMeta.className}(${entityMeta.className} ${entityMeta.lowerClassName}) {
+	     ${entityMeta.lowerClassName}.setUpdateTime(new Date());
+		${entityMeta.lowerClassName}Dao.update${entityMeta.className}(${entityMeta.lowerClassName});
+	}
+
+	/**
+	 * 删除${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 */
+	@Override
+	public void delete${entityMeta.className}(${entityMeta.pkFieldMeta.javaType} ${entityMeta.pkFieldMeta.javaFieldName}) {
+		${entityMeta.lowerClassName}Dao.delete${entityMeta.className}(${entityMeta.pkFieldMeta.javaFieldName});
+	}
+	/**
+	 * 批量删除${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 */
+	@Override
+	public void delete${entityMeta.className}Batch(${entityMeta.pkFieldMeta.javaType}[] ${entityMeta.pkFieldMeta.javaFieldName}s) {
+		 ${entityMeta.lowerClassName}Dao.delete${entityMeta.className}Batch(${entityMeta.pkFieldMeta.javaFieldName}s);
+	}
+	
+	/*===============================================================================*/
+	/*                                以下是get/set方法
+	/*===============================================================================*/
+	/**
+	 * @return the ${entityMeta.lowerClassName}Dao
+	 */
+	public ${entityMeta.className}Dao get${entityMeta.className}Dao() {
+		return this.${entityMeta.lowerClassName}Dao;
+	}
+	
+	/**
+	 * @param ${entityMeta.lowerClassName}Dao the ${entityMeta.lowerClassName}Dao to set
+	 */
+	public void set${entityMeta.className}Dao(${entityMeta.className}Dao ${entityMeta.lowerClassName}Dao) {
+		this.${entityMeta.lowerClassName}Dao = ${entityMeta.lowerClassName}Dao;
+	}
+	
+}

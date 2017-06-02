@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<maps>
+#foreach($entityMeta in $entityMetaList)
+	   <map src="${entityMeta.packageName}.service.${entityMeta.className}Service.insert${entityMeta.className}" key="${entityMeta.packageName}.service.${entityMeta.className}Service.insert${entityMeta.className}"/>
+#end
+</maps>
+ 

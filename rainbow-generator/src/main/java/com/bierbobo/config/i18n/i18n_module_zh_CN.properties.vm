@@ -1,0 +1,3 @@
+#foreach(${fieldMeta} in ${fieldMetaMap.entrySet()})
+${entityMetaList.get(0).projectMeta.projectName}.${entityMetaList.get(0).projectMeta.moduleName}.${fieldMeta.key}=${fieldMeta.value}
+#end 

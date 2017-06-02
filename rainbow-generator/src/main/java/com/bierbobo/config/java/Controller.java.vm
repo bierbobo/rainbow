@@ -1,0 +1,167 @@
+package ${entityMeta.packageName}.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
+import org.apache.log4j.Logger;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ${entityMeta.projectMeta.groupId}.common.Page;
+import ${entityMeta.projectMeta.groupId}.common.Result;
+#if($entityMeta.projectMeta.i18n)
+#else
+import ${entityMeta.projectMeta.groupId}.common.util.ExportExcel;
+import ${entityMeta.projectMeta.groupId}.constant.ExcelConstant;
+#end
+import ${entityMeta.projectMeta.groupId}.constant.Constant;
+import ${entityMeta.packageName}.domain.${entityMeta.className};
+import ${entityMeta.packageName}.condition.${entityMeta.className}Condition;
+import ${entityMeta.packageName}.service.${entityMeta.className}Service;
+import ${entityMeta.projectMeta.groupId}.main.controller.BaseController;
+
+#foreach(${importClass} in ${entityMeta.importClassList})
+import ${importClass};
+#end
+
+/** 
+ * ${entityMeta.className}控制器
+ * @author $entityMeta.author
+ * @date $dateTool.format("yyyy-MM-dd  hh:mm:ss",$entityMeta.generateDate)
+ */
+@Controller
+@RequestMapping("${entityMeta.lowerClassName}")
+public class ${entityMeta.className}Controller extends BaseController {
+	
+	@Resource
+	${entityMeta.className}Service ${entityMeta.lowerClassName}Service;
+    /**
+     * 
+     */
+    private static final Logger logger = Logger.getLogger(${entityMeta.className}Controller.class);
+
+    /**
+     * 跳转到${entityMeta.comment}管理主页面
+     * @return
+     */
+    @RequestMapping(value = "/goto${entityMeta.className}Page.do",method = {RequestMethod.GET, RequestMethod.POST})
+    public String goto${entityMeta.className}Page(Model model,${entityMeta.className}Condition ${entityMeta.lowerClassName}Condition) {
+    	return "/${entityMeta.lowerClassName}/${entityMeta.lowerClassName}List";
+    }
+    
+
+    /**
+     * 查询${entityMeta.comment}列表数据
+     * @param aoData
+     */
+    @RequestMapping(value = "/query${entityMeta.className}List.do")
+    public @ResponseBody  Object query${entityMeta.className}List(Page page,${entityMeta.className}Condition ${entityMeta.lowerClassName}Condition) {
+        page = ${entityMeta.lowerClassName}Service.find${entityMeta.className}List(page,${entityMeta.lowerClassName}Condition);
+         return page;
+    }
+    
+    
+	 /**
+     * 跳转到${entityMeta.comment}页面
+     * @return
+     */
+    @RequestMapping(value = "/goto${entityMeta.className}Edit.do")
+    public String  goto${entityMeta.className}Edit(Long id,Model model) {
+    	if(id != null){
+    		${entityMeta.className} ${entityMeta.lowerClassName} = ${entityMeta.lowerClassName}Service.get${entityMeta.className}(id);
+        	model.addAttribute("${entityMeta.lowerClassName}", ${entityMeta.lowerClassName});
+    	}
+    	return "/${entityMeta.lowerClassName}/${entityMeta.lowerClassName}Edit";
+    }
+	
+	
+    /**
+     * 编辑${entityMeta.comment}数据
+     * @return
+     */
+    @RequestMapping(value = "/edit${entityMeta.className}.do")
+    public @ResponseBody  Object edit${entityMeta.className}(HttpServletRequest request,@Valid @ModelAttribute ${entityMeta.className} ${entityMeta.lowerClassName},Errors errors) {
+    	if(errors.hasErrors()){
+    		return validateMessage(request,errors);
+    	}
+		Result result = null;
+    	if(${entityMeta.lowerClassName} != null){
+			try {
+				if(${entityMeta.lowerClassName}.getId() == null){
+					${entityMeta.lowerClassName}Service.insert${entityMeta.className}(${entityMeta.lowerClassName});
+				}else{
+					${entityMeta.lowerClassName}Service.update${entityMeta.className}(${entityMeta.lowerClassName});
+				}
+				result = new Result(returnSuccess(request),Constant.SUCCESS_CODE);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				result =  new Result(returnError(request),Constant.SUCCESS_CODE);
+			}
+    	}else{
+    		result =  new Result(returnError(request),Constant.SUCCESS_CODE);
+    	}
+    	return result;
+    }
+	
+	 /**
+     * 跳转到${entityMeta.comment}页面
+     * @return
+     */
+    @RequestMapping(value = "/goto${entityMeta.className}Detail.do")
+    public String  goto${entityMeta.className}Detail(Long id,Model model) {
+    	if(id != null){
+    		${entityMeta.className} ${entityMeta.lowerClassName} = ${entityMeta.lowerClassName}Service.get${entityMeta.className}(id);
+        	model.addAttribute("${entityMeta.lowerClassName}", ${entityMeta.lowerClassName});
+    	}
+    	return "/${entityMeta.lowerClassName}/${entityMeta.lowerClassName}Detail";
+    }
+	
+    /**
+     * 删除${entityMeta.comment}数据
+     * @return
+     */
+    @RequestMapping(value = "/delete${entityMeta.className}.do")
+    public @ResponseBody  Object delete${entityMeta.className}(HttpServletRequest request,Long[] ids) {
+    	Result result = null;
+    	try {
+			${entityMeta.lowerClassName}Service.delete${entityMeta.className}Batch(ids);
+			result = new Result(returnSuccess(request),Constant.SUCCESS_CODE);
+		} catch (Exception e) {
+			logger.error(e);
+			result =  new Result(returnError(request),Constant.SUCCESS_CODE);
+		}
+    	return result;
+    }
+    
+#if($entityMeta.projectMeta.i18n)
+#else
+	  /**
+     * 导出根据${entityMeta.comment}查询条件的数据
+     *
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/export${entityMeta.className}.do")
+    public  void export${entityMeta.className}(HttpServletResponse response, ${entityMeta.className}Condition ${entityMeta.lowerClassName}Condition,String exportType) {
+        try {
+        	Page page = new Page();
+			 page.setPageSize(Integer.MAX_VALUE);
+        	 page = ${entityMeta.lowerClassName}Service.find${entityMeta.className}List(page,${entityMeta.lowerClassName}Condition);
+             ExportExcel.exportFile(response,ExcelConstant.${entityMeta.className}.FILENAME, ExcelConstant.${entityMeta.className}.PROPERTYS, ExcelConstant.${entityMeta.className}.TITLES, page.getRows(),exportType);
+        } catch (Exception e) {
+        	logger.error(Constant.ERROR_MESSAGE,e);
+        }
+    }
+#end
+
+}

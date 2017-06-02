@@ -1,0 +1,137 @@
+$(function(){
+     var height = parseInt(document.documentElement.clientHeight-100-$(".easyui-panel").height());
+      $.i18n({
+	    baseName:["i18n/${entityMeta.projectMeta.moduleName}"],
+		callback:function(data){
+			$.fn.pagination.defaults.beforePageText = data['project.message.beforePageText'];
+			$.fn.pagination.defaults.afterPageText = data['project.message.afterPageText'];
+			$.fn.pagination.defaults.displayMsg = data['project.message.displayMsg'];
+    	 $('#${entityMeta.lowerClassName}_grid').datagrid({
+    	    title:data['project.message.list'],
+    		height: height<200?200:height,
+            url: "query${entityMeta.ClassName}List.do",
+            method: 'post',
+    		nowrap:true,
+    		striped:true,
+    		fitColumns:true,
+    		pageSize:15,
+    		collapsible: false,
+    		checkOnSelect:true,
+    		sortName:"id",
+    		sortOrder:"desc",
+            remoteSort: true,
+            loadMsg: data['project.message.loading'],
+    		pageList:[15,30,50,100],
+            columns: [
+          	[
+    		  {field: 'ck', checkbox: true, checked: false, align: 'left'},
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(${fieldMeta.showCols})
+#if(${fieldMeta.formType}=="SELECT")
+    		  {field: '${fieldMeta.javaFieldName}', title: data['${entityMeta.projectMeta.projectName}.${entityMeta.projectMeta.moduleName}.${fieldMeta.javaFieldName}'], width: '10%', align: 'center',sortable:true,
+    		  formatter: function(value){
+        		return value;		
+        	  }
+    		  },
+#elseif(${fieldMeta.formType}=="DATE")
+    		 {field: '${fieldMeta.javaFieldName}', title:data['${entityMeta.projectMeta.projectName}.${entityMeta.projectMeta.moduleName}.${fieldMeta.javaFieldName}'], width: '10%', align: 'center',sortable:true,
+                formatter:function(value){
+                	return new Date(value).format();
+                }},
+#else
+	        {field: '${fieldMeta.javaFieldName}', title:data['${entityMeta.projectMeta.projectName}.${entityMeta.projectMeta.moduleName}.${fieldMeta.javaFieldName}'], width: '10%', align: 'center',sortable:true},
+#end	
+           
+#end
+#end          
+             ]
+      	 ],
+        	pagination: true,
+      	    rownumbers: true,
+      	    toolbar: [
+              {text:data['project.button.add'],iconCls:'icon-save',handler:to_add_${entityMeta.lowerClassName}},
+              "-",
+              {text:data['project.button.update'],iconCls:'icon-edit',handler:to_edit_${entityMeta.lowerClassName}},
+			   "-",
+              {text:data['project.button.detail'],iconCls:'icon-reload',handler:to_detail_${entityMeta.lowerClassName}},
+              "-",
+              {text:data['project.button.delete'],iconCls:'icon-remove',handler:to_delete_${entityMeta.lowerClassName}}
+              ]
+	 });
+	}
+	});
+	 /** 关闭**/
+	 $("#${entityMeta.lowerClassName}_close_button").on('click',function(){
+		 $('#${entityMeta.lowerClassName}_dialog').dialog('close');
+	 });
+	 /**查询**/
+	 $("#${entityMeta.lowerClassName}_query_button").on('click',function(){
+		 $('#${entityMeta.lowerClassName}_grid').datagrid('load',{
+#set($i=0)		 
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(${fieldMeta.query})
+#if(${fieldMeta.formType}=="SELECT")
+		        ${fieldMeta.javaFieldName}: $('#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}').combobox('getValue')
+#elseif(${fieldMeta.formType}=="DATE")
+	            ${fieldMeta.javaFieldName}: $('#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}').datebox('getValue')
+#else
+	           	${fieldMeta.javaFieldName}: $("#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}").val()
+#end
+#if($i+1 lt ${entityMeta.queryCount})
+	            ,
+#end
+#set($i=$i+1)
+#end
+#end
+		});
+	 });
+	 /**重置**/
+	 $("#${entityMeta.lowerClassName}_reset_button").on('click',function(){
+		 $("#${entityMeta.lowerClassName}_query_form").form('reset');
+	 });
+});
+
+/** 跳转到添加页面 **/
+function to_add_${entityMeta.lowerClassName}() {
+    $.i18n({
+		callback:function(data){
+	   $('#${entityMeta.lowerClassName}_dialog').openDialog({title :data['project.button.add']+data['project.module.${entityMeta.lowerClassName}'],url:"goto${entityMeta.className}Edit.do",handler:"edit_${entityMeta.lowerClassName}()"});
+	}});
+}
+/** 跳转到编辑页面 **/
+function to_edit_${entityMeta.lowerClassName}() {
+ $.i18n({
+  callback:function(data){
+	$('#${entityMeta.lowerClassName}_dialog').toEditObj({
+		title:data['project.button.update']+data['project.module.${entityMeta.lowerClassName}'],
+		url:"goto${entityMeta.className}Edit.do",
+		grid:"${entityMeta.lowerClassName}_grid",
+		handler:"edit_${entityMeta.lowerClassName}()"
+	});
+  }});
+}
+/** 添加编辑 **/
+ function edit_${entityMeta.lowerClassName}() {
+ $.i18n({
+  callback:function(data){
+	  $('#${entityMeta.lowerClassName}_form').editObj({url:"edit${entityMeta.className}.do",dialog:"${entityMeta.lowerClassName}_dialog",grid:"${entityMeta.lowerClassName}_grid"});
+ }});
+ }
+ 
+/** 跳转到详情页面 **/
+function to_detail_${entityMeta.lowerClassName}() {
+ $.i18n({
+  callback:function(data){
+	$('#${entityMeta.lowerClassName}_dialog').toDetailObj({
+		title:data['project.button.detail']+data['project.module.${entityMeta.lowerClassName}'],
+		url:"goto${entityMeta.className}Detail.do",
+		grid:"${entityMeta.lowerClassName}_grid"
+	});
+  }});
+}
+
+/** 删除 **/
+function to_delete_${entityMeta.lowerClassName}() {
+       $("#${entityMeta.lowerClassName}_grid").deleteObj({url:"delete${entityMeta.className}.do"});
+}
+

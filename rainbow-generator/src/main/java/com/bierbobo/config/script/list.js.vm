@@ -1,0 +1,135 @@
+$(function(){
+     var height = parseInt(document.documentElement.clientHeight-100-$(".easyui-panel").height());
+	 $('#${entityMeta.lowerClassName}_grid').datagrid({
+	    title:'列表',
+		height: height<200?200:height,
+        url: "query${entityMeta.ClassName}List.do",
+        method: 'post',
+		nowrap:true,
+		striped:true,
+		fitColumns:true,
+		pageSize:15,
+		collapsible: false,
+		checkOnSelect:true,
+		sortName:"id",
+		sortOrder:"desc",
+        remoteSort: true,
+        loadMsg: '数据加载中......',
+		pageList:[15,30,50,100],
+        columns: [
+      	[
+		  {field: 'ck', checkbox: true, checked: false, align: 'left'},
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(${fieldMeta.showCols})
+#if(${fieldMeta.formType}=="SELECT")
+		  {field: '${fieldMeta.javaFieldName}', title: '${fieldMeta.comment}', width: '10%', align: 'center',sortable:true,
+		  formatter: function(value){
+    		return value;		
+    	  }
+		  },
+#elseif(${fieldMeta.formType}=="DATE")
+		 {field: '${fieldMeta.javaFieldName}', title: '${fieldMeta.comment}', width: '10%', align: 'center',sortable:true,
+            formatter:function(value){
+            	return new Date(value).format();
+            }},
+#else
+	      {field: '${fieldMeta.javaFieldName}', title: '${fieldMeta.comment}', width: '10%', align: 'center',sortable:true},
+#end	
+           
+#end
+#end          
+            ]
+      	],
+      	pagination: true,
+      	rownumbers: true,
+      	toolbar: [
+              {text:'添加',iconCls:'icon-save',handler:to_add_${entityMeta.lowerClassName}},
+              "-",
+              {text:'编辑',iconCls:'icon-edit',handler:to_edit_${entityMeta.lowerClassName}},
+			   "-",
+              {text:'详情',iconCls:'icon-reload',handler:to_detail_${entityMeta.lowerClassName}},
+              "-",
+              {text:'删除',iconCls:'icon-remove',handler:to_delete_${entityMeta.lowerClassName}},
+              "-",
+              {text:'导出',iconCls:'icon-print',handler:to_export_${entityMeta.lowerClassName}}
+              ]
+	 });
+	 /** 关闭**/
+	 $("#${entityMeta.lowerClassName}_close_button").on('click',function(){
+		 $('#${entityMeta.lowerClassName}_dialog').dialog('close');
+	 });
+	 /**查询**/
+	 $("#${entityMeta.lowerClassName}_query_button").on('click',function(){
+		 $('#${entityMeta.lowerClassName}_grid').datagrid('load',{
+#set($i=0)		 
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(${fieldMeta.query})
+#if(${fieldMeta.formType}=="SELECT")
+		        ${fieldMeta.javaFieldName}: $('#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}').combobox('getValue')
+#elseif(${fieldMeta.formType}=="DATE")
+	            ${fieldMeta.javaFieldName}: $('#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}').datebox('getValue')
+#else
+	           	${fieldMeta.javaFieldName}: $("#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}").val()
+#end
+#if($i+1 lt ${entityMeta.queryCount})
+	            ,
+#end
+#set($i=$i+1)
+#end
+#end
+		});
+	 });
+	 /**重置**/
+	 $("#${entityMeta.lowerClassName}_reset_button").on('click',function(){
+		 $("#${entityMeta.lowerClassName}_query_form").form('reset');
+	 });
+});
+
+/** 跳转到添加页面 **/
+function to_add_${entityMeta.lowerClassName}() {
+	$('#${entityMeta.lowerClassName}_dialog').openDialog({title :"添加${entityMeta.comment}",url:"goto${entityMeta.className}Edit.do",handler:"edit_${entityMeta.lowerClassName}()"});
+}
+/** 跳转到编辑页面 **/
+function to_edit_${entityMeta.lowerClassName}() {
+	$('#${entityMeta.lowerClassName}_dialog').toEditObj({
+		title:"编辑${entityMeta.comment}",
+		url:"goto${entityMeta.className}Edit.do",
+		grid:"${entityMeta.lowerClassName}_grid",
+		handler:"edit_${entityMeta.lowerClassName}()"
+	});
+}
+/** 添加编辑 **/
+ function edit_${entityMeta.lowerClassName}() {
+	  $('#${entityMeta.lowerClassName}_form').editObj({url:"edit${entityMeta.className}.do",dialog:"${entityMeta.lowerClassName}_dialog",grid:"${entityMeta.lowerClassName}_grid"});
+ }
+ 
+/** 跳转到详情页面 **/
+function to_detail_${entityMeta.lowerClassName}() {
+	$('#${entityMeta.lowerClassName}_dialog').toDetailObj({
+		title:"查看${entityMeta.comment}",
+		url:"goto${entityMeta.className}Detail.do",
+		grid:"${entityMeta.lowerClassName}_grid"
+	});
+}
+
+/** 删除 **/
+function to_delete_${entityMeta.lowerClassName}() {
+	$("#${entityMeta.lowerClassName}_grid").deleteObj({url:"delete${entityMeta.className}.do"});
+}
+
+/** 导出 **/
+function to_export_${entityMeta.lowerClassName}() {
+	  url = "export${entityMeta.ClassName}.do?1=1";
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(${fieldMeta.query})
+#if(${fieldMeta.formType}=="SELECT")
+	  url+="&${fieldMeta.javaFieldName}="+$('#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}').combobox('getValue');
+#elseif(${fieldMeta.formType}=="DATE")
+	  url+="&${fieldMeta.javaFieldName}="+$('#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}').datebox('getValue');
+#else
+	  url+="&${fieldMeta.javaFieldName}="+$("#${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}").val();
+#end
+#end
+#end
+	$.exportFile({"url":url});
+}

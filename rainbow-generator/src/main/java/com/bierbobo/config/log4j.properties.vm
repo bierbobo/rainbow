@@ -1,0 +1,26 @@
+#default
+log4j.rootLogger=${mvn.log.level},RollingFile,Console
+
+#console log
+log4j.appender.Console=org.apache.log4j.ConsoleAppender
+log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+log4j.appender.Console.layout.conversionPattern=%-5p - %d{yyyy-MM-dd HH:mm:ss} [%t] %l -- %m%n
+
+#file log
+log4j.appender.RollingFile=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.RollingFile.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollingFile.layout.conversionPattern=%-5p - %d{yyyy-MM-dd HH:mm:ss} [%t] %l -- %m%n
+log4j.appender.RollingFile.file=${mvn.log.path}${project.name}.log
+log4j.appender.RollingFile.append=true
+log4j.appender.RollingFile.encoding=UTF-8
+log4j.appender.RollingFile.datePattern='.'yyyy-MM-dd'.log'
+
+log4j.logger.${entityMeta.projectMeta.groupId}=${mvn.log.level}
+
+#other
+log4j.logger.com.bierbobo=${mvn.log.other.level}
+log4j.logger.com.mybatis=${mvn.log.other.level}
+log4j.logger.com.mybatis.common.jdbc.SimpleDataSource=${mvn.log.other.level}
+log4j.logger.com.mybatis.common.jdbc.ScriptRunner=${mvn.log.other.level}
+log4j.logger.org.mybatis.spring.SqlSessionTemplate=${mvn.log.other.level}
+

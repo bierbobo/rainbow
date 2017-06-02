@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+       <objectContribution
+            adaptable="true"
+            id="com.bierbobo.tool.codegen.generateProjectContribution"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="com.bierbobo.config.tool.codegen.popup.actions.GenerateProjectAction"
+               icon="icons/exportPlugin.png"
+               id="com.bierbobo.tool.codegen.GenerateProjectAction"
+               label="生成所有">
+         </action>
+      </objectContribution>
+      
+      <objectContribution
+            adaptable="true"
+            id="com.bierbobo.tool.codegen.generateAllContribution"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="com.bierbobo.config.tool.codegen.popup.actions.GenerateAllAction"
+               icon="icons/exportPlugin.png"
+               id="com.bierbobo.tool.codegen.GenerateAllAction"
+               label="生成服务层">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="com.bierbobo.tool.codegen.generateWebContribution"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="com.bierbobo.config.tool.codegen.popup.actions.GenerateWebAction"
+               icon="icons/exportPlugin.png"
+               id="com.bierbobo.tool.codegen.GenerateWebAction"
+               label="生成展现层">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.console.consoleFactories">
+      <consoleFactory
+            class="com.bierbobo.config.tool.codegen.console.ConsoleFactory"
+            icon="icons/exportPlugin.png"
+            label="Generate Code Console">
+      </consoleFactory>
+   </extension>
+
+</plugin>

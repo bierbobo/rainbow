@@ -1,0 +1,47 @@
+${entityMeta.velocitySymbol}set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>#springMessage("project.main.title")</title>
+	<link id="easyuiTheme" rel="stylesheet" type="text/css" href="#springUrl('/static/css/easyui/themes/bootstrap/easyui.css')" >
+	<link rel="stylesheet" type="text/css" href="#springUrl('/static/css/easyui/themes/icon.css')">
+	<link rel="stylesheet" type="text/css" href="#springUrl('/static/css/default.css')">
+	<script type="text/javascript" src="#springUrl('/static/js/jquery.min.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/easyui/jquery.easyui.min.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/menu.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/validate.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/common.js')"></script>
+	<script type="text/javascript" src="#springUrl('/static/js/util/jquery.fn.extend.js')"></script>
+	
+</head>
+<body class="easyui-layout">
+<noscript>
+	<div class="noscript"><img src="#springUrl('/static/images/noscript.gif')" /></div>
+</noscript>
+<div class="easyui-layout" style="width:100%;height:100%;">
+	<div data-options="region:'north'" split="true" border="false" style="overflow: hidden; height: 30px;
+        background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+        line-height: 20px;color: #fff; font-family: Verdana">
+		<div style="float:right;">
+			 <span style="float:right; padding-right:20px;" class="head">#springMessage("project.main.welcome")  #*<a href="#" id="editpass">修改密码</a>*# <a href="#" id="loginOut">#springMessage("project.main.logout")</a></span>
+		</div>
+       
+    </div>
+	
+<div  id="easyui-accordion"  data-options="region:'west',title:'title',split:true" style="width:180px;">
+</div>
+<div data-options="region:'center'" >
+	<div id="tabs" class="easyui-tabs"  fit="true" border="false">
+		<div title="#springMessage('project.main.index')"> </div>
+	</div>
+</div>
+<div region="south" split="true" class="bottom">
+	<div class="footer">#springMessage("project.main.title")</div>
+</div>
+</div>
+</body>
+</html>

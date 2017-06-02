@@ -1,0 +1,113 @@
+package ${entityMetaList.get(0).projectMeta.groupId}.main.controller;
+
+import ${entityMetaList.get(0).projectMeta.groupId}.common.bean.Menu;
+#if($entityMetaList.get(0).projectMeta.i18n)
+import java.util.Enumeration;	
+#end
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+#if($entityMetaList.get(0).projectMeta.i18n)
+import java.util.ResourceBundle;	
+#end
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+/** 
+ * 控制器
+ * @author $entityMetaList.get(0).author
+ * @date $dateTool.format("yyyy-MM-dd  hh:mm:ss",$entityMetaList.get(0).generateDate)
+ */
+@Controller
+@RequestMapping("")
+public class MainController extends BaseController{
+	
+    /**
+     * 跳转到主页面
+     * @return
+     */
+    @RequestMapping(value = "/",method = {RequestMethod.GET, RequestMethod.POST})
+    public String main(Model model) {
+    	return "/main";
+    }
+    
+    /**
+     * 主页面加载菜单
+     * @return
+     */
+    @RequestMapping(value = "/loadMenu.do",method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody Object loadMenu(HttpServletRequest request,Model model) {
+#if($entityMetaList.get(0).projectMeta.i18n)	
+	    ResourceBundle myResourcesBundle = getCommonResourceBundle(request);
+#end				
+    	Map<String,List<Menu>> map = new HashMap<String,List<Menu>>();
+		List<Menu> menus = new ArrayList<Menu>();				
+#set($i=0)	    	
+#foreach($entityMeta in $entityMetaList)				
+		Menu m${i} = new Menu();
+#if($entityMetaList.get(0).projectMeta.i18n)	
+		m${i}.setName(getResourceString(myResourcesBundle,"project.module.${entityMeta.lowerClassName}"));
+#else
+	    	m${i}.setName("${entityMeta.comment}管理");
+#end
+    
+    	m${i}.setUrl("${entityMeta.lowerClassName}/goto${entityMeta.className}Page.do");
+    	m${i}.setIcon("icon-sys");
+    	menus.add(m${i});
+#set($i=$i+1)		
+#end    	
+    	Menu menu = new Menu();
+    	menu.setMenus(menus);
+#if($entityMetaList.get(0).projectMeta.i18n)	
+	    menu.setName(getResourceString(myResourcesBundle,"project.module.root"));
+#else
+	  	menu.setName("系统管理");  	
+#end		
+		
+    
+    	menu.setIcon("icon-sys");
+    	List<Menu> list = new ArrayList<Menu>();
+    	list.add(menu);
+    	map.put("menus", list);
+    	return map;
+    }
+#if($entityMetaList.get(0).projectMeta.i18n)
+	/**
+	 * 主页面加载菜单
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "loadProperties.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody
+	Object loadProperties(HttpServletRequest request, String[] baseName) {
+		Map<String,String> mapKey = new HashMap<String,String>();
+		if(baseName!=null){
+			for(String bn:baseName ){
+				ResourceBundle myResourcesBundle = getResourceBundle(request,bn);
+				Enumeration<String> keys = myResourcesBundle.getKeys();
+				while (keys.hasMoreElements()) {
+					String key = keys.nextElement();
+					mapKey.put(key, getResourceString(myResourcesBundle,key));
+				}
+			}
+		}
+
+		 ResourceBundle myResourcesBundle = getCommonResourceBundle(request);
+		Enumeration<String> keys = myResourcesBundle.getKeys();
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			mapKey.put(key, getResourceString(myResourcesBundle,key));
+		}
+	
+		
+		return mapKey;
+	
+	}
+#end    
+}

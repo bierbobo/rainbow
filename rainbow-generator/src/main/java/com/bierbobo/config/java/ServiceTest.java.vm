@@ -1,0 +1,33 @@
+package ${entityMeta.packageName};
+
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import ${entityMeta.packageName}.service.${entityMeta.className}Service;
+
+/**
+ * ${entityMeta.comment}服务测试
+ * @org ${entityMeta.projectMeta.domainName}
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+public class ${entityMeta.className}ServiceTest {
+	
+	/**
+	 * Logger for this class
+	 */
+	 private static final Logger log = Logger.getLogger(${entityMeta.className}ServiceTest.class);
+	
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[]{"spring/spring-main.xml","spring/spring-ref-test.xml"});
+        ${entityMeta.className}Service ${entityMeta.lowerClassName}Service = (${entityMeta.className}Service) ctx.getBean("ref${entityMeta.className}Service");
+        String echoMessage = ${entityMeta.lowerClassName}Service.echo("Hello world!");
+        log.info(echoMessage);
+	}
+	
+}

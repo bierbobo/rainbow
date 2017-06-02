@@ -1,0 +1,394 @@
+/**对话框**/
+jQuery.fn.openDialog=function (options) {
+	var __that = $(this);
+	$.i18n({
+		callback:function(data){
+			options = jQuery.extend({
+				title : options.title||data['project.message.dialog'],
+				width : options.width||800,
+				height : options.height||350,
+				url : options.url||"",
+				handler:options.handler||''
+			});
+			var _that = $(__that);
+			if(options.handler==''){
+				$(_that).dialog({
+					title : options.title,
+					width : options.width,
+					height : options.height,
+					minimizable:false,
+					maximizable:false,
+					collapsible:false,
+					resizable:false,
+					closed : false,
+					cache : false,
+					href : options.url,
+					modal : true,
+					buttons : [{
+						text : data['project.message.close'],
+						iconCls : 'icon-cancel',
+						handler : function() {
+							$(_that).dialog('close');
+						}
+					} ]
+				});
+			}else{
+				$(_that).dialog({
+					title : options.title,
+					width : options.width,
+					height : options.height,
+					minimizable:false,
+					maximizable:false,
+					collapsible:false,
+					resizable:false,
+					closed : false,
+					cache : false,
+					href : options.url,
+					modal : true,
+					buttons : [ {
+						text : data['project.message.confirm'],
+						iconCls : 'icon-ok',
+						handler : function() {
+							eval(options.handler);
+						}
+					}, {
+						text : data['project.message.cancel'],
+						iconCls : 'icon-cancel',
+						handler : function() {
+							$(_that).dialog('close');
+						}
+					} ]
+				});
+			}
+		}});
+	
+};
+/***
+ * @desc 编辑
+ * @param options{
+ var options = $.extend({
+		url:options.url,
+		dialog:options.dialog,
+		grid:options.grid
+	});
+ * }
+ */
+jQuery.fn.editObj = function(options){
+	var _that = $(this);
+	$.i18n({
+		callback:function(data){
+			$.messager.defaults.ok=data['project.message.confirm'];
+			$.messager.defaults.cancel=data['project.message.cancel'];
+			 options = $.extend({
+				url:options.url,
+				dialog:options.dialog,
+				grid:options.grid
+			});
+		
+			if ($(_that).form("validate")) {
+				$(_that).ajaxSubmit({
+					url : options.url,
+					success : function(result) {
+						//var result = eval('(' + result + ')');
+						if (result.code == 1) {
+							$('#'+options.dialog).dialog('close');
+							$.messager.alert(data['project.message.tips'], result.msg, "info", function() {
+								$('#'+options.grid).datagrid('reload');
+							});
+						}else if (result.code == -1) {
+							$.messager.alert(data['project.message.tips'], result.msg, 'error');
+						} else {
+							$.messager.alert(data['project.message.tips'], result.msg, 'error');
+						}
+					}
+				});
+			}
+		}});
+};
+/***
+ * @desc 跳转到编辑页面
+ * @param options{
+ *  var options = $.extend({
+		title:options.title, 
+		url:options.url, 
+		grid:options.grid, 
+		width:options.width,
+		height:options.height,
+		handler:options.handler
+	});
+ * }
+ */
+jQuery.fn.toEditObj = function(options){
+	var _that = this;
+	$.i18n({
+		callback:function(data){
+			 options = $.extend({
+				title:options.title,
+				url:options.url,
+				grid:options.grid,
+				width:options.width,
+				height:options.height,
+				readonly:options.readonlys,
+				handler:options.handler
+			});
+			var rows = $('#'+options.grid).datagrid('getSelections');
+			if (rows.length == 0) {
+				$.messager.alert(data['project.message.tips'], data['project.message.choose_row'], 'error');
+			} else if (rows.length > 1) {
+				$.messager.alert(data['project.message.tips'], data['project.message.choose_one_row'], 'error');
+			} else {
+				$(_that).openDialog({
+					title :options.title,
+					url:options.url+"?id="+rows[0].id,
+					width:options.width,
+					height:options.height,
+					handler:options.handler
+				});
+			}
+		}});
+};
+/***
+ * @desc 跳转到编辑页面
+ * @param options{
+ *  var options = $.extend({
+		title:options.title, 
+		url:options.url, 
+		grid:options.grid, 
+		width:options.width,
+		height:options.height,
+		handler:options.handler
+	});
+ * }
+ */
+jQuery.fn.toDetailObj = function(options){
+	var _that = $(this);
+	$.i18n({
+		callback:function(data){
+				 options = $.extend({
+					title:options.title,
+					url:options.url,
+					grid:options.grid,
+					width:options.width,
+					height:options.height
+				});
+				var rows = $('#'+options.grid).datagrid('getSelections');
+				if (rows.length == 0) {
+					$.messager.alert(data['project.message.tips'], data['project.message.choose_row'], 'error');
+				} else if (rows.length > 1) {
+					$.messager.alert(data['project.message.tips'], data['project.message.choose_one_row'], 'error');
+				} else {
+					$(_that).openDialog({
+						title :options.title,
+						url:options.url+"?id="+rows[0].id,
+						width:options.width,
+						height:options.height
+					});
+				}
+		}});
+};
+
+/***
+ * @desc 批量删除对象
+ * @param options{
+ *  url :""
+ * }
+ */
+jQuery.fn.deleteObj=function (options) {
+	$(this).confirmObj(options);
+};
+/***
+ * @desc 批量确认对象
+ * @param options{
+ *  url :""
+ * }
+ */
+jQuery.fn.confirmObj=function (options) {
+	var _that = $(this);
+	$.i18n({
+		callback:function(data){
+			$.messager.defaults.ok=data['project.message.confirm'];
+			$.messager.defaults.cancel=data['project.message.cancel'];
+			var _delete_that = _that;
+		    var url = options.url||'';
+		    var title = options.title||data['project.message.deleteConfirm'];
+			var rows = $(_that).datagrid('getSelections');
+			if (rows.length == 0) {
+				$.messager.alert(data['project.message.tips'], data['project.message.choose_row'], 'error');
+				return;
+			}
+			
+			$.messager.confirm(data['project.message.confirm_dialog'], title, function(result) {
+				if (result) {
+					var ids = [];
+					for ( var i = 0; i < rows.length; i++) {
+						ids.push(rows[i].id);
+					}
+					jQuery.ajax({
+						"type" : "post",
+						"url" : url,
+						"dataType" : "json",
+						"data" : {
+							ids : ids.join(",")
+						},
+						"success" : function(result) {
+							if (result.code == 1) {
+								$.messager.alert(data['project.message.tips'], result.msg, 'info', function() {
+									$(_delete_that).datagrid('reload');
+								});
+							} else {
+								$.messager.alert(data['project.message.tips'], result.msg, 'error');
+							}
+						}
+					});
+				}
+			});
+			
+		}
+	});
+};
+
+
+/***
+ * 扩展的方法
+ */
+jQuery.extend({	
+	i18n:function (options) {
+	 var callback = options.callback;
+	 jQuery.ajax({
+		"type" : "post",
+		"url" : "../loadProperties.do",
+		"dataType" : "json",
+		traditional: true,
+		"data" : {
+			"baseName" : options.baseName
+		},
+		"success" :function(data){
+			$.initI18n(data);
+			callback.call(this,data);
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			
+		}
+	
+	});
+  },
+	/*
+	 * 导出
+	 * @param url
+	 */
+	exportObj:function (url) {
+		$.i18n({
+			callback:function(data){
+			$.messager.confirm(data['project.message.confirm_dialog'], data['project.message.confirm_export'], function(result) {
+				if (result) {
+					window.location.href = url;
+				}
+			});
+		}});
+	},
+    /**
+     * 导出
+     * @param url
+     */
+    exportFile:function (options) {
+    	$.i18n({
+			callback:function(data){
+			$("#exportFileDialog").show();
+	        $("#exportFileDialog").dialog({
+	            title :data['project.message.confirm_dialog'],
+	            width:320,
+	            height:150,
+	            closed : false,
+	            cache : false,
+	            modal : true,
+	            buttons : [ {
+	                text : data['project.message.confirm'],
+	                iconCls : 'icon-ok',
+	                handler : function() {
+	                   var url=options.url+ "&exportType="+$("#export_radio").val();
+	                    $("#exportFileDialog").dialog('close');
+	                    location.href = url;
+	                }
+	            }, {
+	                text : data['project.message.cancel'],
+	                iconCls : 'icon-cancel',
+	                handler : function() {
+	                    $("#exportFileDialog").dialog('close');
+	                }
+	            } ]
+	        });
+	   }});
+    },
+	go:function (url) {
+				window.location.href = url;
+	},
+	initI18n:function(data){
+		if ($.fn.pagination){
+			$.fn.pagination.defaults.beforePageText = data['project.message.beforePageText'];
+			$.fn.pagination.defaults.afterPageText = data['project.message.afterPageText'];
+			$.fn.pagination.defaults.displayMsg = data['project.message.displayMsg'];
+		}
+		if ($.fn.datagrid){
+			$.fn.datagrid.defaults.loadMsg =  data['project.message.loading'];
+		}
+		if ($.fn.treegrid && $.fn.datagrid){
+			$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;
+		}
+		if ($.messager){
+			$.messager.defaults.ok = data['project.message.confirm'];
+			$.messager.defaults.cancel = data['project.message.cancel'];
+		}
+		$.map(['validatebox','textbox','filebox','searchbox',
+				'combo','combobox','combogrid','combotree',
+				'datebox','datetimebox','numberbox',
+				'spinner','numberspinner','timespinner','datetimespinner'], function(plugin){
+			if ($.fn[plugin]){
+				$.fn[plugin].defaults.missingMessage = data['project.message.missingMessage'];
+			}
+		});
+		if ($.fn.validatebox){
+			$.fn.validatebox.defaults.rules.email.message = data['project.message.email'];
+			$.fn.validatebox.defaults.rules.url.message = data['project.message.url'];
+			$.fn.validatebox.defaults.rules.length.message = data['project.message.length'];
+			$.fn.validatebox.defaults.rules.remote.message = data['project.message.remote'];
+		}
+		if ($.fn.calendar){
+			$.fn.calendar.defaults.weeks = data['project.message.weeks'].split(",");
+			$.fn.calendar.defaults.months = data['project.message.months'].split(",");
+		}
+		if ($.fn.datebox){
+			$.fn.datebox.defaults.currentText = data['project.message.confirm'];
+			$.fn.datebox.defaults.closeText = data['project.message.close'];
+			$.fn.datebox.defaults.okText = data[''];
+			$.fn.datebox.defaults.formatter = function(date){
+				var y = date.getFullYear();
+				var m = date.getMonth()+1;
+				var d = date.getDate();
+				return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+			};
+			$.fn.datebox.defaults.parser = function(s){
+				if (!s) return new Date();
+				var ss = s.split('-');
+				var y = parseInt(ss[0],10);
+				var m = parseInt(ss[1],10);
+				var d = parseInt(ss[2],10);
+				if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+					return new Date(y,m-1,d);
+				} else {
+					return new Date();
+				}
+			};
+		}
+		if ($.fn.datetimebox && $.fn.datebox){
+			$.extend($.fn.datetimebox.defaults,{
+				currentText: $.fn.datebox.defaults.currentText,
+				closeText: $.fn.datebox.defaults.closeText,
+				okText: $.fn.datebox.defaults.okText
+			});
+		}
+		if ($.fn.datetimespinner){
+			$.fn.datetimespinner.defaults.selections = [[0,4],[5,7],[8,10],[11,13],[14,16],[17,19]]
+		}
+
+	}
+});

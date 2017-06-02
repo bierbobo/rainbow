@@ -1,0 +1,57 @@
+package ${entityMeta.packageName}.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import ${entityMeta.projectMeta.groupId}.common.Page;
+import ${entityMeta.packageName}.domain.${entityMeta.className};
+import ${entityMeta.packageName}.condition.${entityMeta.className}Condition;
+
+/**
+ * ${entityMeta.comment}Dao
+ * @org ${entityMeta.projectMeta.domainName}
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+public interface ${entityMeta.className}Dao {
+
+	/**
+	 * 获取${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 * @return the ${entityMeta.className}
+	 */
+	public ${entityMeta.className} get${entityMeta.className}(${entityMeta.pkFieldMeta.javaType} ${entityMeta.pkFieldMeta.javaFieldName});
+
+	/**  
+	* @Description: 按条件获取${entityMeta.comment}列表
+	* @param page
+	* @param user
+	* @return 
+	*/
+	public List find${entityMeta.className}List(@Param("page")Page page,@Param("po")${entityMeta.className}Condition ${entityMeta.lowerClassName}Condition);
+	
+	/**
+	 * 插入${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */	 
+	public void insert${entityMeta.className}(${entityMeta.className} ${entityMeta.lowerClassName});
+	
+	/**
+	 * 更新${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */
+	public void update${entityMeta.className}(${entityMeta.className} ${entityMeta.lowerClassName});
+	
+	/**
+	 * 删除${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 */
+	public void delete${entityMeta.className}(${entityMeta.pkFieldMeta.javaType} ${entityMeta.pkFieldMeta.javaFieldName});
+	
+	/**
+	 * 批量删除${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 */
+	public void delete${entityMeta.className}Batch(@Param("${entityMeta.pkFieldMeta.javaFieldName}s")${entityMeta.pkFieldMeta.javaType}[] ${entityMeta.pkFieldMeta.javaFieldName}s);
+}

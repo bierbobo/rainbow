@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Codegen
+Bundle-SymbolicName: com.bierbobo.tool.codegen;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: JD
+Require-Bundle: org.eclipse.ui,org.eclipse.core.resources,org.eclipse.
+ core.jobs,org.eclipse.equinox.common,org.eclipse.jdt.core,org.eclipse
+ .core.runtime,org.eclipse.ui.ide,org.eclipse.jdt.ui,org.eclipse.ui.co
+ nsole
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .,lib/commons-io-2.4.jar,lib/commons-lang-2.6.jar,li
+ b/commons-logging-1.1.1.jar,lib/dom4j-1.6.1.jar,lib/poi-3.8.jar,lib/p
+ oi-ooxml-3.8.jar,lib/poi-ooxml-schemas-3.8.jar,lib/velocity-1.7.jar,l
+ ib/velocity-tools-2.0.jar,lib/xmlbeans-2.3.0.jar,lib/commons-collecti
+ ons-3.2.1.jar,lib/commons-beanutils-1.8.3.jar,lib/gson-1.7.1.jar
+Export-Package: com.bierbobo.tool.codegen.domain,com.bierbobo.tool.codegen.service
+ ,com.bierbobo.tool.codegen.service.impl
+Bundle-Activator: com.bierbobo.tool.codegen.CodeGenPlugin
+Bundle-ActivationPolicy: lazy
+

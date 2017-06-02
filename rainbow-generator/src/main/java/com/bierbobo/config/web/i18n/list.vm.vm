@@ -1,0 +1,39 @@
+<div class="body" title="#springMessage('project.button.query')">
+	<div class="easyui-panel" title="#springMessage('project.button.query')"  data-options="iconCls:'icon-search',collapsible:true" style="overflow-x:hidden;" >
+		<form id="${entityMeta.lowerClassName}_query_form">
+			
+#set($i=0)				
+#foreach($fieldMeta in $entityMeta.queryPropertyList)
+#if(${fieldMeta.query})
+#if($i%4==0)
+	    <div class="row ">
+#end			
+				<span>
+					<lable>${entityMeta.velocitySymbol}springMessage("${entityMeta.projectMeta.projectName}.${entityMeta.projectMeta.moduleName}.${fieldMeta.javaFieldName}")：</lable>
+#if(${fieldMeta.formType}=="SELECT")
+					<select  id="${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}" class="easyui-combobox input" >
+        			</select>
+#elseif(${fieldMeta.formType}=="DATE")
+		            <input type="text"  id="${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}" class="easyui-textbox  easyui-datebox input" style="height:25px;"/>
+#else
+	                <input type="text"  id="${entityMeta.lowerClassName}_${fieldMeta.javaFieldName}" class="easyui-textbox  input" style="height:25px;"/>
+#end				
+				</span>
+#if($i%4==3)			
+		</div>
+#end		
+	#set($i=$i+1)	
+#end
+#end				
+			
+				<span><a  id="${entityMeta.lowerClassName}_query_button" href="javascript:void(0)" class="easyui-linkbutton btn" iconCls="icon-search">#springMessage('project.button.query')</a></span>
+				<span><a  id="${entityMeta.lowerClassName}_reset_button" href="javascript:void(0)" class="easyui-linkbutton btn" iconCls="icon-undo">#springMessage('project.button.reset')</a></span>
+			</div>
+		</form>
+	</div>
+	<div style="margin-top:10px;">
+		<table id="${entityMeta.lowerClassName}_grid"></table>
+	</div>
+<div id="${entityMeta.lowerClassName}_dialog"  class="dialog"></div>
+</div>
+<script src="#springUrl('')/static/script/${entityMeta.lowerClassName}/${entityMeta.lowerClassName}List.js"></script>
