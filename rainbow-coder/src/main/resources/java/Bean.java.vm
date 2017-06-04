@@ -1,0 +1,54 @@
+package ${entityMeta.packageName}.domain;
+
+import ${entityMeta.projectMeta.groupId}.common.base.BaseEntity;
+import org.hibernate.validator.constraints.*;
+#foreach(${importClass} in ${entityMeta.importClassList})
+import ${importClass};
+#end
+
+/**
+ * $entityMeta.comment
+ * @org ${entityMeta.projectMeta.domainName} 
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+public class $entityMeta.className extends BaseEntity {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+	/**
+	 * $fieldMeta.comment
+	 */
+#if(${fieldMeta.validateCondition}!="" )	 
+###foreach($message in $fieldMeta.serverValidateMessage)
+##	$message
+###end
+#end	
+	private $fieldMeta.javaType $fieldMeta.javaFieldName;
+	
+#end
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+	/**
+	 * @return the $fieldMeta.javaFieldName
+	 */
+#if(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+	public $fieldMeta.javaType is${fieldMeta.upperJavaFieldName}() {
+#else
+	public $fieldMeta.javaType get${fieldMeta.upperJavaFieldName}() {
+#end
+		return $fieldMeta.javaFieldName;
+	}
+	
+	/**
+	 * @param $fieldMeta.javaFieldName the $fieldMeta.javaFieldName to set
+	 */
+	public void set${fieldMeta.upperJavaFieldName}($fieldMeta.javaType $fieldMeta.javaFieldName) {
+		this.$fieldMeta.javaFieldName = $fieldMeta.javaFieldName;
+	}
+	
+#end
+}

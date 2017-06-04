@@ -1,0 +1,35 @@
+package ${entityMetaList.get(0).projectMeta.groupId}.constant;
+
+public interface ExcelConstant {
+#foreach($entityMeta in $entityMetaList)
+	interface ${entityMeta.className}{
+		String FILENAME="${entityMeta.comment}";
+		String[] TITLES = {
+#set($i=0)		
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if($fieldMeta.showCols)
+#if($i==$entityMeta.lisCotunt)
+                    		"${fieldMeta.javaFieldName}"
+#else
+	                        "${fieldMeta.javaFieldName}",
+#end							
+#set($i=$i+1)	
+#end 
+#end
+						   };
+		String[] PROPERTYS = {
+#set($i=0)		
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if($fieldMeta.showCols)
+#if($i==$entityMeta.lisCotunt)
+                    		"${fieldMeta.comment}"
+#else
+	                        "${fieldMeta.comment}",
+#end							
+#set($i=$i+1)	
+#end 
+#end
+						  };
+	}
+#end	
+}

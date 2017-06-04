@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties>
+		<property name="dialect" value="MYSQL"/>
+	</properties>
+	<settings>
+		<!--<setting name="cacheEnabled" value="true" />-->
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+        <setting name="cacheEnabled" value="false" />
+        <setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	<typeAliases>
+#foreach($entityMeta in $entityMetaList)
+		<typeAlias alias="${entityMeta.className}" type="${entityMeta.packageName}.domain.${entityMeta.className}" />
+#end
+	</typeAliases>
+	<plugins>
+		<plugin interceptor="${entityMetaList.get(0).projectMeta.groupId}.common.dao.interceptor.PaginationInterceptor"/>
+	</plugins>
+	<mappers>
+#foreach($entityMeta in $entityMetaList)
+		<mapper resource="mapper/${entityMeta.className}Mapper.xml" />
+#end
+	</mappers>
+</configuration>

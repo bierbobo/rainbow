@@ -1,0 +1,72 @@
+project.main.title=International logistics management system
+project.main.welcome=Welcome
+project.main.logout=Logout
+project.main.menu=Menu
+project.main.index=Index
+
+project.message.list=List
+project.message.dialog=Dialog
+project.message.confirm=Confirm
+project.message.close=Close
+project.message.cancel=Cancel
+project.message.choose_row=Please choose a line
+project.message.choose_one_row=Can only choose one line
+project.message.deleteConfirm=Are you sure you want to delete?
+project.message.choose=Choose
+project.message.confirm_dialog=confirm_dialog
+project.message.confirm_export=Are you sure you want to export?
+project.message.tips=Tips
+project.message.exportType=export type
+
+project.message.success=success
+project.message.error=error
+project.exception.100001=100001 exception
+project.exception.100002=100002 exception
+
+
+project.validate.Email=Please enter a valid email address
+project.validate.Length=the length must be between  {0} and {1}
+project.validate.NotBlank=This field is required.
+project.validate.NotEmpty=This field is re quired.
+project.validate.Range=must be between  {0} and {1} 
+project.validate.URL=Please enter a valid email address
+
+
+project.message.beforePageText=Page
+project.message.afterPageText=of {pages}
+project.message.displayMsg=Displaying {from} to {to} of {total} items
+project.message.loading=loading...
+
+project.message.missingMessage=This field is required.
+project.message.email=Please enter a valid email address
+project.message.url=Please enter a valid URL address
+project.message.length=The input content must be between {0} and {1}
+project.message.remote=Please amend the field
+project.message.weeks=S,M,T,W,T,F,S
+project.message.months=Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
+project.message.currentText=Today
+
+
+project.button.add=add
+project.button.update=update
+project.button.delete=delete
+project.button.detail=detail
+project.button.export=export
+project.button.query=query
+project.button.reset=reset
+project.module.root=rootManager 
+
+#foreach($entityMeta in $entityMetaList)
+project.module.${entityMeta.lowerClassName}=${entityMeta.lowerClassName}Manager
+#end
+#foreach(${fieldMeta} in ${fieldMetaMap.entrySet()})
+project.module.${fieldMeta.key}=${fieldMeta.key}
+#end 
+
+
+
+
+
+
+
+

@@ -1,0 +1,213 @@
+package ${entityMeta.packageName}.manager;
+
+#foreach(${importClass} in ${entityMeta.importClassList})
+import ${importClass};
+#end
+
+import org.apache.log4j.Logger;
+import javax.annotation.Resource;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import junit.framework.Assert;
+import java.util.List;
+import ${entityMeta.projectMeta.groupId}.common.Page;
+#if(!$entityMeta.pkFieldMeta.autoIncrement)
+import ${entityMeta.projectMeta.groupId}.common.util.NumberUtil;
+#end
+import ${entityMeta.packageName}.domain.${entityMeta.className};
+import ${entityMeta.packageName}.condition.${entityMeta.className}Condition;
+
+
+/**
+ * ${entityMeta.comment}管理器测试类
+ * @org ${entityMeta.projectMeta.domainName}
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath*:spring/spring-main.xml" })
+public class ${entityMeta.className}ManagerTest {
+	/**
+	 * Logger for this class
+	 */
+	 private static final Logger log = Logger.getLogger(${entityMeta.className}ManagerTest.class);
+	
+	/**
+	 * the ${entityMeta.className}Manager to be tested
+	 */
+	@Resource
+	private ${entityMeta.className}Manager ${entityMeta.lowerClassName}Manager;
+	
+	private static ${entityMeta.pkFieldMeta.javaType} ${entityMeta.pkFieldMeta.javaFieldName};
+	
+	
+	
+	/*===============================================================================*/
+	/*                                以下是增删改查测试方法
+	/*===============================================================================*/
+
+	
+	
+	
+	/**
+	 * 测试插入${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */
+	@Test
+	public void testInsert${entityMeta.className}() {
+		${entityMeta.className} ${entityMeta.lowerClassName} = new ${entityMeta.className}();
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(!${fieldMeta.pk})
+#if(${fieldMeta.javaType}=="String")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}("abc");
+#elseif(${fieldMeta.javaType}=="BigDecimal")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(new BigDecimal(1));		
+#elseif(${fieldMeta.javaType}=="Date")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(new Date());
+#elseif(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(false);		
+#elseif(${fieldMeta.javaType}=="Byte" || ${fieldMeta.javaType}=="byte")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((byte)1);
+#elseif(${fieldMeta.javaType}=="Double" || ${fieldMeta.javaType}=="double")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((double)1);
+#elseif(${fieldMeta.javaType}=="Float" || ${fieldMeta.javaType}=="float")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((float)1);	
+#elseif(${fieldMeta.javaType}=="Long" || ${fieldMeta.javaType}=="long")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((long)1);		
+#elseif(${fieldMeta.columnName}=="yn")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((byte)1);
+#else
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(1);
+#end
+#else
+#if(!$fieldMeta.autoIncrement)
+		${entityMeta.lowerClassName}.setId(NumberUtil.generateId());
+#end
+#end
+#end
+		${entityMeta.lowerClassName}Manager.insert${entityMeta.className}(${entityMeta.lowerClassName});
+		id = ${entityMeta.lowerClassName}.getId();
+	}
+	
+	
+	/**
+	 * 测试查询${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */
+	@Test
+	public void testFind${entityMeta.className}List() {
+		${entityMeta.className}Condition ${entityMeta.lowerClassName}Condition = new ${entityMeta.className}Condition();
+		Page page = new Page();
+		page.setPage(1);
+		page.setPageSize(10);
+		page.setSort("id");
+		page.setOrder("desc");
+		page =  this.${entityMeta.lowerClassName}Manager.find${entityMeta.className}List(page, ${entityMeta.lowerClassName}Condition);
+	}
+	
+
+	/**
+	 * 测试更新${entityMeta.comment}
+	 * @param ${entityMeta.lowerClassName}
+	 */
+	@Test
+	public void testUpdate${entityMeta.className}() {
+		${entityMeta.className} ${entityMeta.lowerClassName} = new ${entityMeta.className}();
+		${entityMeta.lowerClassName}.set${entityMeta.pkFieldMeta.upperJavaFieldName}(${entityMeta.pkFieldMeta.javaFieldName});
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(!${fieldMeta.pk})
+#if(${fieldMeta.javaType}=="String")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}("abc");
+#elseif(${fieldMeta.javaType}=="BigDecimal")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(new BigDecimal(1));		
+#elseif(${fieldMeta.javaType}=="Date")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(new Date());
+#elseif(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(false);
+#elseif(${fieldMeta.javaType}=="Byte" || ${fieldMeta.javaType}=="byte")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((byte)1);
+#elseif(${fieldMeta.javaType}=="Double" || ${fieldMeta.javaType}=="double")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((double)1);
+#elseif(${fieldMeta.javaType}=="Float" || ${fieldMeta.javaType}=="float")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((float)1);	
+#elseif(${fieldMeta.javaType}=="Long" || ${fieldMeta.javaType}=="long")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((long)1);			
+#elseif(${fieldMeta.columnName}=="yn")
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}((byte)1);
+#else
+		${entityMeta.lowerClassName}.set${fieldMeta.upperJavaFieldName}(1);
+#end
+#end
+#end
+
+		${entityMeta.lowerClassName}Manager.update${entityMeta.className}(${entityMeta.lowerClassName});
+	}
+
+	
+	/**
+	 * 测试获取${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 * @return the ${entityMeta.className}
+	 */
+	@Test
+	public void testGet${entityMeta.className}() {
+		${entityMeta.className} ${entityMeta.lowerClassName} = ${entityMeta.lowerClassName}Manager.get${entityMeta.className}(${entityMeta.pkFieldMeta.javaFieldName});
+		
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(!${fieldMeta.pk})
+#if(${fieldMeta.javaType}=="String")
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), "abc");
+#elseif(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+		Assert.assertEquals(${entityMeta.lowerClassName}.is${fieldMeta.upperJavaFieldName}(), false);		
+#elseif(${fieldMeta.javaType}=="byte")
+	    Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), (byte)1);
+#elseif(${fieldMeta.javaType}=="Byte")
+	    Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), Byte.valueOf("1"));		
+#elseif(${fieldMeta.javaType}=="Double" || ${fieldMeta.javaType}=="double")
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), (double)1);
+#elseif(${fieldMeta.javaType}=="Float" || ${fieldMeta.javaType}=="float")
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), (float)1);
+#elseif(${fieldMeta.javaType}=="long")
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), (long)1);
+#elseif(${fieldMeta.javaType}=="Long")
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), Long.valueOf("1"));			
+#elseif(${fieldMeta.javaType}=="Integer")
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), Integer.valueOf("1"));
+#elseif(${fieldMeta.javaType}=="Date")
+#else
+		Assert.assertEquals(${entityMeta.lowerClassName}.get${fieldMeta.upperJavaFieldName}(), 1);
+#end
+#end
+#end
+	}
+	
+	/**
+	 * 测试删除${entityMeta.comment}
+	 * @param ${entityMeta.pkFieldMeta.javaFieldName}
+	 */
+	@Test
+	public void testDelete${entityMeta.className}() {
+		${entityMeta.lowerClassName}Manager.delete${entityMeta.className}Batch(new ${entityMeta.pkFieldMeta.javaType}[]{${entityMeta.pkFieldMeta.javaFieldName}});
+	}
+
+	/*===============================================================================*/
+	/*                                以下是get/set方法
+	/*===============================================================================*/
+	/**
+	 * @return the ${entityMeta.lowerClassName}Manager
+	 */
+	public ${entityMeta.className}Manager get${entityMeta.className}Manager() {
+		return this.${entityMeta.lowerClassName}Manager;
+	}
+	
+	/**
+	 * @param ${entityMeta.lowerClassName}Manager the ${entityMeta.lowerClassName}Manager to set
+	 */
+	public void set${entityMeta.className}Manager(${entityMeta.className}Manager ${entityMeta.lowerClassName}Manager) {
+		this.${entityMeta.lowerClassName}Manager = ${entityMeta.lowerClassName}Manager;
+	}
+	
+}

@@ -1,0 +1,29 @@
+\#set($layout = "layout/null.vm")
+<div class="body-dialog">
+	<form id="${entityMeta.lowerClassName}_form" method="post" >
+		<input name="id" id="${entityMeta.lowerClassName}_id" type="hidden" value="$!{${entityMeta.lowerClassName}.${entityMeta.pkFieldMeta.javaFieldName}}" >
+#set($i=0)
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+#if(${fieldMeta.formItem})
+#if($i%2==0)
+		<div class="row">
+#end			
+			<div class="cols">
+				<label class="label">${fieldMeta.comment}：</label>
+#if(${fieldMeta.formType}=="SELECT")
+	            <select  name="${fieldMeta.javaFieldName}" class="easyui-combobox input-short" style="height:25px;" data-options="${fieldMeta.validateCondition}">
+        		</select>
+#elseif(${fieldMeta.formType}=="DATE")
+		        <input name="${fieldMeta.javaFieldName}" class="easyui-textbox easyui-datebox input-short" style="height:25px;"  value="$!{${entityMeta.lowerClassName}.${fieldMeta.javaFieldName}}" data-options="${fieldMeta.validateCondition}">
+#else
+	            <input name="${fieldMeta.javaFieldName}" class="easyui-textbox input-short" style="height:25px;" value="$!{${entityMeta.lowerClassName}.${fieldMeta.javaFieldName}}" data-options="${fieldMeta.validateCondition}">
+#end	
+		    </div>
+#if($i%2==1)			
+		</div>
+#end
+#set($i=$i+1)		
+#end
+#end
+	</form>
+</div>	

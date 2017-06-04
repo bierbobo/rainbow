@@ -1,0 +1,104 @@
+package ${entityMeta.packageName}.condition;
+
+import java.io.Serializable;
+
+#foreach(${importClass} in ${entityMeta.importClassList})
+import ${importClass};
+#end
+
+/**
+ * $entityMeta.comment
+ * @org ${entityMeta.projectMeta.domainName}
+ * @author $entityMeta.author
+ * @Date $dateTool.format("yyyy-MM-dd a hh:mm:ss",$entityMeta.generateDate)
+ */
+public class ${entityMeta.className}Condition implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+	
+	/**
+	 * $fieldMeta.comment
+	 */
+#if(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+	private  ${fieldMeta.javaType}  $fieldMeta.javaFieldName;
+#else
+	private String $fieldMeta.javaFieldName;
+#end
+ #if($fieldMeta.query&&${fieldMeta.queryType}=="RANGE")
+	private String from${fieldMeta.upperJavaFieldName};
+	private String to${fieldMeta.upperJavaFieldName};
+ #end	
+#end
+#foreach($fieldMeta in $entityMeta.fieldMetaList)
+	/**
+	 * @return the $fieldMeta.javaFieldName
+	 */
+#if(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+	public ${fieldMeta.javaType} is${fieldMeta.upperJavaFieldName}() {
+#else
+	public String get${fieldMeta.upperJavaFieldName}() {
+#end
+		return $fieldMeta.javaFieldName;
+	}
+	
+	/**
+	 * @param $fieldMeta.javaFieldName the $fieldMeta.javaFieldName to set
+	 */
+#if(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+	public void set${fieldMeta.upperJavaFieldName}(${fieldMeta.javaType} $fieldMeta.javaFieldName) {
+		this.$fieldMeta.javaFieldName = $fieldMeta.javaFieldName;
+	}
+#else
+	public void set${fieldMeta.upperJavaFieldName}(String $fieldMeta.javaFieldName) {
+		this.$fieldMeta.javaFieldName = $fieldMeta.javaFieldName;
+	}
+#end	 
+	
+	
+#if($fieldMeta.query&&${fieldMeta.queryType}=="RANGE")
+	/**
+	 * @return the from${fieldMeta.upperJavaFieldName}
+	 */
+#if(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+	public String isFrom${fieldMeta.upperJavaFieldName}() {
+#else
+	public String getFrom${fieldMeta.upperJavaFieldName}() {
+#end
+		return from${fieldMeta.upperJavaFieldName};
+	}
+	
+	/**
+	 * @param from${fieldMeta.upperJavaFieldName} the from${fieldMeta.upperJavaFieldName} to set
+	 */
+	public void setFrom${fieldMeta.upperJavaFieldName}(String from${fieldMeta.upperJavaFieldName}) {
+		this.from${fieldMeta.upperJavaFieldName} = from${fieldMeta.upperJavaFieldName};
+	}
+	
+	
+	/**
+	 * @return the to${fieldMeta.upperJavaFieldName}
+	 */
+#if(${fieldMeta.javaType}=="boolean" || ${fieldMeta.javaType}=="Boolean")
+	public String isTo${fieldMeta.upperJavaFieldName}() {
+#else
+	public String getTo${fieldMeta.upperJavaFieldName}() {
+#end
+		return to${fieldMeta.upperJavaFieldName};
+	}
+	
+	/**
+	 * @param from${fieldMeta.upperJavaFieldName} the to${fieldMeta.upperJavaFieldName} to set
+	 */
+	public void setTo${fieldMeta.upperJavaFieldName}(String to${fieldMeta.upperJavaFieldName}) {
+		this.to${fieldMeta.upperJavaFieldName} = to${fieldMeta.upperJavaFieldName};
+	}
+#end	
+	
+	
+#end
+}

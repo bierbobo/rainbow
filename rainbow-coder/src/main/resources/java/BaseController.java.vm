@@ -1,0 +1,120 @@
+package ${entityMetaList.get(0).projectMeta.groupId}.main.controller;
+
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
+import ${entityMetaList.get(0).projectMeta.groupId}.common.Result;
+import ${entityMetaList.get(0).projectMeta.groupId}.constant.Constant;
+
+import com.bierbobo.jsf.gd.util.StringUtils;
+
+public class BaseController {
+	
+	protected static final String COMMON_BASE_NAME="i18n/messages";
+	
+	/**
+	 * 返回成功提示信息
+	 * @param request
+	 * @return
+	 */
+	protected static String returnSuccess(HttpServletRequest request){
+		 ResourceBundle resourcesBundle =getCommonResourceBundle(request);
+		 return resourcesBundle.getString("project.message.success");
+	}
+	
+	/**
+	 * 返回错误提示信息
+	 * @param request
+	 * @return
+	 */
+	protected static String returnError(HttpServletRequest request){
+		 ResourceBundle resourcesBundle =getCommonResourceBundle(request);
+		 return resourcesBundle.getString("project.message.error");
+	}
+	
+	/**
+	 * 返回异常提示信息
+	 * @param request
+	 * @param exceptionCode
+	 * @return
+	 */
+	protected static String returnException(HttpServletRequest request,String exceptionCode){
+		 ResourceBundle resourcesBundle =getCommonResourceBundle(request);
+		 return resourcesBundle.getString("project.exception."+exceptionCode);
+	}
+	
+	/**
+	 * 获取指定路径的资源信息
+	 * @param request
+	 * @param baseName
+	 * @return
+	 */
+	protected static ResourceBundle getResourceBundle(HttpServletRequest request,String baseName){
+		ResourceBundle resourcesBundle = ResourceBundle.getBundle(
+				baseName, request.getLocale());
+		return resourcesBundle;
+	}
+	
+	/**
+	 * 获取公共路径的资源信息
+	 * @param request
+	 * @return
+	 */
+	protected static ResourceBundle getCommonResourceBundle(HttpServletRequest request){
+		return getResourceBundle(request,COMMON_BASE_NAME);
+	}
+
+	/**
+	 * 根据资源文件的key获取value
+	 * @param resourcesBundle
+	 * @param key
+	 * @return
+	 */
+	protected static String getResourceString(ResourceBundle resourcesBundle,String key){
+		String message = resourcesBundle.getString(key);
+		/**try {
+			message = new String(resourcesBundle.getString(key).getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+		}
+		**/
+		return message;
+	}
+
+	/**
+	 * 服务器端验证的提示信息
+	 * @param request
+	 * @param errors
+	 * @return
+	 */
+	protected static Result validateMessage(HttpServletRequest request,Errors errors){
+	    	StringBuilder sb = new StringBuilder();
+	    	if(errors.hasErrors()){
+	    		List<ObjectError> list =  errors.getAllErrors();
+	    		for (ObjectError objectError:list) {
+	    			FieldError fieldError = (FieldError)objectError;
+	    			String[] codes = fieldError.getCodes();
+		    		String validateType = codes[codes.length-1];
+	    			String defaultMessage = fieldError.getDefaultMessage();
+	    			 ResourceBundle resourcesBundle =getCommonResourceBundle(request);
+	    			 String msg =  getResourceString(resourcesBundle,"project.validate."+validateType);
+					 if(StringUtils.isNotEmpty(msg)){
+						 Object[] objs = fieldError.getArguments();
+						 if(objs.length>1&&objs.length<=3){
+			    				String[] formatObjs = new String[2];
+			    				formatObjs[0] = objs[2].toString();
+				    			formatObjs[1] = objs[1].toString();
+							    msg = MessageFormat.format(msg, formatObjs);  
+						 }
+						 sb.append(msg+"\r\n");
+					 }else{
+						 sb.append(defaultMessage+"\r\n");
+					 }
+				}
+	    	}
+	    	return  new Result(sb.toString(),Constant.ERROR_CODE);
+	  }
+}
